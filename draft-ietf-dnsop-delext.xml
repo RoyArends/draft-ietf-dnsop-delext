@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
-<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-07" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="6895" indexInclude="true">
+<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-08-candidate" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="6895" indexInclude="true">
 
 <front>
-<title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-07" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
+<title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-08-candidate" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
 <author initials="R." surname="Arends" fullname="Roy Arends"><organization>ICANN</organization><address><postal><street></street>
 <country>Guernsey</country>
 </postal><email>roy.arends@icann.org</email>
@@ -39,7 +39,7 @@
 <t>This document makes use of the terms defined in <xref target="RFC9499"></xref>. In addition, this document defines the following terms:</t>
 
 <ul>
-<li><t>Delegation Types: Designates the set of RR types allocated from the ranges reserved in <xref target="alloc"></xref> of this document.</t>
+<li><t>Delegation Types: Designates the set of RR types allocated from the ranges reserved in <xref target="alloc"></xref> of this document. NS and DS types are not Delegation Types.</t>
 </li>
 <li><t>Delegation-Extension-aware name server, resolver, forwarder or stub resolver: A client or server that implements this specification.</t>
 </li>
@@ -88,16 +88,16 @@
 
 <section anchor="NSREQ"><name>Name Server Requirements</name>
 <t>Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE flag from the request to the response.</t>
+<t>When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are treated as data TYPEs.</t>
 
 <section anchor="INCLUDEDT"><name>Including Delegation Types in a Referral Response</name>
 <t>When the DE flag is set to 1, the server includes Delegation Types in referrals and omits the NS RRset. When there are no Delegation Types for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.</t>
-<t>When the DE flag is clear (i.e., set to 0), and no NS RRset exists for a referral, there is no facility for the resolver to continue resolving the delegated namespace. An NXDOMAIN (Name Error) MUST be returned in this case. Authoritative servers SHOULD include an Extended DNS Error <xref target="RFC8914"></xref> to clarify the reason, absent a local policy requiring otherwise.</t>
-<t>The rationale is to prevent legacy resolvers from asking other authoritative name servers for the same information.</t>
+<t>Note that When the DE flag is clear (i.e., set to 0), and no NS RRset exists for a referral, there is no delegation from the perspective of a non Delegation-Extension-Aware resolver and the server SHOULD include an Extended DNS Error <xref target="RFC8914"></xref> absent a local policy requiring otherwise.</t>
 </section>
 
 <section anchor="explicit-queries-for-delegation-types"><name>Explicit queries for Delegation Types</name>
 <t>When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).</t>
-<t>When the DE flag is clear, a query for a Delegation Type MUST result in an authoritative answer if the Delegation Type exists. If the Delegation Type does not exist, the response MUST be a referral  containing the NS RRset if an NS RRset exists, or a NODATA response if other Delegation Types exist.</t>
+<t>Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in <xref target="RFC2136"></xref>, Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type exists at that name.</t>
 </section>
 </section>
 
@@ -126,7 +126,7 @@ to indicate that Delegation Types are supported.</t>
 <t>The presence of one or more Delegation Types in the Authority section identifies the response as a referral.</t>
 <t>Delegation Types, together with existing DNS protocol elements such as DS, provide all information required to process the delegation. Accordingly, NS records that appear in addition to Delegation Types MUST be ignored. These NS records MUST NOT be validated or cached.</t>
 <t>The purpose of this restriction is to avoid leakage of DNS messages over unencrypted transport (i.e., Do53) when servers, indicated by Delegation Types, fail to respond.</t>
-<t>When the referral contains no Delegation Types, the resolver MAY use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.</t>
+<t>When the referral contains no Delegation Types, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.</t>
 </section>
 </section>
 
@@ -201,8 +201,8 @@ to indicate that Delegation Types are supported.</t>
 <t>In unsigned zones, no cryptographic protection against this attack is available.</t>
 </section>
 
-<section anchor="denial-of-service-via-nxdomain-for-legacy-resolvers"><name>Denial-Of-Service via NXDOMAIN for Legacy Resolvers</name>
-<t><xref target="INCLUDEDT"></xref> specifies that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a legacy resolver from exhausting other authoritative servers for information it cannot act upon.</t>
+<section anchor="denial-of-service-via-nxdomain-for-non-delegation-extension-aware-resolvers"><name>Denial-Of-Service via NXDOMAIN for non Delegation-Extension-aware Resolvers</name>
+<t><xref target="INCLUDEDT"></xref> specifies that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a non Delegation-Extension-aware resolver from exhausting other authoritative servers for information it cannot act upon.</t>
 <t>An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return NXDOMAIN for a name that legitimately exists.</t>
 <t>However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any NXDOMAIN response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare NXDOMAIN response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject an NXDOMAIN response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering.</t>
 <t>As with the attacks described in <xref target="DOWNGRADE"></xref>, this mitigation depends on the delegating zone being DNSSEC-signed, ADT being set, and the resolver performing validation. In zones where these conditions do not hold, a DE-stripping attack may result in an NXDOMAIN response that the resolver cannot distinguish from a legitimate one, causing a denial of service for the queried name. This residual risk is addressed in <xref target="PARTIAL"></xref>.</t>
@@ -264,7 +264,21 @@ Bit 2    DE    Delegation Extensions        This-document
 </section>
 
 <section anchor="acknowledgments"><name>Acknowledgments</name>
-<t>This idea was initially proposed by Petr Špaček and independently by Paul Wouters.</t>
+<t>This document is heavily based on past work done by Tim April in
+   <xref target="I-D.tapril-ns2"></xref> and thus extends the thanks to the people helping on
+   this which are: John Levine, Erik Nygren, Jon Reed, Ben Kaduk,
+   Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
+   Marx and Brian Wellington.</t>
+<t>Work on the Delegation Extensions protocol was started at IETF 118 Hackaton.  Hackaton
+   participants: Christian Elmerot, David Blacka, David Lawrence, Edward
+   Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion,
+   Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip
+   Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan
+   Adhvaryu, Vladimír Čunát, Andreas Schulze.</t>
+<t>Other people joined the effort after the initial hackaton: Ben
+   Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
+   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...</t>
+<t>The idea of allocating a range of delegation types was proposed by Petr Špaček <xref target="I-D.peetterr-dnsop-parent-side-auth-types"></xref>. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.</t>
 </section>
 
 </middle>
@@ -273,6 +287,7 @@ Bit 2    DE    Delegation Extensions        This-document
 <references><name>References</name>
 <references><name>Normative References</name>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5011.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6891.xml"/>
@@ -285,11 +300,13 @@ Bit 2    DE    Delegation Extensions        This-document
 </references>
 <references><name>Informative References</name>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-deleg.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.peetterr-dnsop-parent-side-auth-types.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.tapril-ns2.xml"/>
 </references>
 </references>
 
 <section anchor="deleg-service"><name>Services Provided by Delegation Types</name>
-<t>Services provided by Delegation Types consist of information useful to a resolver when connecting to servers responsible for the delegated namespace. This can include, but is not limited to, secure transport parameters, policy information about zones, and DNSSEC security parameters.</t>
+<t>Services provided by Delegation Types consist of useful information about the delegated namespace. This can include, but is not limited to, secure transport parameters, policy information about zones, and DNSSEC security parameters.</t>
 </section>
 
 </back>

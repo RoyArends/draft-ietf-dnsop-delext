@@ -1,7 +1,7 @@
 %%%
 title = "DNS Protocol Modifications for Delegation Extensions"
 abbrev = "DELEXT"
-docName = "draft-ietf-dnsop-delext-07"
+docName = "draft-ietf-dnsop-delext-08-candidate"
 category = "std"
 updates = [6895]
 
@@ -12,7 +12,7 @@ keyword = ["Internet-Draft"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-dnsop-delext-07"
+value = "draft-ietf-dnsop-delext-08-candidate"
 stream = "IETF"
 status = "standard"
 
@@ -70,7 +70,7 @@ To protect the negotiation mechanism against downgrade attacks, a DNSKEY flag is
 # Conventions and Definitions {#term}
 This document makes use of the terms defined in [@!RFC9499]. In addition, this document defines the following terms:
 
-* Delegation Types: Designates the set of RR types allocated from the ranges reserved in (#alloc) of this document.
+* Delegation Types: Designates the set of RR types allocated from the ranges reserved in (#alloc) of this document. NS and DS types are not Delegation Types.
 
 * Delegation-Extension-aware name server, resolver, forwarder or stub resolver: A client or server that implements this specification.
 
@@ -119,17 +119,17 @@ The range 0xF1F0-0xF1FF is reserved for Private Use in accordance with [@!RFC812
 # Name Server Requirements {#NSREQ}
 Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE flag from the request to the response. 
 
+When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are treated as data TYPEs.  
+
 ## Including Delegation Types in a Referral Response {#INCLUDEDT}
 When the DE flag is set to 1, the server includes Delegation Types in referrals and omits the NS RRset. When there are no Delegation Types for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.
 
-When the DE flag is clear (i.e., set to 0), and no NS RRset exists for a referral, there is no facility for the resolver to continue resolving the delegated namespace. An NXDOMAIN (Name Error) MUST be returned in this case. Authoritative servers SHOULD include an Extended DNS Error [@!RFC8914] to clarify the reason, absent a local policy requiring otherwise.
-
-The rationale is to prevent legacy resolvers from asking other authoritative name servers for the same information. 
+Note that When the DE flag is clear (i.e., set to 0), and no NS RRset exists for a referral, there is no delegation from the perspective of a non Delegation-Extension-Aware resolver and the server SHOULD include an Extended DNS Error [@!RFC8914] absent a local policy requiring otherwise.
 
 ## Explicit queries for Delegation Types
 When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
 
-When the DE flag is clear, a query for a Delegation Type MUST result in an authoritative answer if the Delegation Type exists. If the Delegation Type does not exist, the response MUST be a referral  containing the NS RRset if an NS RRset exists, or a NODATA response if other Delegation Types exist.
+Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in [@!RFC2136], Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type exists at that name. 
 
 # Resolver Requirements {#RESREQ}
 
@@ -165,7 +165,7 @@ Delegation Types, together with existing DNS protocol elements such as DS, provi
 
 The purpose of this restriction is to avoid leakage of DNS messages over unencrypted transport (i.e., Do53) when servers, indicated by Delegation Types, fail to respond.
 
-When the referral contains no Delegation Types, the resolver MAY use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.
+When the referral contains no Delegation Types, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.
 
 # DNSSEC Requirements {#DNSSECREQ}
 In a DNSSEC-signed zone, Delegation Type RRsets MUST be signed. 
@@ -244,9 +244,9 @@ This attack is mitigated by DNSSEC. In a DNSSEC-signed zone, Delegation Type RRs
 
 In unsigned zones, no cryptographic protection against this attack is available. 
 
-##  Denial-Of-Service via NXDOMAIN for Legacy Resolvers
+##  Denial-Of-Service via NXDOMAIN for non Delegation-Extension-aware Resolvers
 
-(#INCLUDEDT) specifies that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a legacy resolver from exhausting other authoritative servers for information it cannot act upon.
+(#INCLUDEDT) specifies that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a non Delegation-Extension-aware resolver from exhausting other authoritative servers for information it cannot act upon.
 
 An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return NXDOMAIN for a name that legitimately exists.
 
@@ -313,9 +313,32 @@ The Designated Experts may approve allocation requests accompanied by a stable, 
 Allocation requests for Delegation Types that introduce new protocol behaviors or that interact with the mechanisms defined in (#NSREQ), (#RESREQ), or (#DNSSECREQ) of this document must be accompanied by, or integrated into, a Standards Track document. 
 
 # Acknowledgments
-This idea was initially proposed by Petr Špaček and independently by Paul Wouters.
+
+This document is heavily based on past work done by Tim April in
+   [@I-D.tapril-ns2] and thus extends the thanks to the people helping on
+   this which are: John Levine, Erik Nygren, Jon Reed, Ben Kaduk,
+   Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
+   Marx and Brian Wellington.
+
+   Work on the Delegation Extensions protocol was started at IETF 118 Hackaton.  Hackaton
+   participants: Christian Elmerot, David Blacka, David Lawrence, Edward
+   Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion,
+   Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip
+   Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan
+   Adhvaryu, Vladimír Čunát, Andreas Schulze.
+
+   Other people joined the effort after the initial hackaton: Ben
+   Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
+   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...
+
+   The idea of allocating a range of delegation types was proposed by Petr Špaček [@I-D.peetterr-dnsop-parent-side-auth-types]. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.
 
 {backmatter}
 
 # Services Provided by Delegation Types {#deleg-service}
-Services provided by Delegation Types consist of information useful to a resolver when connecting to servers responsible for the delegated namespace. This can include, but is not limited to, secure transport parameters, policy information about zones, and DNSSEC security parameters. 
+Services provided by Delegation Types consist of useful information about the delegated namespace. This can include, but is not limited to, secure transport parameters, policy information about zones, and DNSSEC security parameters. 
+
+
+
+
+
