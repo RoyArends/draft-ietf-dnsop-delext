@@ -241,10 +241,7 @@ Internet-Draft                   DELEXT                        July 2026
 3.1.2.  Private Use Range
 
    The range 0xF1F0-0xF1FF is reserved for Private Use in accordance
-   with [RFC8126].  Values in this range MUST NOT be published in zones
-   intended for the public DNS and MUST NOT be used in any context where
-   interoperability with implementations outside a private network is
-   required.
+   with [RFC8126].
 
 4.  Name Server Requirements
 
@@ -274,6 +271,9 @@ Internet-Draft                   DELEXT                        July 2026
    When the DE flag is set to 1, a query for a Delegation Type MUST
    result in an authoritative answer if the Delegation Type exists, or a
    NODATA response (AA flag set, RCODE=0, empty answer section).
+
+
+
 
 
 

@@ -81,7 +81,7 @@
 </section>
 
 <section anchor="private-use-range"><name>Private Use Range</name>
-<t>The range 0xF1F0-0xF1FF is reserved for Private Use in accordance with <xref target="RFC8126"></xref>. Values in this range MUST NOT be published in zones intended for the public DNS and MUST NOT be used in any context where interoperability with implementations outside a private network is required.</t>
+<t>The range 0xF1F0-0xF1FF is reserved for Private Use in accordance with <xref target="RFC8126"></xref>.</t>
 </section>
 </section>
 </section>

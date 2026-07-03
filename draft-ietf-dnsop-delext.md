@@ -114,7 +114,7 @@ A record type may be useful in the context of delegation, but that does not by i
 
 ### Private Use Range
 
-The range 0xF1F0-0xF1FF is reserved for Private Use in accordance with [@!RFC8126]. Values in this range MUST NOT be published in zones intended for the public DNS and MUST NOT be used in any context where interoperability with implementations outside a private network is required.
+The range 0xF1F0-0xF1FF is reserved for Private Use in accordance with [@!RFC8126]. 
 
 # Name Server Requirements {#NSREQ}
 Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE flag from the request to the response. 
