@@ -88,6 +88,8 @@ Although the DS RR type has similar semantics, it is not classified as a Delegat
 
 [@!RFC6895] lists three subcategories of RR type numbers: data TYPEs, QTYPEs, and Meta-TYPEs. This specification adds a fourth subcategory: Delegation Types.
 
+Delegation Types are DNS CLASS independent.
+
 (#alloc-iana) requests IANA to allocate the ranges 0xF000-0xF1EF and 0xF1F0-0xF1FF for Delegation Types.
 
 (#deleg-service) describes potential services provided by Delegation Types.
@@ -124,7 +126,7 @@ When the value of the EDNS(0) DE flag is 0, the server behaves as a server that 
 ## Including Delegation Types in a Referral Response {#INCLUDEDT}
 When the DE flag is set to 1, the server includes Delegation Types in referrals and omits the NS RRset. When there are no Delegation Types for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.
 
-Note that When the DE flag is clear (i.e., set to 0), and no NS RRset exists for a referral, there is no delegation from the perspective of a non Delegation-Extension-Aware resolver and the server SHOULD include an Extended DNS Error [@!RFC8914] absent a local policy requiring otherwise.
+Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non Delegation-Extension-Aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE (TBD) Extended DNS Error [@!RFC8914] specified in (#ede) absent a local policy requiring otherwise.
 
 ## Explicit queries for Delegation Types
 When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
@@ -311,6 +313,15 @@ In addition to the general Expert Review criteria established by [@!RFC6895], th
 The Designated Experts may approve allocation requests accompanied by a stable, publicly available specification that need not be an RFC, provided that the specification is sufficiently detailed to allow independent interoperable implementation. 
 
 Allocation requests for Delegation Types that introduce new protocol behaviors or that interact with the mechanisms defined in (#NSREQ), (#RESREQ), or (#DNSSECREQ) of this document must be accompanied by, or integrated into, a Standards Track document. 
+
+## The Delegation Extension Support Required Extended DNS Error Code {#ede}
+
+IANA is requested to assign INFO-CODE (TBD) to the "Extended DNS Error Codes" registry under the "Domain Name System (DNS) Parameters" available at [](https://www.iana.org/assignments/dns-parameters) with a Purpose of Delegation Extension Support Required with this document as the Reference.
+
+```
+INFO-CODE  Purpose                                 Reference
+(TBD)      Delegation Extension Support Required   This-document
+```
 
 # Acknowledgments
 
