@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
-<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-08-candidate" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="6895" indexInclude="true">
+<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-08" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="6895" indexInclude="true">
 
 <front>
-<title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-08-candidate" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
+<title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-08" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
 <author initials="R." surname="Arends" fullname="Roy Arends"><organization>ICANN</organization><address><postal><street></street>
 <country>Guernsey</country>
 </postal><email>roy.arends@icann.org</email>

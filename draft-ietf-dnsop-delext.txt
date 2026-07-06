@@ -12,7 +12,7 @@ Expires: 7 January 2027                                        P. Špaček
 
 
           DNS Protocol Modifications for Delegation Extensions
-                  draft-ietf-dnsop-delext-08-candidate
+                       draft-ietf-dnsop-delext-08
 
 Abstract
 
