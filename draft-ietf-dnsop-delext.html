@@ -14,7 +14,7 @@
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-ietf-dnsop-delext-08" name="ietf.draft">
+<meta content="draft-ietf-dnsop-delext-08-candidate" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.31.0
     Python 3.9.6
@@ -1222,7 +1222,7 @@ li > p:last-of-type:only-child {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Arends, et al.</td>
-<td class="center">Expires 7 January 2027</td>
+<td class="center">Expires 21 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1232,18 +1232,18 @@ li > p:last-of-type:only-child {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">DNSOP</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-dnsop-delext-08</dd>
+<dd class="internet-draft">draft-ietf-dnsop-delext-08-candidate</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
 <a href="https://www.rfc-editor.org/rfc/rfc6895" class="eref">6895</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-06" class="published">6 July 2026</time>
+<time datetime="2026-07-20" class="published">20 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-21">21 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1286,7 +1286,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1427,9 +1427,6 @@ li > p:last-of-type:only-child {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
                 <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.  <a href="#name-additional-expert-review-cr" class="internal xref">Additional Expert Review Criteria</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
-                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-the-delegation-extension-su" class="internal xref">The Delegation Extension Support Required Extended DNS Error Code</a></p>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
@@ -1514,7 +1511,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-updates-to-allocation-polic">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-updates-to-allocation-polic" class="section-name selfRef">Updates to Allocation Policy</a>
         </h3>
-<p id="section-3.1-1"><span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span> establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. <a href="#crit" class="auto internal xref">Section 3.1.1</a> updates that policy to account for the Delegation Types subcategory and <a href="#alloc-crit" class="auto internal xref">Section 9.4</a> specifies the criteria that apply to allocation requests within the ranges 0xF000-0xF1EF and 0xF1F0-0xF1FF.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1"><span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span> establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. <a href="#crit" class="auto internal xref">Section 3.1.1</a> updates that policy to account for the Delegation Types subcategory and <a href="#alloc-crit" class="auto internal xref">Section 9.4</a> specifies the criteria that apply to allocation requests within the range 0xF000-0xF1EF.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <div id="crit">
 <section id="section-3.1.1">
           <h4 id="name-criteria-for-delegation-typ">
@@ -1562,7 +1559,7 @@ li > p:last-of-type:only-child {
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-including-delegation-types-" class="section-name selfRef">Including Delegation Types in a Referral Response</a>
         </h3>
 <p id="section-4.1-1">When the DE flag is set to 1, the server includes Delegation Type RRsets in referrals and omits the NS RRset. When there are no Delegation Type RRsets for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE (TBD) Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> specified in <a href="#ede" class="auto internal xref">Section 9.5</a> absent a local policy requiring otherwise.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> specified in <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> absent a local policy requiring otherwise.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="explicit-queries-for-delegation-types">
@@ -1589,6 +1586,8 @@ li > p:last-of-type:only-child {
 <p id="section-5.1-1">EDNS(0) <span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span> defines 16 bits as extended flags in the OPT record. These bits are encoded into the TTL field of the OPT record.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.1-2">
 <pre>           +0 (MSB)                            +1 (LSB)
+                                             1   1   1   1   1   1
+     0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 0: |         EXTENDED-RCODE        |            VERSION            |
    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -1650,7 +1649,10 @@ to indicate that Delegation Types are supported.<a href="#section-5.1-8" class="
         <h3 id="name-validating-a-referral">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-validating-a-referral" class="section-name selfRef">Validating a Referral</a>
         </h3>
-<p id="section-6.2-1">When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">On receiving a referral from a DNSSEC-signed delegating zone, a  validating resolver MUST determine the authenticated state of the ADT flag from a validated DNSKEY RRset for that zone.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">When the DNSKEY-ADT flag is clear, this consistency check does not
+apply. The resolver processes the referral according to the procedures defined in <a href="#RESREQ" class="auto internal xref">Section 5</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1830,19 +1832,6 @@ Bit 2    DE    Delegation Extensions        This-document
 <p id="section-9.4-4">Allocation requests for Delegation Types that introduce new protocol behaviors or that interact with the mechanisms defined in <a href="#NSREQ" class="auto internal xref">Section 4</a>, <a href="#RESREQ" class="auto internal xref">Section 5</a>, or <a href="#DNSSECREQ" class="auto internal xref">Section 6</a> of this document must be accompanied by, or integrated into, a Standards Track document.<a href="#section-9.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="ede">
-<section id="section-9.5">
-        <h3 id="name-the-delegation-extension-su">
-<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-the-delegation-extension-su" class="section-name selfRef">The Delegation Extension Support Required Extended DNS Error Code</a>
-        </h3>
-<p id="section-9.5-1">IANA is requested to assign INFO-CODE (TBD) to the "Extended DNS Error Codes" registry under the "Domain Name System (DNS) Parameters" available at <span><a href="https://www.iana.org/assignments/dns-parameters">https://www.iana.org/assignments/dns-parameters</a></span> with a Purpose of Delegation Extension Support Required with this document as the Reference.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-9.5-2">
-<pre>INFO-CODE  Purpose                                 Reference
-(TBD)      Delegation Extension Support Required   This-document
-</pre><a href="#section-9.5-2" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
 </section>
 </div>
 <div id="acknowledgments">
@@ -1862,7 +1851,7 @@ Bit 2    DE    Delegation Extensions        This-document
    Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <p id="section-10-3">Other people joined the effort after the initial hackathon: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...<a href="#section-10-3" class="pilcrow">¶</a></p>
+   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Peter Thomassen.<a href="#section-10-3" class="pilcrow">¶</a></p>
 <p id="section-10-4">The idea of allocating a range of delegation types was proposed by Petr Špaček <span>[<a href="#I-D.peetterr-dnsop-parent-side-auth-types" class="cite xref">I-D.peetterr-dnsop-parent-side-auth-types</a>]</span>. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.<a href="#section-10-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1928,7 +1917,7 @@ Bit 2    DE    Delegation Extensions        This-document
 <dl class="references">
 <dt id="I-D.ietf-deleg">[I-D.ietf-deleg]</dt>
         <dd>
-<span class="refAuthor">Špaček, P.</span>, <span class="refAuthor">Weber, R.</span>, and <span class="refAuthor">Lawrence</span>, <span class="refTitle">"Extensible Delegation for DNS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-deleg-09</span>, <time datetime="2026-06-04" class="refDate">4 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-deleg-09">https://datatracker.ietf.org/doc/html/draft-ietf-deleg-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Špaček, P.</span>, <span class="refAuthor">Weber, R.</span>, and <span class="refAuthor">Lawrence</span>, <span class="refTitle">"Extensible Delegation for DNS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-deleg-10</span>, <time datetime="2026-07-04" class="refDate">4 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-deleg-10">https://datatracker.ietf.org/doc/html/draft-ietf-deleg-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.peetterr-dnsop-parent-side-auth-types">[I-D.peetterr-dnsop-parent-side-auth-types]</dt>
         <dd>

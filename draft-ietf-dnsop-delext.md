@@ -1,7 +1,7 @@
 %%%
 title = "DNS Protocol Modifications for Delegation Extensions"
 abbrev = "DELEXT"
-docName = "draft-ietf-dnsop-delext-08"
+docName = "draft-ietf-dnsop-delext-08-candidate"
 category = "std"
 updates = [6895]
 
@@ -12,7 +12,7 @@ keyword = ["Internet-Draft"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-dnsop-delext-08"
+value = "draft-ietf-dnsop-delext-08-candidate"
 stream = "IETF"
 status = "standard"
 
@@ -96,7 +96,7 @@ Delegation Types are DNS CLASS independent.
 
 ## Updates to Allocation Policy
 
-[@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. (#crit) updates that policy to account for the Delegation Types subcategory and (#alloc-crit) specifies the criteria that apply to allocation requests within the ranges 0xF000-0xF1EF and 0xF1F0-0xF1FF.
+[@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. (#crit) updates that policy to account for the Delegation Types subcategory and (#alloc-crit) specifies the criteria that apply to allocation requests within the range 0xF000-0xF1EF.
 
 ### Criteria for Delegation Type Allocation {#crit}
 
@@ -126,7 +126,7 @@ When the value of the EDNS(0) DE flag is 0, the server behaves as a server that 
 ## Including Delegation Types in a Referral Response {#INCLUDEDT}
 When the DE flag is set to 1, the server includes Delegation Type RRsets in referrals and omits the NS RRset. When there are no Delegation Type RRsets for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.
 
-Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE (TBD) Extended DNS Error [@!RFC8914] specified in (#ede) absent a local policy requiring otherwise.
+Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error [@!RFC8914] specified in [@I-D.ietf-deleg] absent a local policy requiring otherwise.
 
 ## Explicit Queries for Delegation Types
 When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the queried Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
@@ -141,6 +141,8 @@ EDNS(0) [@!RFC6891] defines 16 bits as extended flags in the OPT record. These b
 
  
                +0 (MSB)                            +1 (LSB)
+                                                 1   1   1   1   1   1
+         0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
        +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
     0: |         EXTENDED-RCODE        |            VERSION            |
        +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -192,7 +194,13 @@ The descriptions of the ZONE (ZON) and Secure Entry Point (SEP) flags are provid
 When set to 1, it indicates to a validator that a referral MUST contain an NSEC or NSEC3 record to prove the presence or absence of types for the delegated name.
 
 ## Validating a Referral {#ADTREQ}
+
+On receiving a referral from a DNSSEC-signed delegating zone, a  validating resolver MUST determine the authenticated state of the ADT flag from a validated DNSKEY RRset for that zone.
+
 When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.
+
+When the DNSKEY-ADT flag is clear, this consistency check does not
+apply. The resolver processes the referral according to the procedures defined in (#RESREQ).
 
 # Operational Considerations
 
@@ -314,15 +322,6 @@ The Designated Experts may approve allocation requests accompanied by a stable, 
 
 Allocation requests for Delegation Types that introduce new protocol behaviors or that interact with the mechanisms defined in (#NSREQ), (#RESREQ), or (#DNSSECREQ) of this document must be accompanied by, or integrated into, a Standards Track document. 
 
-## The Delegation Extension Support Required Extended DNS Error Code {#ede}
-
-IANA is requested to assign INFO-CODE (TBD) to the "Extended DNS Error Codes" registry under the "Domain Name System (DNS) Parameters" available at [](https://www.iana.org/assignments/dns-parameters) with a Purpose of Delegation Extension Support Required with this document as the Reference.
-
-```
-INFO-CODE  Purpose                                 Reference
-(TBD)      Delegation Extension Support Required   This-document
-```
-
 # Acknowledgments
 
 This document is heavily based on past work done by Tim April in
@@ -339,7 +338,7 @@ This document is heavily based on past work done by Tim April in
 
    Other people joined the effort after the initial hackathon: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, ...
+   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Peter Thomassen.
 
    The idea of allocating a range of delegation types was proposed by Petr Špaček [@I-D.peetterr-dnsop-parent-side-auth-types]. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.
 
