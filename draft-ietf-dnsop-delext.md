@@ -92,8 +92,6 @@ Delegation Types are DNS CLASS independent.
 
 (#alloc-iana) requests IANA to allocate the ranges 0xF000-0xF1EF and 0xF1F0-0xF1FF for Delegation Types.
 
-(#deleg-service) provides examples of services that may be implemented using Delegation Types.
-
 ## Updates to Allocation Policy
 
 [@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. (#crit) updates that policy to account for the Delegation Types subcategory and (#alloc-crit) specifies the criteria that apply to allocation requests within the range 0xF000-0xF1EF.
@@ -128,10 +126,16 @@ When the DE flag is set to 1, the server includes Delegation Type RRsets in refe
 
 Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error [@!RFC8914] specified in [@I-D.ietf-deleg] absent a local policy requiring otherwise.
 
+If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.
+
 ## Explicit Queries for Delegation Types
 When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the queried Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
 
 Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in [@!RFC2136], Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point. 
+
+## Queries for type ANY
+
+
 
 # Resolver Requirements {#RESREQ}
 
@@ -171,10 +175,72 @@ The purpose of this restriction is to avoid leakage of DNS messages over unencry
 
 When the referral contains no Delegation Type RRsets, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.
 
+
+## Algorithm for "Finding the Best Servers to Ask" {#finding-best}
+
+This document updates instructions for finding the best servers to ask, covered in [@!RFC1034] Section 5.3.3 and [@]!RFC6672] Section 3.4.1 with the text "2. Find the best servers to ask.".
+These instructions were informally updated by [@!RFC4035] Section 4.2 for the DS RR type.
+
+This document applies the behavior for DS RR types to Delegation Types.
+
+When Delegation Types exist, Delegation-Extension-aware resolvers ignore Delegation Point and Apex NS RRset for the delegated zone. 
+
+Each delegation level can have a mixture of Delegation-Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combines both types in arbitrary ways.
+
+The terms SNAME and SLIST used here are defined in [@!RFC1034] Section 5.3.2:
+
+- SNAME is the domain name we are searching for.
+
+- SLIST is a structure which describes the name servers and the zone which the resolver is currently trying to query.
+
+This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.
+
+Neither [@!RFC1034] nor this document define how a resolver uses SLIST; they only define how to populate it.
+
+A Delegation-Extension-aware resolver's SLIST needs to be able to hold multiple types of information, delegations defined by NS RRset and delegations defined by Delegation Type RRsets.
+
+Delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.
+
+Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;
+
+This is the same recommendation to bound the amount specified in [@!RFC1034] Section 5.3.3.
+
+Step 2 of [@!RFC1034] Section 5.3.3 is "2. Find the best servers to ask."
+
+For Delegation-Extension-aware resolvers, this description becomes:
+
+=====
+
+&#x0032;. Find the best servers to ask:
+
+2.1. Determine deepest possible zone cut which can potentially hold the answer for a given (query name, type, class) combination as follows:
+
+2.1.1. Start with SNAME equal to QNAME.
+
+2.1.2. If QTYPE is a type that is authoritative at the delegation point (DS or the range defined in this document), remove the leftmost label from SNAME.
+
+For example, if the QNAME is "test.example." and the QTYPE is a Delegation Type or DS, set SNAME to "example.".
+
+2.2. Look for locally-available Delegation Types and NS RRsets, starting at current SNAME.
+
+2.2.1. For a given SNAME, check for the existence of Delegation Type RRsets.
+
+If they exist, the resolver MUST use their content to populate SLIST.
+
+However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.
+
+2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
+
+2.2.3 if SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.
+
+=====
+
+The rest of Step 2's description in [@!RFC1034] Section 5.3.3 is not affected by this document.
+
 # DNSSEC Requirements {#DNSSECREQ}
 In a DNSSEC-signed zone, Delegation Type RRsets MUST be signed. 
 
-To avoid a downgrade attack, where the Delegation Type RRsets and NSEC (or NSEC3) records can be replaced by unsigned NS records, causing the resolver to use unencrypted transport, a secure signal in the form of a DNSKEY flag is introduced. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response. 
+To avoid a downgrade attack, where the Delegation Type RRsets and NSEC (or NSEC3) records can be replaced by unsigned NS records, a secure signal in the form of a DNSKEY flag is introduced. See (#DSTRIP) for the specific Threat Model. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response. 
 
 ## The DNSKEY-ADT Flag {#ADT}
 The DNSKEY Flags field consists of 16 bits shown in Figure 2.
@@ -343,10 +409,6 @@ This document is heavily based on past work done by Tim April in
    The idea of allocating a range of delegation types was proposed by Petr Špaček [@I-D.peetterr-dnsop-parent-side-auth-types]. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.
 
 {backmatter}
-
-# Services Provided by Delegation Types {#deleg-service}
-Services provided by Delegation Types consist of useful information about the delegated namespace. This can include, but is not limited to, secure transport parameters, policy information about zones, and DNSSEC security parameters. 
-
 
 
 
