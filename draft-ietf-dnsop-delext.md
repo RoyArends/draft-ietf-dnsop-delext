@@ -1,9 +1,9 @@
 %%%
 title = "DNS Protocol Modifications for Delegation Extensions"
 abbrev = "DELEXT"
-docName = "draft-ietf-dnsop-delext-08-candidate"
+docName = "draft-ietf-dnsop-delext-09-candidate"
 category = "std"
-updates = [6895]
+updates = [1034, 4035, 6672, 6840, 6895]
 
 ipr = "trust200902"
 area = "General"
@@ -12,7 +12,7 @@ keyword = ["Internet-Draft"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-dnsop-delext-08-candidate"
+value = "draft-ietf-dnsop-delext-09-candidate"
 stream = "IETF"
 status = "standard"
 
@@ -55,7 +55,7 @@ organization = "ISC"
 .# Abstract
 The Domain Name System (DNS) protocol permits Delegation Signer (DS) records at delegation points. This document specifies modifications to the DNS protocol to permit a range of Resource Record types at delegation points. These modifications are designed to maintain compatibility with existing DNS resolution mechanisms and provide a secure method for processing these records at delegation points.
 
-This document updates RFC 6895.
+This document updates RFCs 1034, 4035, 6672, 6840 and 6895.
 
 {mainmatter}
 
@@ -128,14 +128,21 @@ Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at 
 
 If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.
 
+### Interaction with Compact Denial of Existence
+
+Interaction with Compact Denial of Existence [@!RFC9824] is currently undefined. 
+
 ## Explicit Queries for Delegation Types
 When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the queried Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
 
 Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in [@!RFC2136], Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point. 
 
 ## Queries for type ANY
+Queries for type ANY where the QNAME matches a delegation point with Delegation Types present MUST behave the same way
+as if a DS record was present at the delegation point.
 
-
+## Delegation Types at a Wildcard Domain Name
+Wildcard domain names are valid domain names, however, wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.
 
 # Resolver Requirements {#RESREQ}
 
@@ -173,12 +180,16 @@ Delegation Type RRsets, together with existing DNS protocol elements such as DS,
 
 The purpose of this restriction is to avoid leakage of DNS messages over unencrypted transport (i.e., Do53) when servers, indicated by Delegation Types, fail to respond.
 
+When a signed Delegation Type RRset is the result of a wildcard domain name expansion, the delegation MUST NOT be used. Treat such delegation point as if all servers were unusable. The label counter in the RRSIG RDATA will be less than the number of labels observed in the owner name.
+
 When the referral contains no Delegation Type RRsets, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.
+
+
 
 
 ## Algorithm for "Finding the Best Servers to Ask" {#finding-best}
 
-This document updates instructions for finding the best servers to ask, covered in [@!RFC1034] Section 5.3.3 and [@]!RFC6672] Section 3.4.1 with the text "2. Find the best servers to ask.".
+This document updates instructions for finding the best servers to ask, covered in [@!RFC1034] Section 5.3.3 and [@!RFC6672] Section 3.4.1 with the text "2. Find the best servers to ask.".
 These instructions were informally updated by [@!RFC4035] Section 4.2 for the DS RR type.
 
 This document applies the behavior for DS RR types to Delegation Types.
@@ -267,6 +278,36 @@ When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of
 
 When the DNSKEY-ADT flag is clear, this consistency check does not
 apply. The resolver processes the referral according to the procedures defined in (#RESREQ).
+
+## Clarifications on Nonexistence Proofs
+
+This document updates [@!RFC6840] Section 4.1 to include "NS or Delegation Types" in the type bitmap as indication of a delegation point, and generalizes applicability of ancestor delegation proof to all RR types that are authoritative at a delegation point.
+
+The text in that section is updated as follows:
+
+An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:
+
+-  the NS and/or Delegation Types bits set,
+
+-  the Start of Authority (SOA) bit clear, and
+
+-  a signer field that is shorter than the owner name of the NSEC RR,
+  or the original owner name for the NSEC3 RR.
+
+Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume nonexistence of any RRs below that zone cut, which include all RRs at that original owner name, other than types authoritative at the delegation point (DS and Delegation Types), and all RRs below that owner name regardless of type.
+
+## Insecure Delegation Proofs
+
+This document updates [@!RFC6840] Section 4.4 to include securing Delegation Point RRsets. The first paragraph of that section is updated to read:
+
+[@!RFC4035] Section 5.2 specifies that a validator, when proving a delegation is not secure, needs to check for the absence of the DS and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in [@!RFC6840] Section 4.1.
+
+This document updates [@!RFC4035] and [@!RFC6840] to specify that the validator MUST check for the presence of the NS or Delegation Types bit in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).
+
+Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
+RR with the Opt-Out flag set.
+
+Opt-Out is not applicable to delegations with Delegation Type RRsets as Delegation Type RRsets are authoritative at the delegation point.
 
 # Operational Considerations
 
