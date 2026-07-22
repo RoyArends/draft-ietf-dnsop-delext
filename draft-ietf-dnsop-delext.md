@@ -1,7 +1,7 @@
 %%%
 title = "DNS Protocol Modifications for Delegation Extensions"
 abbrev = "DELEXT"
-docName = "draft-ietf-dnsop-delext-09-candidate"
+docName = "draft-ietf-dnsop-delext-09"
 category = "std"
 updates = [1034, 4035, 6672, 6840, 6895, 9824]
 
@@ -12,7 +12,7 @@ keyword = ["Internet-Draft"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-dnsop-delext-09-candidate"
+value = "draft-ietf-dnsop-delext-09"
 stream = "IETF"
 status = "standard"
 
@@ -128,7 +128,9 @@ Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at 
 
 If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.
 
-For Compact Denial of Existence (CDOE) [@!RFC9824] enabled servers, the NXDOMAIN response required above is an exception to the CDOE method: it MUST be generated as a conventional Name Error proof ([@!RFC4035], or [@!RFC5155] for
+### Compact Denial of Existence
+
+This document updates Compact Denial of Existence (CDOE) [@!RFC9824]. For CDOE enabled servers, the NXDOMAIN response required above is an exception to the CDOE method: it MUST be generated as a conventional Name Error proof ([@!RFC4035], or [@!RFC5155] for
 NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag [@!RFC9824].
 
 For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit

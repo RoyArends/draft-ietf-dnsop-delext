@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
-<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-09-candidate" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="1034, 4035, 6672, 6840, 6895, 9824" indexInclude="true">
+<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-09" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="1034, 4035, 6672, 6840, 6895, 9824" indexInclude="true">
 
 <front>
-<title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-09-candidate" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
+<title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-09" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
 <author initials="R." surname="Arends" fullname="Roy Arends"><organization>ICANN</organization><address><postal><street></street>
 <country>Guernsey</country>
 </postal><email>roy.arends@icann.org</email>
@@ -94,12 +94,15 @@
 <t>When the DE flag is set to 1, the server includes Delegation Type RRsets in referrals and omits the NS RRset. When there are no Delegation Type RRsets for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.</t>
 <t>Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns an NXDOMAIN response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 (&quot;New Delegation Only&quot;) Extended DNS Error <xref target="RFC8914"></xref> specified in <xref target="I-D.ietf-deleg"></xref> absent a local policy requiring otherwise.</t>
 <t>If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.</t>
-<t>For Compact Denial of Existence (CDOE) <xref target="RFC9824"></xref> enabled servers, the NXDOMAIN response required above is an exception to the CDOE method: it MUST be generated as a conventional Name Error proof (<xref target="RFC4035"></xref>, or <xref target="RFC5155"></xref> for
+
+<section anchor="compact-denial-of-existence"><name>Compact Denial of Existence</name>
+<t>This document updates Compact Denial of Existence (CDOE) <xref target="RFC9824"></xref>. For CDOE enabled servers, the NXDOMAIN response required above is an exception to the CDOE method: it MUST be generated as a conventional Name Error proof (<xref target="RFC4035"></xref>, or <xref target="RFC5155"></xref> for
 NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag <xref target="RFC9824"></xref>.</t>
 <t>For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit
 Maps field conveys the Delegation Type(s) present at the delegation point.</t>
 <t>For an NSEC3 zone, the proof is the usual closest-encloser construction of <xref target="RFC5155"></xref>: the NSEC3 record matching the delegation point (whose Type Bit Map conveys the Delegation Type(s) present there), the NSEC3 record covering the next closer name, and the NSEC3 record covering the source of synthesis (wildcard) at the closest encloser. Unlike the NSEC case, these are in general three distinct records, because NSEC3 hashing does not preserve the name hierarchy.</t>
 <t>Returning an NXNAME-based response matching the queried name would not convey the presence of Delegation Types at the delegation point and would prevent the downgrade detection described in <xref target="ADTREQ"></xref> and <xref target="DOSNON"></xref>.</t>
+</section>
 </section>
 
 <section anchor="explicit-queries-for-delegation-types"><name>Explicit Queries for Delegation Types</name>
