@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
-<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-09-candidate" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="1034, 4035, 6672, 6840, 6895" indexInclude="true">
+<rfc version="3" ipr="trust200902" docName="draft-ietf-dnsop-delext-09-candidate" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="1034, 4035, 6672, 6840, 6895, 9824" indexInclude="true">
 
 <front>
 <title abbrev="DELEXT">DNS Protocol Modifications for Delegation Extensions</title><seriesInfo value="draft-ietf-dnsop-delext-09-candidate" stream="IETF" status="standard" name="Internet-Draft"></seriesInfo>
@@ -22,7 +22,7 @@
 
 <abstract>
 <t>The Domain Name System (DNS) protocol permits Delegation Signer (DS) records at delegation points. This document specifies modifications to the DNS protocol to permit a range of Resource Record types at delegation points. These modifications are designed to maintain compatibility with existing DNS resolution mechanisms and provide a secure method for processing these records at delegation points.</t>
-<t>This document updates RFCs 1034, 4035, 6672, 6840 and 6895.</t>
+<t>This document updates RFCs 1034, 4035, 6672, 6840, 6895 and 9824.</t>
 </abstract>
 
 </front>
@@ -70,7 +70,7 @@
 <ul>
 <li><t>The RR type is intended to appear at a delegation point as authoritative data in the delegating zone, in a manner analogous to the DS record as defined in <xref target="RFC4034"></xref>.</t>
 </li>
-<li><t>The RR type carries information intended to be processed by a resolver while following a referral. This includes information used prior to sending queries to the authoritative servers for the delegated zone, or after the referral has been followed, such as material used to authenticate a DNSKEY in the delegated zone.</t>
+<li><t>The RR type carries information intended to be processed by a resolver while following a referral. This includes information used prior to sending queries to the authoritative name servers for the delegated zone, or after the referral has been followed, such as material used to authenticate a DNSKEY in the delegated zone.</t>
 </li>
 <li><t>The RR type is not intended to appear as authoritative data within the delegated zone itself.</t>
 </li>
@@ -88,16 +88,18 @@
 
 <section anchor="NSREQ"><name>Name Server Requirements</name>
 <t>Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE flag from the request to the response.</t>
-<t>When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are treated as Data Types.</t>
+<t>When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are processed as ordinary Data Types.</t>
 
 <section anchor="INCLUDEDT"><name>Including Delegation Types in a Referral Response</name>
 <t>When the DE flag is set to 1, the server includes Delegation Type RRsets in referrals and omits the NS RRset. When there are no Delegation Type RRsets for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.</t>
-<t>Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server SHOULD include the Delegation Extension Required INFO-CODE 34 (&quot;New Delegation Only&quot;) Extended DNS Error <xref target="RFC8914"></xref> specified in <xref target="I-D.ietf-deleg"></xref> absent a local policy requiring otherwise.</t>
+<t>Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns an NXDOMAIN response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 (&quot;New Delegation Only&quot;) Extended DNS Error <xref target="RFC8914"></xref> specified in <xref target="I-D.ietf-deleg"></xref> absent a local policy requiring otherwise.</t>
 <t>If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.</t>
-
-<section anchor="interaction-with-compact-denial-of-existence"><name>Interaction with Compact Denial of Existence</name>
-<t>Interaction with Compact Denial of Existence <xref target="RFC9824"></xref> is currently undefined.</t>
-</section>
+<t>For Compact Denial of Existence (CDOE) <xref target="RFC9824"></xref> enabled servers, the NXDOMAIN response required above is an exception to the CDOE method: it MUST be generated as a conventional Name Error proof (<xref target="RFC4035"></xref>, or <xref target="RFC5155"></xref> for
+NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag <xref target="RFC9824"></xref>.</t>
+<t>For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit
+Maps field conveys the Delegation Type(s) present at the delegation point.</t>
+<t>For an NSEC3 zone, the proof is the usual closest-encloser construction of <xref target="RFC5155"></xref>: the NSEC3 record matching the delegation point (whose Type Bit Map conveys the Delegation Type(s) present there), the NSEC3 record covering the next closer name, and the NSEC3 record covering the source of synthesis (wildcard) at the closest encloser. Unlike the NSEC case, these are in general three distinct records, because NSEC3 hashing does not preserve the name hierarchy.</t>
+<t>Returning an NXNAME-based response matching the queried name would not convey the presence of Delegation Types at the delegation point and would prevent the downgrade detection described in <xref target="ADTREQ"></xref> and <xref target="DOSNON"></xref>.</t>
 </section>
 
 <section anchor="explicit-queries-for-delegation-types"><name>Explicit Queries for Delegation Types</name>
@@ -140,7 +142,7 @@ to indicate that Delegation Types are supported.</t>
 
 <section anchor="REFS"><name>Referrals</name>
 <t>The presence of one or more Delegation Type RRsets in the Authority section identifies the response as a referral.</t>
-<t>Delegation Type RRsets, together with existing DNS protocol elements such as DS, provide all information required to process the delegation. Accordingly, NS records that appear in addition to Delegation Types MUST be ignored. These NS records MUST NOT be validated or cached.</t>
+<t>Delegation Type RRsets, together with a DS RRset, provide all information required to process the delegation. Accordingly, NS records that appear in addition to Delegation Types MUST be ignored. These NS records MUST NOT be validated or cached.</t>
 <t>The purpose of this restriction is to avoid leakage of DNS messages over unencrypted transport (i.e., Do53) when servers, indicated by Delegation Types, fail to respond.</t>
 <t>When a signed Delegation Type RRset is the result of a wildcard domain name expansion, the delegation MUST NOT be used. Treat such delegation point as if all servers were unusable. The label counter in the RRSIG RDATA will be less than the number of labels observed in the owner name.</t>
 <t>When the referral contains no Delegation Type RRsets, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.</t>
@@ -151,7 +153,7 @@ to indicate that Delegation Types are supported.</t>
 These instructions were informally updated by <xref target="RFC4035"></xref> Section 4.2 for the DS RR type.</t>
 <t>This document applies the behavior for DS RR types to Delegation Types.</t>
 <t>When Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone.</t>
-<t>Each delegation level can have a mixture of Delegation-Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.</t>
+<t>Each delegation level can have a mixture of Delegation Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.</t>
 <t>The terms SNAME and SLIST used here are defined in <xref target="RFC1034"></xref> Section 5.3.2:</t>
 
 <ul>
@@ -164,7 +166,7 @@ These instructions were informally updated by <xref target="RFC4035"></xref> Sec
 <t>Neither <xref target="RFC1034"></xref> nor this document define how a resolver uses SLIST. They only define how to populate it.</t>
 <t>A Delegation-Extension-aware resolver's SLIST needs to be able to hold multiple types of information, delegations defined by NS RRset and delegations defined by Delegation Type RRsets.</t>
 <t>Delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.</t>
-<t>Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;</t>
+<t>Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST.</t>
 <t>This is the same recommendation to bound the amount specified in <xref target="RFC1034"></xref> Section 5.3.3.</t>
 <t>Step 2 of <xref target="RFC1034"></xref> Section 5.3.3 is &quot;2. Find the best servers to ask.&quot;</t>
 <t>For Delegation-Extension-aware resolvers, this description becomes:</t>
@@ -217,7 +219,7 @@ apply. The resolver processes the referral according to the procedures defined i
 <t>An &quot;ancestor delegation&quot; NSEC RR (or NSEC3 RR) is one with:</t>
 
 <ul>
-<li><t>the NS and/or Delegation Types bits set,</t>
+<li><t>the NS and/or Delegation Type bits set,</t>
 </li>
 <li><t>the Start of Authority (SOA) bit clear, and</t>
 </li>
@@ -231,7 +233,7 @@ or the original owner name for the NSEC3 RR.</t>
 <section anchor="insecure-delegation-proofs"><name>Insecure Delegation Proofs</name>
 <t>This document updates <xref target="RFC6840"></xref> Section 4.4 to include securing delegation point RRsets. The first paragraph of that section is updated to read:</t>
 <t><xref target="RFC4035"></xref> Section 5.2 specifies that a validator, when proving a delegation is not secure, needs to check for the absence of the DS and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in <xref target="RFC6840"></xref> Section 4.1.</t>
-<t>This document updates <xref target="RFC4035"></xref> and <xref target="RFC6840"></xref> to specify that the validator MUST check for the presence of the NS or Delegation Types bit in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).</t>
+<t>This document updates <xref target="RFC4035"></xref> and <xref target="RFC6840"></xref> to specify that the validator MUST check for the presence of the NS or Delegation Type bits in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).</t>
 <t>Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
 RR with the Opt-Out flag set.</t>
 <t>Opt-Out is not applicable to delegations with Delegation Type RRsets as Delegation Type RRsets are authoritative at the delegation point.</t>
@@ -258,7 +260,7 @@ RR with the Opt-Out flag set.</t>
 <t>This mitigation is effective only when all of the following conditions hold:</t>
 
 <ul spacing="compact">
-<li>The delegating zone is signed with DNSSEC.</li>
+<li>The delegating zone is DNSSEC-signed.</li>
 <li>The ADT flag is set in the delegating zone's DNSKEY RRset.</li>
 <li>The resolver performs DNSSEC validation.</li>
 <li>The resolver enforces the ADT requirement as specified in <xref target="ADTREQ"></xref>.</li>
@@ -273,7 +275,7 @@ RR with the Opt-Out flag set.</t>
 </section>
 
 <section anchor="interaction-between-flag-stripping-attacks"><name>Interaction Between Flag-Stripping Attacks</name>
-<t>The two downgrade attacks described above may be attempted in combination. An attacker who strips the DE flag from a query causes the authoritative server to respond with NS records only and no Delegation Types. Without Delegation Types in the response, the resolver cannot apply the NS-ignoring rule defined in <xref target="REFS"></xref>, and would ordinarily follow the NS records to resolve the delegated name, potentially over unencrypted transport.</t>
+<t>The two downgrade attacks described above may be attempted in combination. An attacker who strips the DE flag from a query causes the authoritative name server to respond with NS records only and no Delegation Types. Without Delegation Types in the response, the resolver cannot apply the NS-ignoring rule defined in <xref target="REFS"></xref>, and would ordinarily follow the NS records to resolve the delegated name, potentially over unencrypted transport.</t>
 <t>As described in <xref target="DESTRIP"></xref>, the ADT flag defeats this combined attack for validating resolvers in zones where ADT is set. The resolver's obligation to require NSEC or NSEC3 proof derives from the previously validated DNSKEY RRset, not from the contents of the referral itself. A referral containing only NS records, with no NSEC or NSEC3 proof, will be rejected regardless of whether Delegation Types were present.</t>
 <t>The residual risk in both <xref target="DESTRIP"></xref> and this section therefore reduces to the same condition: zones in which ADT is not set, or in which DNSSEC is not deployed, provide no cryptographic protection against either attack. This is a deployment risk, addressed in <xref target="PARTIAL"></xref>.</t>
 </section>
@@ -285,16 +287,16 @@ RR with the Opt-Out flag set.</t>
 <t>In unsigned zones, no cryptographic protection against this attack is available.</t>
 </section>
 
-<section anchor="denial-of-service-via-nxdomain-for-non-delegation-extension-aware-resolvers"><name>Denial-of-Service via NXDOMAIN for non-Delegation-Extension-aware Resolvers</name>
-<t><xref target="INCLUDEDT"></xref> notes that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a non-Delegation-Extension-aware resolver from exhausting other authoritative servers for information it cannot act upon.</t>
+<section anchor="DOSNON"><name>Denial-of-Service via NXDOMAIN for non-Delegation-Extension-aware Resolvers</name>
+<t><xref target="INCLUDEDT"></xref> notes that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a non-Delegation-Extension-aware resolver from exhausting other authoritative name servers for information it cannot act upon.</t>
 <t>An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return NXDOMAIN for a name that legitimately exists.</t>
-<t>However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any NXDOMAIN response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare NXDOMAIN response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject an NXDOMAIN response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering.</t>
+<t>However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any NXDOMAIN response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare NXDOMAIN response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject an NXDOMAIN response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering. Authoritative name servers for a delegating zone that employ Compact Denial of Existence [RFC9824] MUST NOT satisfy this proof with an NXNAME-based response matching the queried name, because such a response omits the Delegation Type bits at the delegation point on which this detection relies. It MUST instead return a conventional Name Error proof as described in <xref target="INCLUDEDT"></xref>.</t>
 <t>As with the attacks described in <xref target="DOWNGRADE"></xref>, this mitigation depends on the delegating zone being DNSSEC-signed, ADT being set, and the resolver performing validation. In zones where these conditions do not hold, a DE-flag-stripping attack may result in an NXDOMAIN response that the resolver cannot distinguish from a legitimate one, causing a denial of service for the queried name. This residual risk is addressed in <xref target="PARTIAL"></xref>.</t>
-<t>Authoritative servers SHOULD include an Extended DNS Error <xref target="RFC8914"></xref> code in NXDOMAIN responses returned when the DE flag is clear and no NS RRset exists, to assist in diagnosing misconfiguration or attack, absent a local policy requiring otherwise.</t>
+<t>Authoritative name servers SHOULD include an Extended DNS Error <xref target="RFC8914"></xref> code in NXDOMAIN responses returned when the DE flag is clear and no NS RRset exists, to assist in diagnosing misconfiguration or attack, absent a local policy requiring otherwise.</t>
 </section>
 
 <section anchor="PARTIAL"><name>Partial Deployment and Transition Risks</name>
-<t>The mechanisms defined in this document are effective only when deployed end-to-end. During the transition period in which some resolvers, authoritative servers, and zones have adopted this specification and others have not, a number of residual risks apply.</t>
+<t>The mechanisms defined in this document are effective only when deployed end-to-end. During the transition period in which some resolvers, authoritative name servers, and zones have adopted this specification and others have not, a number of residual risks apply.</t>
 <t>The ADT flag provides protection against the downgrade attacks described in <xref target="DOWNGRADE"></xref> only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available.</t>
 <t>Zone operators that publish Delegation Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on Delegation Types for security properties such as encrypted transport MUST be DNSSEC-signed.</t>
 </section>
@@ -376,6 +378,7 @@ Bit 2    DE    Delegation Extensions        This-document
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4592.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5011.xml"/>
+<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5155.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6672.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6840.xml"/>
 <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6891.xml"/>
