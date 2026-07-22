@@ -7,8 +7,8 @@ Internet-Draft                                                     ICANN
 Updates: 1034, 4035, 6672, 6840, 6895 (if                    P. van Dijk
          approved)                                              PowerDNS
 Intended status: Standards Track                               P. Špaček
-Expires: 22 January 2027                                             ISC
-                                                            21 July 2026
+Expires: 23 January 2027                                             ISC
+                                                            22 July 2026
 
 
           DNS Protocol Modifications for Delegation Extensions
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 January 2027.
+   This Internet-Draft will expire on 23 January 2027.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 1]
+Arends, et al.           Expires 23 January 2027                [Page 1]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 2]
+Arends, et al.           Expires 23 January 2027                [Page 2]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 3]
+Arends, et al.           Expires 23 January 2027                [Page 3]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -221,7 +221,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 4]
+Arends, et al.           Expires 23 January 2027                [Page 4]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -277,7 +277,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 5]
+Arends, et al.           Expires 23 January 2027                [Page 5]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -319,10 +319,9 @@ Internet-Draft                   DELEXT                        July 2026
 
 4.4.  Delegation Types at a Wildcard Domain Name
 
-   Wildcard domain names are valid domain names, however, wildcard
-   expansion defined in [RFC4592] does not create delegation points, as
-   it was left undefined.  Consequently, a wildcard owner name MUST NOT
-   have Delegation Types.
+   Wildcard expansion defined in [RFC4592] does not create delegation
+   points, as it was left undefined.  Consequently, a wildcard owner
+   name MUST NOT have Delegation Types.
 
 5.  Resolver Requirements
 
@@ -333,7 +332,8 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 6]
+
+Arends, et al.           Expires 23 January 2027                [Page 6]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -389,7 +389,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 7]
+Arends, et al.           Expires 23 January 2027                [Page 7]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -416,11 +416,11 @@ Internet-Draft                   DELEXT                        July 2026
    Types.
 
    When Delegation Types exist, Delegation-Extension-aware resolvers
-   ignore Delegation Point and Apex NS RRset for the delegated zone.
+   ignore delegation point and Apex NS RRset for the delegated zone.
 
    Each delegation level can have a mixture of Delegation-Types and NS
    RR types, and Delegation-Extension-aware resolvers MUST be able to
-   follow chains of delegations which combines both types in arbitrary
+   follow chains of delegations which combine both types in arbitrary
    ways.
 
    The terms SNAME and SLIST used here are defined in [RFC1034]
@@ -435,8 +435,8 @@ Internet-Draft                   DELEXT                        July 2026
    be represented only once in the final SLIST even if it was
    encountered multiple times during SLIST construction.
 
-   Neither [RFC1034] nor this document define how a resolver uses SLIST;
-   they only define how to populate it.
+   Neither [RFC1034] nor this document define how a resolver uses SLIST.
+   They only define how to populate it.
 
    A Delegation-Extension-aware resolver's SLIST needs to be able to
    hold multiple types of information, delegations defined by NS RRset
@@ -445,7 +445,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 8]
+Arends, et al.           Expires 23 January 2027                [Page 8]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -501,7 +501,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027                [Page 9]
+Arends, et al.           Expires 23 January 2027                [Page 9]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -510,9 +510,9 @@ Internet-Draft                   DELEXT                        July 2026
    but does have an NS RRset, the resolver MUST copy the NS RRset into
    SLIST.
 
-   2.2.3 if SLIST is not populated, remove the leftmost label from SNAME
-   and go back to step 2.2, using the newly shortened SNAME.  If SLIST
-   is populated, stop walking up the DNS tree.
+   2.2.3.  If SLIST is not populated, remove the leftmost label from
+   SNAME and go back to step 2.2, using the newly shortened SNAME.  If
+   SLIST is populated, stop walking up the DNS tree.
 
    =====
 
@@ -557,7 +557,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 10]
+Arends, et al.           Expires 23 January 2027               [Page 10]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -606,14 +606,14 @@ Internet-Draft                   DELEXT                        July 2026
 6.4.  Insecure Delegation Proofs
 
    This document updates [RFC6840] Section 4.4 to include securing
-   Delegation Point RRsets.  The first paragraph of that section is
+   delegation point RRsets.  The first paragraph of that section is
    updated to read:
 
 
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 11]
+Arends, et al.           Expires 23 January 2027               [Page 11]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -669,7 +669,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 12]
+Arends, et al.           Expires 23 January 2027               [Page 12]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -725,7 +725,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 13]
+Arends, et al.           Expires 23 January 2027               [Page 13]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -781,7 +781,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 14]
+Arends, et al.           Expires 23 January 2027               [Page 14]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -837,7 +837,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 15]
+Arends, et al.           Expires 23 January 2027               [Page 15]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -847,7 +847,7 @@ Internet-Draft                   DELEXT                        July 2026
    signed, the ADT flag is set in the zone's DNSKEY RRset, and the
    resolver performs validation.  In zones that publish Delegation Types
    but have not set the ADT flag in the DNSKEY RRset, or that are not
-   DNSSEC signed, no cryptographic protection against referral-stripping
+   DNSSEC-signed, no cryptographic protection against referral-stripping
    or DE-flag-stripping attacks is available.
 
    Zone operators that publish Delegation Types in signed zones are
@@ -893,7 +893,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 16]
+Arends, et al.           Expires 23 January 2027               [Page 16]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -949,7 +949,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 17]
+Arends, et al.           Expires 23 January 2027               [Page 17]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 18]
+Arends, et al.           Expires 23 January 2027               [Page 18]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1061,7 +1061,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 19]
+Arends, et al.           Expires 23 January 2027               [Page 19]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1117,7 +1117,7 @@ Authors' Addresses
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 20]
+Arends, et al.           Expires 23 January 2027               [Page 20]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1173,4 +1173,4 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 22 January 2027               [Page 21]
+Arends, et al.           Expires 23 January 2027               [Page 21]

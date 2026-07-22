@@ -142,7 +142,7 @@ Queries for type ANY where the QNAME matches a delegation point with Delegation 
 as if a DS record was present at the delegation point.
 
 ## Delegation Types at a Wildcard Domain Name
-Wildcard domain names are valid domain names, however, wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.
+Wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.
 
 # Resolver Requirements {#RESREQ}
 
@@ -194,9 +194,9 @@ These instructions were informally updated by [@!RFC4035] Section 4.2 for the DS
 
 This document applies the behavior for DS RR types to Delegation Types.
 
-When Delegation Types exist, Delegation-Extension-aware resolvers ignore Delegation Point and Apex NS RRset for the delegated zone. 
+When Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone. 
 
-Each delegation level can have a mixture of Delegation-Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combines both types in arbitrary ways.
+Each delegation level can have a mixture of Delegation-Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.
 
 The terms SNAME and SLIST used here are defined in [@!RFC1034] Section 5.3.2:
 
@@ -206,7 +206,7 @@ The terms SNAME and SLIST used here are defined in [@!RFC1034] Section 5.3.2:
 
 This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.
 
-Neither [@!RFC1034] nor this document define how a resolver uses SLIST; they only define how to populate it.
+Neither [@!RFC1034] nor this document define how a resolver uses SLIST. They only define how to populate it.
 
 A Delegation-Extension-aware resolver's SLIST needs to be able to hold multiple types of information, delegations defined by NS RRset and delegations defined by Delegation Type RRsets.
 
@@ -242,7 +242,7 @@ However, if the Delegation Type RRsets are known to exist but are unusable (for 
 
 2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
 
-2.2.3 if SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.
+2.2.3. If SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.
 
 =====
 
@@ -298,7 +298,7 @@ Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume nonexistence of
 
 ## Insecure Delegation Proofs
 
-This document updates [@!RFC6840] Section 4.4 to include securing Delegation Point RRsets. The first paragraph of that section is updated to read:
+This document updates [@!RFC6840] Section 4.4 to include securing delegation point RRsets. The first paragraph of that section is updated to read:
 
 [@!RFC4035] Section 5.2 specifies that a validator, when proving a delegation is not secure, needs to check for the absence of the DS and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in [@!RFC6840] Section 4.1.
 
@@ -377,7 +377,7 @@ Authoritative servers SHOULD include an Extended DNS Error [@!RFC8914] code in N
 
 The mechanisms defined in this document are effective only when deployed end-to-end. During the transition period in which some resolvers, authoritative servers, and zones have adopted this specification and others have not, a number of residual risks apply.
 
-The ADT flag provides protection against the downgrade attacks described in (#DOWNGRADE) only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available. 
+The ADT flag provides protection against the downgrade attacks described in (#DOWNGRADE) only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available. 
 
 Zone operators that publish Delegation Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on Delegation Types for security properties such as encrypted transport MUST be DNSSEC-signed.
 

@@ -1222,7 +1222,7 @@ li > p:last-of-type:only-child {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Arends, et al.</td>
-<td class="center">Expires 22 January 2027</td>
+<td class="center">Expires 23 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1238,12 +1238,12 @@ li > p:last-of-type:only-child {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a>, <a href="https://www.rfc-editor.org/rfc/rfc6895" class="eref">6895</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-21" class="published">21 July 2026</time>
+<time datetime="2026-07-22" class="published">22 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-22">22 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-23">23 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1286,7 +1286,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1610,7 +1610,7 @@ as if a DS record was present at the delegation point.<a href="#section-4.3-1" c
         <h3 id="name-delegation-types-at-a-wildc">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-delegation-types-at-a-wildc" class="section-name selfRef">Delegation Types at a Wildcard Domain Name</a>
         </h3>
-<p id="section-4.4-1">Wildcard domain names are valid domain names, however, wildcard expansion defined in <span>[<a href="#RFC4592" class="cite xref">RFC4592</a>]</span> does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">Wildcard expansion defined in <span>[<a href="#RFC4592" class="cite xref">RFC4592</a>]</span> does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1666,8 +1666,8 @@ to indicate that Delegation Types are supported.<a href="#section-5.1-8" class="
 <p id="section-5.3-1">This document updates instructions for finding the best servers to ask, covered in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 and <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> Section 3.4.1 with the text "2. Find the best servers to ask.".
 These instructions were informally updated by <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 4.2 for the DS RR type.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">This document applies the behavior for DS RR types to Delegation Types.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">When Delegation Types exist, Delegation-Extension-aware resolvers ignore Delegation Point and Apex NS RRset for the delegated zone.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4">Each delegation level can have a mixture of Delegation-Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combines both types in arbitrary ways.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">When Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">Each delegation level can have a mixture of Delegation-Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 <p id="section-5.3-5">The terms SNAME and SLIST used here are defined in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.2:<a href="#section-5.3-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.3-6.1">
@@ -1678,7 +1678,7 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
 </li>
         </ul>
 <p id="section-5.3-7">This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.<a href="#section-5.3-7" class="pilcrow">¶</a></p>
-<p id="section-5.3-8">Neither <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> nor this document define how a resolver uses SLIST; they only define how to populate it.<a href="#section-5.3-8" class="pilcrow">¶</a></p>
+<p id="section-5.3-8">Neither <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> nor this document define how a resolver uses SLIST. They only define how to populate it.<a href="#section-5.3-8" class="pilcrow">¶</a></p>
 <p id="section-5.3-9">A Delegation-Extension-aware resolver's SLIST needs to be able to hold multiple types of information, delegations defined by NS RRset and delegations defined by Delegation Type RRsets.<a href="#section-5.3-9" class="pilcrow">¶</a></p>
 <p id="section-5.3-10">Delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.<a href="#section-5.3-10" class="pilcrow">¶</a></p>
 <p id="section-5.3-11">Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST;<a href="#section-5.3-11" class="pilcrow">¶</a></p>
@@ -1696,7 +1696,7 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
 <p id="section-5.3-23">If they exist, the resolver MUST use their content to populate SLIST.<a href="#section-5.3-23" class="pilcrow">¶</a></p>
 <p id="section-5.3-24">However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.<a href="#section-5.3-24" class="pilcrow">¶</a></p>
 <p id="section-5.3-25">2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.<a href="#section-5.3-25" class="pilcrow">¶</a></p>
-<p id="section-5.3-26">2.2.3 if SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.<a href="#section-5.3-26" class="pilcrow">¶</a></p>
+<p id="section-5.3-26">2.2.3. If SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.<a href="#section-5.3-26" class="pilcrow">¶</a></p>
 <p id="section-5.3-27">=====<a href="#section-5.3-27" class="pilcrow">¶</a></p>
 <p id="section-5.3-28">The rest of Step 2's description in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 is not affected by this document.<a href="#section-5.3-28" class="pilcrow">¶</a></p>
 </section>
@@ -1769,7 +1769,7 @@ or the original owner name for the NSEC3 RR.<a href="#section-6.3-4.3.1" class="
         <h3 id="name-insecure-delegation-proofs">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-insecure-delegation-proofs" class="section-name selfRef">Insecure Delegation Proofs</a>
         </h3>
-<p id="section-6.4-1">This document updates <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.4 to include securing Delegation Point RRsets. The first paragraph of that section is updated to read:<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">This document updates <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.4 to include securing delegation point RRsets. The first paragraph of that section is updated to read:<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2"><span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 5.2 specifies that a validator, when proving a delegation is not secure, needs to check for the absence of the DS and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.1.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">This document updates <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> and <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> to specify that the validator MUST check for the presence of the NS or Delegation Types bit in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <p id="section-6.4-4">Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
@@ -1878,7 +1878,7 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
 <a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-partial-deployment-and-tran" class="section-name selfRef">Partial Deployment and Transition Risks</a>
         </h3>
 <p id="section-8.5-1">The mechanisms defined in this document are effective only when deployed end-to-end. During the transition period in which some resolvers, authoritative servers, and zones have adopted this specification and others have not, a number of residual risks apply.<a href="#section-8.5-1" class="pilcrow">¶</a></p>
-<p id="section-8.5-2">The ADT flag provides protection against the downgrade attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a> only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
+<p id="section-8.5-2">The ADT flag provides protection against the downgrade attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a> only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
 <p id="section-8.5-3">Zone operators that publish Delegation Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on Delegation Types for security properties such as encrypted transport MUST be DNSSEC-signed.<a href="#section-8.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
