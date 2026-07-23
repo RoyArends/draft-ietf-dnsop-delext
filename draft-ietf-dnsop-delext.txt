@@ -7,8 +7,8 @@ Internet-Draft                                                     ICANN
 Updates: 1034, 4035, 6672, 6840, 6895, 9824 (if              P. van Dijk
          approved)                                              PowerDNS
 Intended status: Standards Track                               P. Špaček
-Expires: 23 January 2027                                             ISC
-                                                            22 July 2026
+Expires: 24 January 2027                                             ISC
+                                                            23 July 2026
 
 
           DNS Protocol Modifications for Delegation Extensions
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2027.
+   This Internet-Draft will expire on 24 January 2027.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 1]
+Arends, et al.           Expires 24 January 2027                [Page 1]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -97,7 +97,7 @@ Table of Contents
        8.2.2.  Stripping of the DE Flag from Queries . . . . . . . .  14
        8.2.3.  Interaction Between Flag-Stripping Attacks  . . . . .  14
      8.3.  Injection of Delegation Types . . . . . . . . . . . . . .  15
-     8.4.  Denial-of-Service via NXDOMAIN for
+     8.4.  Denial-of-Service via a Negative Response for
            non-Delegation-Extension-aware Resolvers  . . . . . . . .  15
      8.5.  Partial Deployment and Transition Risks . . . . . . . . .  16
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 2]
+Arends, et al.           Expires 24 January 2027                [Page 2]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 3]
+Arends, et al.           Expires 24 January 2027                [Page 3]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -194,8 +194,8 @@ Internet-Draft                   DELEXT                        July 2026
 
    Delegation Types are DNS CLASS independent.
 
-   Section 9.3 requests IANA to allocate the ranges 0xF000-0xF1EF and
-   0xF1F0-0xF1FF for Delegation Types.
+   Section 9.3 requests IANA to allocate the ranges 0xF000-0xF1EF
+   (61440-61935) and 0xF1F0-0xF1FF (61936-61951) for Delegation Types.
 
 3.1.  Updates to Allocation Policy
 
@@ -221,7 +221,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 4]
+Arends, et al.           Expires 24 January 2027                [Page 4]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -270,14 +270,14 @@ Internet-Draft                   DELEXT                        July 2026
    Note that when the DE flag is clear (i.e., set to 0), and no NS RRset
    exists at a delegation point, there is no referral from the
    perspective of a non-Delegation-Extension-aware resolver and the
-   server returns an NXDOMAIN response.  The server SHOULD include the
+   server returns a negative response.  The server SHOULD include the
    Delegation Extension Required INFO-CODE 34 ("New Delegation Only")
    Extended DNS Error [RFC8914] specified in [I-D.ietf-deleg] absent a
    local policy requiring otherwise.
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 5]
+Arends, et al.           Expires 24 January 2027                [Page 5]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -288,11 +288,12 @@ Internet-Draft                   DELEXT                        July 2026
 4.1.1.  Compact Denial of Existence
 
    This document updates Compact Denial of Existence (CDOE) [RFC9824].
-   For CDOE enabled servers, the NXDOMAIN response required above is an
-   exception to the CDOE method: it MUST be generated as a conventional
-   Name Error proof ([RFC4035], or [RFC5155] for NSEC3) rather than as
-   an NXNAME-based NODATA response, and it MUST be returned regardless
-   of whether the query sets the Compact Answers OK (CO) flag [RFC9824].
+   For CDOE enabled servers, the negative response required above is an
+   exception to the CDOE method, i.e., it MUST be generated as a
+   conventional Name Error proof ([RFC4035], or [RFC5155] for NSEC3)
+   rather than as an NXNAME-based NODATA response, and it MUST be
+   returned regardless of whether the query sets the Compact Answers OK
+   (CO) flag [RFC9824].
 
    For an NSEC zone, a single NSEC record whose owner name matches the
    delegation point satisfies both aspects of the Name Error proof at
@@ -332,8 +333,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-
-Arends, et al.           Expires 23 January 2027                [Page 6]
+Arends, et al.           Expires 24 January 2027                [Page 6]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -389,7 +389,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 7]
+Arends, et al.           Expires 24 January 2027                [Page 7]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -445,7 +445,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 8]
+Arends, et al.           Expires 24 January 2027                [Page 8]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -501,7 +501,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027                [Page 9]
+Arends, et al.           Expires 24 January 2027                [Page 9]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -530,14 +530,17 @@ Internet-Draft                   DELEXT                        July 2026
    The rest of Step 2's description in [RFC1034] Section 5.3.3 is not
    affected by this document.
 
+   Note that a query for QNAME="." and QTYPE=DS (or a Delegation Type)
+   is non-sensical, as there is no zone that delegates to the root zone.
+
 6.  DNSSEC Requirements
 
    In a DNSSEC-signed zone, Delegation Type RRsets MUST be signed.
 
-   To avoid a downgrade attack, where the Delegation Type RRsets and
-   NSEC (or NSEC3) records can be replaced by unsigned NS records, a
-   secure signal in the form of a DNSKEY flag is introduced.  See
-   Section 8.2.1 for the specific Threat Model.  This secure signal
+   To avoid a downgrade attack, where the Delegation Type RRsets, NSEC
+   (or NSEC3) RRsets and their signatures can be replaced by unsigned NS
+   records, a secure signal in the form of a DNSKEY flag is introduced.
+   See Section 8.2.1 for the specific Threat Model.  This secure signal
    indicates that NSEC or NSEC3 records MUST be present in a referral
    response.
 
@@ -551,16 +554,15 @@ Internet-Draft                   DELEXT                        July 2026
    |                           |ZON|REV|                   |ADT|SEP|
    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 
-   Figure 2: DNSKEY Flags Field
 
 
 
-
-
-Arends, et al.           Expires 23 January 2027               [Page 10]
+Arends, et al.           Expires 24 January 2027               [Page 10]
 
 Internet-Draft                   DELEXT                        July 2026
 
+
+   Figure 2: DNSKEY Flags Field
 
    The descriptions of the ZONE (ZON) and Secure Entry Point (SEP) flags
    are provided in [RFC4034].  The description of the REVOKE (REV) flag
@@ -586,7 +588,9 @@ Internet-Draft                   DELEXT                        July 2026
    considered tampered with, and the response MUST be ignored.
 
    When the DNSKEY-ADT flag is clear, this consistency check does not
-   apply.  The resolver processes the referral according to the
+   apply.  To be explicit, it means that a positive response with a
+   DELEG RRset SHOULD NOT be treated as DNSSEC-bogus due to a clear ADT
+   flag.  The resolver processes the referral according to the
    procedures defined in Section 5.
 
 6.3.  Clarifications on Nonexistence Proofs
@@ -609,11 +613,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-
-
-
-
-Arends, et al.           Expires 23 January 2027               [Page 11]
+Arends, et al.           Expires 24 January 2027               [Page 11]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -669,7 +669,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 12]
+Arends, et al.           Expires 24 January 2027               [Page 12]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -725,7 +725,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 13]
+Arends, et al.           Expires 24 January 2027               [Page 13]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -781,7 +781,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 14]
+Arends, et al.           Expires 24 January 2027               [Page 14]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -804,40 +804,40 @@ Internet-Draft                   DELEXT                        July 2026
    In unsigned zones, no cryptographic protection against this attack is
    available.
 
-8.4.  Denial-of-Service via NXDOMAIN for non-Delegation-Extension-aware
-      Resolvers
+8.4.  Denial-of-Service via a Negative Response for non-Delegation-
+      Extension-aware Resolvers
 
    Section 4.1 notes that when the DE flag is clear and no NS RRset
-   exists for a referral, the authoritative name server must return an
-   NXDOMAIN response.  This behavior is intended to prevent a non-
+   exists for a referral, the authoritative name server must return a
+   negative response.  This behavior is intended to prevent a non-
    Delegation-Extension-aware resolver from exhausting other
    authoritative name servers for information it cannot act upon.
 
    An attacker may attempt to exploit this behavior by stripping the DE
    flag from a query directed at a zone that publishes only Delegation
-   Types and no NS RRsets, causing the server to return NXDOMAIN for a
-   name that legitimately exists.
+   Types and no NS RRsets, causing the server to return a negative
+   response for a name that legitimately exists.
 
    However, a resolver that sets the DE flag expects NSEC or NSEC3 proof
-   in any NXDOMAIN response, demonstrating that the queried name does
+   in any negative response, demonstrating that the queried name does
    not exist or that no Delegation Types are present at or above it.  A
-   bare NXDOMAIN response lacking such proof is therefore detectable by
+   bare negative response lacking such proof is therefore detectable by
    a validating resolver.  When the ADT flag is set in the delegating
-   zone's DNSKEY RRset, the resolver MUST reject an NXDOMAIN response
+   zone's DNSKEY RRset, the resolver MUST reject a negative response
    that does not include the required NSEC or NSEC3 records, as the
    absence of proof indicates tampering.  Authoritative name servers for
    a delegating zone that employ Compact Denial of Existence [RFC9824]
    MUST NOT satisfy this proof with an NXNAME-based response matching
    the queried name, because such a response omits the Delegation Type
-   bits at the delegation point on which this detection relies.  It MUST
-   instead return a conventional Name Error proof as described in
-   Section 4.1.
+   bits at the delegation point on which this detection relies.  They
+   MUST instead return a conventional Name Error proof as described in
+   Section 4.1.1.
 
 
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 15]
+Arends, et al.           Expires 24 January 2027               [Page 15]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -845,13 +845,13 @@ Internet-Draft                   DELEXT                        July 2026
    As with the attacks described in Section 8.2, this mitigation depends
    on the delegating zone being DNSSEC-signed, ADT being set, and the
    resolver performing validation.  In zones where these conditions do
-   not hold, a DE-flag-stripping attack may result in an NXDOMAIN
+   not hold, a DE-flag-stripping attack may result in a negative
    response that the resolver cannot distinguish from a legitimate one,
    causing a denial of service for the queried name.  This residual risk
    is addressed in Section 8.5.
 
    Authoritative name servers SHOULD include an Extended DNS Error
-   [RFC8914] code in NXDOMAIN responses returned when the DE flag is
+   [RFC8914] code in negative responses returned when the DE flag is
    clear and no NS RRset exists, to assist in diagnosing
    misconfiguration or attack, absent a local policy requiring
    otherwise.
@@ -893,7 +893,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 16]
+Arends, et al.           Expires 24 January 2027               [Page 16]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -949,7 +949,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 17]
+Arends, et al.           Expires 24 January 2027               [Page 17]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 18]
+Arends, et al.           Expires 24 January 2027               [Page 18]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1061,7 +1061,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 19]
+Arends, et al.           Expires 24 January 2027               [Page 19]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1117,7 +1117,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 20]
+Arends, et al.           Expires 24 January 2027               [Page 20]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1173,4 +1173,4 @@ Authors' Addresses
 
 
 
-Arends, et al.           Expires 23 January 2027               [Page 21]
+Arends, et al.           Expires 24 January 2027               [Page 21]

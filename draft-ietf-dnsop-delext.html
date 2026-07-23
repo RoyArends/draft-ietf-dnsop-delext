@@ -1222,7 +1222,7 @@ li > p:last-of-type:only-child {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Arends, et al.</td>
-<td class="center">Expires 23 January 2027</td>
+<td class="center">Expires 24 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1238,12 +1238,12 @@ li > p:last-of-type:only-child {
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a>, <a href="https://www.rfc-editor.org/rfc/rfc6895" class="eref">6895</a>, <a href="https://www.rfc-editor.org/rfc/rfc9824" class="eref">9824</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-22" class="published">22 July 2026</time>
+<time datetime="2026-07-23" class="published">23 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-23">23 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-24">24 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1286,7 +1286,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1425,7 +1425,7 @@ li > p:last-of-type:only-child {
                 <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-injection-of-delegation-typ" class="internal xref">Injection of Delegation Types</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-denial-of-service-via-nxdom" class="internal xref">Denial-of-Service via NXDOMAIN for non-Delegation-Extension-aware Resolvers</a></p>
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-denial-of-service-via-a-neg" class="internal xref">Denial-of-Service via a Negative Response for non-Delegation-Extension-aware Resolvers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
                 <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.  <a href="#name-partial-deployment-and-tran" class="internal xref">Partial Deployment and Transition Risks</a></p>
@@ -1521,7 +1521,7 @@ li > p:last-of-type:only-child {
       </h2>
 <p id="section-3-1"><span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span> lists three subcategories of RR type numbers: data TYPEs, QTYPEs, and Meta-TYPEs. This specification adds a fourth subcategory: Delegation Types.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Delegation Types are DNS CLASS independent.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3"><a href="#alloc-iana" class="auto internal xref">Section 9.3</a> requests IANA to allocate the ranges 0xF000-0xF1EF and 0xF1F0-0xF1FF for Delegation Types.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3"><a href="#alloc-iana" class="auto internal xref">Section 9.3</a> requests IANA to allocate the ranges 0xF000-0xF1EF (61440-61935) and 0xF1F0-0xF1FF (61936-61951) for Delegation Types.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="updates-to-allocation-policy">
 <section id="section-3.1">
         <h3 id="name-updates-to-allocation-polic">
@@ -1575,15 +1575,14 @@ li > p:last-of-type:only-child {
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-including-delegation-types-" class="section-name selfRef">Including Delegation Types in a Referral Response</a>
         </h3>
 <p id="section-4.1-1">When the DE flag is set to 1, the server includes Delegation Type RRsets in referrals and omits the NS RRset. When there are no Delegation Type RRsets for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns an NXDOMAIN response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> specified in <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> absent a local policy requiring otherwise.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns a negative response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> specified in <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> absent a local policy requiring otherwise.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1-3">If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<div id="compact-denial-of-existence">
+<div id="COED">
 <section id="section-4.1.1">
           <h4 id="name-compact-denial-of-existence">
 <a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-compact-denial-of-existence" class="section-name selfRef">Compact Denial of Existence</a>
           </h4>
-<p id="section-4.1.1-1">This document updates Compact Denial of Existence (CDOE) <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>. For CDOE enabled servers, the NXDOMAIN response required above is an exception to the CDOE method: it MUST be generated as a conventional Name Error proof (<span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span>, or <span>[<a href="#RFC5155" class="cite xref">RFC5155</a>]</span> for
-NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-1">This document updates Compact Denial of Existence (CDOE) <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>. For CDOE enabled servers, the negative response required above is an exception to the CDOE method, i.e., it MUST be generated as a conventional Name Error proof (<span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span>, or <span>[<a href="#RFC5155" class="cite xref">RFC5155</a>]</span> for NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-2">For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit
 Maps field conveys the Delegation Type(s) present at the delegation point.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3">For an NSEC3 zone, the proof is the usual closest-encloser construction of <span>[<a href="#RFC5155" class="cite xref">RFC5155</a>]</span>: the NSEC3 record matching the delegation point (whose Type Bit Map conveys the Delegation Type(s) present there), the NSEC3 record covering the next closer name, and the NSEC3 record covering the source of synthesis (wildcard) at the closest encloser. Unlike the NSEC case, these are in general three distinct records, because NSEC3 hashing does not preserve the name hierarchy.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
@@ -1704,6 +1703,7 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
 <p id="section-5.3-26">2.2.3. If SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.<a href="#section-5.3-26" class="pilcrow">¶</a></p>
 <p id="section-5.3-27">=====<a href="#section-5.3-27" class="pilcrow">¶</a></p>
 <p id="section-5.3-28">The rest of Step 2's description in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 is not affected by this document.<a href="#section-5.3-28" class="pilcrow">¶</a></p>
+<p id="section-5.3-29">Note that a query for QNAME="." and QTYPE=DS (or a Delegation Type) is non-sensical, as there is no zone that delegates to the root zone.<a href="#section-5.3-29" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1714,7 +1714,7 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-dnssec-requirements" class="section-name selfRef">DNSSEC Requirements</a>
       </h2>
 <p id="section-6-1">In a DNSSEC-signed zone, Delegation Type RRsets MUST be signed.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">To avoid a downgrade attack, where the Delegation Type RRsets and NSEC (or NSEC3) records can be replaced by unsigned NS records, a secure signal in the form of a DNSKEY flag is introduced. See <a href="#DSTRIP" class="auto internal xref">Section 8.2.1</a> for the specific Threat Model. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-2">To avoid a downgrade attack, where the Delegation Type RRsets, NSEC (or NSEC3) RRsets and their signatures can be replaced by unsigned NS records, a secure signal in the form of a DNSKEY flag is introduced. See <a href="#DSTRIP" class="auto internal xref">Section 8.2.1</a> for the specific Threat Model. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="ADT">
 <section id="section-6.1">
         <h3 id="name-the-dnskey-adt-flag">
@@ -1743,7 +1743,7 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
 <p id="section-6.2-1">On receiving a referral from a DNSSEC-signed delegating zone, a  validating resolver MUST determine the authenticated state of the ADT flag from a validated DNSKEY RRset for that zone.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">When the DNSKEY-ADT flag is clear, this consistency check does not
-apply. The resolver processes the referral according to the procedures defined in <a href="#RESREQ" class="auto internal xref">Section 5</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+apply. To be explicit, it means that a positive response with a DELEG RRset SHOULD NOT be treated as DNSSEC-bogus due to a clear ADT flag.  The resolver processes the referral according to the procedures defined in <a href="#RESREQ" class="auto internal xref">Section 5</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="clarifications-on-nonexistence-proofs">
@@ -1867,14 +1867,14 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
 </div>
 <div id="DOSNON">
 <section id="section-8.4">
-        <h3 id="name-denial-of-service-via-nxdom">
-<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-denial-of-service-via-nxdom" class="section-name selfRef">Denial-of-Service via NXDOMAIN for non-Delegation-Extension-aware Resolvers</a>
+        <h3 id="name-denial-of-service-via-a-neg">
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-denial-of-service-via-a-neg" class="section-name selfRef">Denial-of-Service via a Negative Response for non-Delegation-Extension-aware Resolvers</a>
         </h3>
-<p id="section-8.4-1"><a href="#INCLUDEDT" class="auto internal xref">Section 4.1</a> notes that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return an NXDOMAIN response. This behavior is intended to prevent a non-Delegation-Extension-aware resolver from exhausting other authoritative name servers for information it cannot act upon.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
-<p id="section-8.4-2">An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return NXDOMAIN for a name that legitimately exists.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
-<p id="section-8.4-3">However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any NXDOMAIN response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare NXDOMAIN response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject an NXDOMAIN response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering. Authoritative name servers for a delegating zone that employ Compact Denial of Existence [RFC9824] MUST NOT satisfy this proof with an NXNAME-based response matching the queried name, because such a response omits the Delegation Type bits at the delegation point on which this detection relies. It MUST instead return a conventional Name Error proof as described in <a href="#INCLUDEDT" class="auto internal xref">Section 4.1</a>.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
-<p id="section-8.4-4">As with the attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a>, this mitigation depends on the delegating zone being DNSSEC-signed, ADT being set, and the resolver performing validation. In zones where these conditions do not hold, a DE-flag-stripping attack may result in an NXDOMAIN response that the resolver cannot distinguish from a legitimate one, causing a denial of service for the queried name. This residual risk is addressed in <a href="#PARTIAL" class="auto internal xref">Section 8.5</a>.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
-<p id="section-8.4-5">Authoritative name servers SHOULD include an Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> code in NXDOMAIN responses returned when the DE flag is clear and no NS RRset exists, to assist in diagnosing misconfiguration or attack, absent a local policy requiring otherwise.<a href="#section-8.4-5" class="pilcrow">¶</a></p>
+<p id="section-8.4-1"><a href="#INCLUDEDT" class="auto internal xref">Section 4.1</a> notes that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return a negative response. This behavior is intended to prevent a non-Delegation-Extension-aware resolver from exhausting other authoritative name servers for information it cannot act upon.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return a negative response for a name that legitimately exists.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any negative response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare negative response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject a negative response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering. Authoritative name servers for a delegating zone that employ Compact Denial of Existence [RFC9824] MUST NOT satisfy this proof with an NXNAME-based response matching the queried name, because such a response omits the Delegation Type bits at the delegation point on which this detection relies. They MUST instead return a conventional Name Error proof as described in <a href="#COED" class="auto internal xref">Section 4.1.1</a>.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">As with the attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a>, this mitigation depends on the delegating zone being DNSSEC-signed, ADT being set, and the resolver performing validation. In zones where these conditions do not hold, a DE-flag-stripping attack may result in a negative response that the resolver cannot distinguish from a legitimate one, causing a denial of service for the queried name. This residual risk is addressed in <a href="#PARTIAL" class="auto internal xref">Section 8.5</a>.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<p id="section-8.4-5">Authoritative name servers SHOULD include an Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> code in negative responses returned when the DE flag is clear and no NS RRset exists, to assist in diagnosing misconfiguration or attack, absent a local policy requiring otherwise.<a href="#section-8.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="PARTIAL">
