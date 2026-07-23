@@ -122,7 +122,7 @@ Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE fl
 When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are processed as ordinary Data Types.  
 
 ## Including Delegation Types in a Referral Response {#INCLUDEDT}
-When the DE flag is set to 1, the server includes Delegation Type RRsets in referrals and omits the NS RRset. When there are no Delegation Type RRsets for a referral, it includes the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the presence or absence of Delegation Types for the delegated name.
+When the DE flag is set to 1 and Delegation Type RRsets exist for the delegated name, the server MUST include the Delegation Type RRsets in the referral and MUST NOT include the NS RRset. If no Delegation Type RRsets exist for the delegated name, the server MUST include the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.
 
 Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns a negative response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error [@!RFC8914] specified in [@I-D.ietf-deleg] absent a local policy requiring otherwise. 
 
