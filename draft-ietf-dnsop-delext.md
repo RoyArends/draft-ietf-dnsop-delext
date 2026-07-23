@@ -122,7 +122,7 @@ Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE fl
 When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are processed as ordinary Data Types.  
 
 ## Including Delegation Types in a Referral Response {#INCLUDEDT}
-When the DE flag is set to 1 and Delegation Type RRsets exist for the delegated name, the server MUST include the Delegation Type RRsets in the referral and MUST NOT include the NS RRset. If no Delegation Type RRsets exist for the delegated name, the server MUST include the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.
+When the DE flag is set to 1 and Delegation Type RRsets exist for the delegated name, the server MUST include the Delegation Type RRsets in the referral and MUST NOT include the NS RRset (regardless if the QTYPE=NS). If no Delegation Type RRsets exist for the delegated name, the server MUST include the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.
 
 Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns a negative response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error [@!RFC8914] specified in [@I-D.ietf-deleg] absent a local policy requiring otherwise. 
 
@@ -146,7 +146,7 @@ Note that when the DE flag is clear, presence of an NS RRset at the delegation p
 
 ## Queries for type ANY
 Queries for type ANY where the QNAME matches a delegation point with Delegation Types present MUST behave the same way
-as if a DS record was present at the delegation point.
+as if a DS record was present at the delegation point. 
 
 ## Delegation Types at a Wildcard Domain Name
 Wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.
@@ -245,7 +245,7 @@ For example, if the QNAME is "test.example." and the QTYPE is a Delegation Type 
 
 If they exist, the resolver MUST use their content to populate SLIST.
 
-However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.
+However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.
 
 2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
 

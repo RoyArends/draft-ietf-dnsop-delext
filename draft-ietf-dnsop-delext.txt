@@ -263,11 +263,11 @@ Internet-Draft                   DELEXT                        July 2026
 
    When the DE flag is set to 1 and Delegation Type RRsets exist for the
    delegated name, the server MUST include the Delegation Type RRsets in
-   the referral and MUST NOT include the NS RRset.  If no Delegation
-   Type RRsets exist for the delegated name, the server MUST include the
-   NS RRset.  For DNSSEC-signed zones, the response MUST include DNSSEC
-   proof of the existence or non-existence of Delegation Type RRsets at
-   the delegated name.
+   the referral and MUST NOT include the NS RRset (regardless if the
+   QTYPE=NS).  If no Delegation Type RRsets exist for the delegated
+   name, the server MUST include the NS RRset.  For DNSSEC-signed zones,
+   the response MUST include DNSSEC proof of the existence or non-
+   existence of Delegation Type RRsets at the delegated name.
 
 
 
@@ -524,8 +524,8 @@ Internet-Draft                   DELEXT                        July 2026
    However, if the Delegation Type RRsets are known to exist but are
    unusable (for example, if it is found in DNSSEC BAD cache, or content
    of individual RRs is unusable for any reason), the resolver MUST NOT
-   instead use an NS RRset; the resolver MUST treat this case as if
-   SLIST is populated with unreachable servers.
+   use an NS RRset; the resolver MUST treat this case as if SLIST is
+   populated with unreachable servers.
 
    2.2.2.  If a given SNAME is proven to not have Delegation Type RRsets
    but does have an NS RRset, the resolver MUST copy the NS RRset into

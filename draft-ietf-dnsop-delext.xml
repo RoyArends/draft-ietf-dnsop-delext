@@ -91,7 +91,7 @@
 <t>When the value of the EDNS(0) DE flag is 0, the server behaves as a server that does not implement this specification, i.e., Delegation Types are processed as ordinary Data Types.</t>
 
 <section anchor="INCLUDEDT"><name>Including Delegation Types in a Referral Response</name>
-<t>When the DE flag is set to 1 and Delegation Type RRsets exist for the delegated name, the server MUST include the Delegation Type RRsets in the referral and MUST NOT include the NS RRset. If no Delegation Type RRsets exist for the delegated name, the server MUST include the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.</t>
+<t>When the DE flag is set to 1 and Delegation Type RRsets exist for the delegated name, the server MUST include the Delegation Type RRsets in the referral and MUST NOT include the NS RRset (regardless if the QTYPE=NS). If no Delegation Type RRsets exist for the delegated name, the server MUST include the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.</t>
 <t>Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns a negative response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 (&quot;New Delegation Only&quot;) Extended DNS Error <xref target="RFC8914"></xref> specified in <xref target="I-D.ietf-deleg"></xref> absent a local policy requiring otherwise.</t>
 <t>If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.</t>
 
@@ -181,7 +181,7 @@ These instructions were informally updated by <xref target="RFC4035"></xref> Sec
 <t>2.2. Look for locally-available Delegation Types and NS RRsets, starting at current SNAME.</t>
 <t>2.2.1. For a given SNAME, check for the existence of Delegation Type RRsets.</t>
 <t>If they exist, the resolver MUST use their content to populate SLIST.</t>
-<t>However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT instead use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.</t>
+<t>However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.</t>
 <t>2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.</t>
 <t>2.2.3. If SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.</t>
 <t>=====</t>
