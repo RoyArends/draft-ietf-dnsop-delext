@@ -222,7 +222,7 @@ These instructions were informally updated by [@!RFC4035] Section 4.2 for the DS
 
 This document applies the behavior for DS RR types to Parent Types.
 
-When Parent Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone. 
+When Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone. 
 
 Each delegation level can have a mixture of Delegation Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.
 

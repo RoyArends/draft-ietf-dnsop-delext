@@ -177,7 +177,7 @@ to indicate that Parent Types are supported.</t>
 <t>This document updates instructions for finding the best servers to ask, covered in <xref target="RFC1034"></xref> Section 5.3.3 and <xref target="RFC6672"></xref> Section 3.4.1 with the text &quot;2. Find the best servers to ask.&quot;.
 These instructions were informally updated by <xref target="RFC4035"></xref> Section 4.2 for the DS RR type.</t>
 <t>This document applies the behavior for DS RR types to Parent Types.</t>
-<t>When Parent Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone.</t>
+<t>When Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone.</t>
 <t>Each delegation level can have a mixture of Delegation Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.</t>
 <t>The terms SNAME and SLIST used here are defined in <xref target="RFC1034"></xref> Section 5.3.2:</t>
 
