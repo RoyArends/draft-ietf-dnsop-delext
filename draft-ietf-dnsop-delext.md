@@ -61,7 +61,7 @@ This document updates RFCs 1034, 4035, 6672, 6840, 6895 and 9824.
 
 # Introduction
 
-Existing DNS protocol semantics permit only the Delegation Signer (DS) RR type to exist as authoritative data at a delegation point [@RFC4034]. New delegation mechanisms such as [@I-D.ietf-deleg] require additional RR types with the same semantics. Rather than defining special protocol handling for each such RR type independently, this document defines a generic class of Delegation Types, Delegation Extra Information Types, reserves a range of RR type codes for that purpose, and specifies the protocol behavior common to all such types.
+Existing DNS protocol semantics permit only the Delegation Signer (DS) RR type to exist as authoritative data at a delegation point [@RFC4034]. New delegation mechanisms such as [@I-D.ietf-deleg] require additional RR types with the same semantics. Rather than defining special protocol handling for each such RR type independently, this document defines a generic class of Delegation Types, Parent Information Types, reserves a range of RR type codes for that purpose, and specifies the protocol behavior common to all such types.
 
 Support for Delegation Types is negotiated using the EDNS(0) [@!RFC6891] Delegation Extensions (DE) flag, specified in (#DE). This ensures that implementations that do not support this specification continue to interoperate using existing DNS delegation semantics.
 
@@ -70,11 +70,11 @@ To protect the negotiation mechanism against downgrade attacks, a DNSKEY flag is
 # Conventions and Definitions {#term}
 This document makes use of the terms defined in [@!RFC9499]. In addition, this document defines the following terms:
 
-* New Delegation Types: Combined range of both Delegation Types and Delegation Extra Information Types defined below.
+* Parent Types: Combined range of both Delegation Types and Parent Information Types defined below.
 
 * Delegation Types: Designates the set of RR types allocated from the ranges reserved in (#alloc) of this document. NS type is not a Delegation Type.
 
-* Delegation Extra Information Types: Designates the set of RR types allocated from the ranges reserved in (#alloc) of this document. DS RR type is similar to types in this range but is an Delegation Extra Information Type.
+* Parent Information Types: Designates the set of RR types allocated from the ranges reserved in (#alloc) of this document. DS RR type is similar to types in this range but is an Parent Information Type.
 
 
 * Delegation-Extension-aware name server, resolver, forwarder, or stub resolver: A client or server that implements this specification.
@@ -82,27 +82,27 @@ This document makes use of the terms defined in [@!RFC9499]. In addition, this d
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 [@!RFC2119] [@!RFC8174] when, and only when, they appear in all capitals, as shown here.
 
 ## Relationship with the Extensible Delegation for DNS
-[@I-D.ietf-deleg] specifies a new type (DELEG) that is authoritative at a delegation point and specifies protocol modifications to support DELEG. The present document generalizes those protocol modifications so they apply to a range of New Delegation Types.
+[@I-D.ietf-deleg] specifies a new type (DELEG) that is authoritative at a delegation point and specifies protocol modifications to support DELEG. The present document generalizes those protocol modifications so they apply to a range of Parent Types.
 
 ## Relationship with NS and DS Records
-The use of DS and delegation point NS records is orthogonal to the use of New Delegation Types. NS and DS records MAY coexist with New Delegation Types.
+The use of DS and delegation point NS records is orthogonal to the use of Parent Types. NS and DS records MAY coexist with Parent Types.
 
 Although the DS RR type has similar semantics, it is not classified as a Delegation Type for the purposes of this document.
 
-# New Delegation Types {#alloc}
+# Parent Types {#alloc}
 
-[@!RFC6895] lists three subcategories of RR type numbers: data TYPEs, QTYPEs, and Meta-TYPEs. This specification adds a two subcategories: Delegation Types and Delegation Extra Information Types.
+[@!RFC6895] lists three subcategories of RR type numbers: data TYPEs, QTYPEs, and Meta-TYPEs. This specification adds a two subcategories: Delegation Types and Parent Information Types.
 
-New Delegation Types are DNS CLASS independent.
+Parent Types are DNS CLASS independent.
 
 (#alloc-iana) requests IANA to allocate the ranges 0xF000-0xF1EF (61440-61935) and 0xF1F0-0xF1FF (61936-61951) for Delegation Types.
-(#alloc-iana) requests IANA to allocate the ranges 0xF200-0xF3EF (61952-62447) and 0xF3F0-0xF3FF (62448-62463) for Delegation Extra Information Types.
+(#alloc-iana) requests IANA to allocate the ranges 0xF200-0xF3EF (61952-62447) and 0xF3F0-0xF3FF (62448-62463) for Parent Information Types.
 
 ## Updates to Allocation Policy
 
-[@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. (#crit) updates that policy to account for the New Delegation Types subcategories and (#alloc-crit) specifies the criteria that apply to allocation requests within the range 0xF000-0xF3EF.
+[@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. (#crit) updates that policy to account for the Parent Types subcategories and (#alloc-crit) specifies the criteria that apply to allocation requests within the range 0xF000-0xF3EF.
 
-A record type may be useful in the context of delegation, but that does not by itself qualify it for allocation as a New Delegation Type. Record types that convey information useful to resolvers but that are intended to appear within a zone rather than at its delegation point in the delegating zone are Data Types and MUST be allocated accordingly.
+A record type may be useful in the context of delegation, but that does not by itself qualify it for allocation as a Parent Type. Record types that convey information useful to resolvers but that are intended to appear within a zone rather than at its delegation point in the delegating zone are Data Types and MUST be allocated accordingly.
 
 (#alloc-crit) specifies additional Expert Review criteria.
 
@@ -118,7 +118,7 @@ A Resource Record type MUST be allocated as a Delegation Type, rather than as a 
 
 RR types that do not meet all of these criteria MUST NOT be allocated from the Delegation Types range.
 
-### Criteria for Delegation Extra Information Type Allocation {#crit}
+### Criteria for Parent Information Type Allocation {#crit}
 
 A Resource Record type MUST be allocated as a Delegation Type, rather than as a Data Type, if and only if all of the following conditions are met:
 
@@ -146,8 +146,8 @@ Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at 
 
 If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.
 
-## Including Delegation Extra Information Types in a Referral Response {#INCLUDEDT}
-When the DE flag is set to 1 and Delegation Extra Information Type RRsets exist for the delegated name, the server MUST include the Delegation Extra Information Type RRsets in the referral. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name. Note this proof will be the same as in the previous section.
+## Including Parent Information Types in a Referral Response {#INCLUDEDT}
+When the DE flag is set to 1 and Parent Information Type RRsets exist for the delegated name, the server MUST include the Parent Information Type RRsets in the referral. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name. Note this proof will be the same as in the previous section.
 
 ### Compact Denial of Existence {#COED}
 
@@ -160,17 +160,17 @@ For an NSEC3 zone, the proof is the usual closest-encloser construction of [@!RF
 
 Returning an NXNAME-based response matching the queried name would not convey the presence of Delegation Types at the delegation point and would prevent the downgrade detection described in (#ADTREQ) and (#DOSNON).
 
-## Explicit Queries for New Delegation Types
-When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the queried New Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
+## Explicit Queries for Parent Types
+When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the queried Parent Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).
 
-Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in [@!RFC2136], Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a New Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point.
+Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in [@!RFC2136], Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Parent Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point.
 
 ## Queries for type ANY
-Queries for type ANY where the QNAME matches a delegation point with New Delegation Types present MUST behave the same way
+Queries for type ANY where the QNAME matches a delegation point with Parent Types present MUST behave the same way
 as if a DS record was present at the delegation point. 
 
 ## Delegation Types at a Wildcard Domain Name
-Wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have New Delegation Types.
+Wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Parent Types.
 
 # Resolver Requirements {#RESREQ}
 
@@ -194,12 +194,12 @@ The descriptions of the EXTENDED-RCODE, VERSION, DO, and Z are provided in Secti
 
 (#DEFLAG) requests IANA to assign the Delegation Extensions (DE) flag to Bit 2.
 
-New Delegation Types are an opt-in extension to the DNS protocol. Their use is negotiated using the EDNS(0) DE flag, allowing existing DNS implementations to interoperate without modification.
+Parent Types are an opt-in extension to the DNS protocol. Their use is negotiated using the EDNS(0) DE flag, allowing existing DNS implementations to interoperate without modification.
 
-To indicate New Delegation Types support, a resolver sets the Delegation Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS request message. 
+To indicate Parent Types support, a resolver sets the Delegation Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS request message. 
 
 A Delegation-Extension-aware recursive resolver that receives a query with the DE flag set to 1 MUST set the DE flag to 1 in its response
-to indicate that New Delegation Types are supported.
+to indicate that Parent Types are supported.
 
 ## Referrals {#REFS}
 The presence of one or more Delegation Type RRsets in the Authority section identifies the response as a referral. 
@@ -220,9 +220,9 @@ When the referral contains no Delegation Type RRsets, the resolver MUST use NS r
 This document updates instructions for finding the best servers to ask, covered in [@!RFC1034] Section 5.3.3 and [@!RFC6672] Section 3.4.1 with the text "2. Find the best servers to ask.".
 These instructions were informally updated by [@!RFC4035] Section 4.2 for the DS RR type.
 
-This document applies the behavior for DS RR types to New Delegation Types.
+This document applies the behavior for DS RR types to Parent Types.
 
-When New Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone. 
+When Parent Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone. 
 
 Each delegation level can have a mixture of Delegation Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.
 
@@ -258,7 +258,7 @@ For Delegation-Extension-aware resolvers, this description becomes:
 
 2.1.2. If QTYPE is a type that is authoritative at the delegation point (DS or the range defined in this document), remove the leftmost label from SNAME.
 
-For example, if the QNAME is "test.example." and the QTYPE is a New Delegation Type or DS, set SNAME to "example.".
+For example, if the QNAME is "test.example." and the QTYPE is a Parent Type or DS, set SNAME to "example.".
 
 2.2. Look for locally-available Delegation Types and NS RRsets, starting at current SNAME.
 
@@ -276,12 +276,12 @@ However, if the Delegation Type RRsets are known to exist but are unusable (for 
 
 The rest of Step 2's description in [@!RFC1034] Section 5.3.3 is not affected by this document.
 
-Note that a query for QNAME="." and QTYPE=DS (or a New Delegation Type) is non-sensical, as there is no zone that delegates to the root zone. 
+Note that a query for QNAME="." and QTYPE=DS (or a Parent Type) is non-sensical, as there is no zone that delegates to the root zone. 
 
 # DNSSEC Requirements {#DNSSECREQ}
-In a DNSSEC-signed zone, New Delegation Type RRsets MUST be signed. 
+In a DNSSEC-signed zone, Parent Type RRsets MUST be signed. 
 
-To avoid a downgrade attack, where the New Delegation Type RRsets, NSEC (or NSEC3) RRsets and their signatures can be replaced by unsigned NS records, a secure signal in the form of a DNSKEY flag is introduced. See (#DSTRIP) for the specific Threat Model. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response. 
+To avoid a downgrade attack, where the Parent Type RRsets, NSEC (or NSEC3) RRsets and their signatures can be replaced by unsigned NS records, a secure signal in the form of a DNSKEY flag is introduced. See (#DSTRIP) for the specific Threat Model. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response. 
 
 ## The DNSKEY-ADT Flag {#ADT}
 The DNSKEY Flags field consists of 16 bits shown in Figure 2.
@@ -304,7 +304,7 @@ When set to 1, it indicates to a validator that a referral MUST contain an NSEC 
 
 On receiving a referral from a DNSSEC-signed delegating zone, a  validating resolver MUST determine the authenticated state of the ADT flag from a validated DNSKEY RRset for that zone.
 
-When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the New Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.
+When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the Parent Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.
 
 When the DNSKEY-ADT flag is clear, this consistency check does not
 apply. To be explicit, it means that a positive response with a DELEG RRset SHOULD NOT be treated as DNSSEC-bogus due to a clear ADT flag.  The resolver processes the referral according to the procedures defined in (#RESREQ).
@@ -324,7 +324,7 @@ An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:
 -  a signer field that is shorter than the owner name of the NSEC RR,
   or the original owner name for the NSEC3 RR.
 
-Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume nonexistence of any RRs below that zone cut, which include all RRs at that original owner name, other than types authoritative at the delegation point (DS and New Delegation Types), and all RRs below that owner name regardless of type.
+Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume nonexistence of any RRs below that zone cut, which include all RRs at that original owner name, other than types authoritative at the delegation point (DS and Parent Types), and all RRs below that owner name regardless of type.
 
 ## Insecure Delegation Proofs
 
@@ -337,7 +337,7 @@ This document updates [@!RFC4035] and [@!RFC6840] to specify that the validator 
 Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
 RR with the Opt-Out flag set.
 
-Opt-Out is not applicable to delegations with New Delegation Type RRsets as New Delegation Type RRsets are authoritative at the delegation point.
+Opt-Out is not applicable to delegations with Parent Type RRsets as Parent Type RRsets are authoritative at the delegation point.
 
 # Operational Considerations
 
@@ -352,11 +352,11 @@ The threat model assumed by this document includes an on-path attacker capable o
 
 ##  Downgrade Attacks {#DOWNGRADE}
 Two classes of downgrade attack are relevant to this specification.
-###  Stripping of New Delegation Types from Referrals {#DSTRIP}
+###  Stripping of Parent Types from Referrals {#DSTRIP}
 
-An on-path attacker may remove New Delegation Type RRsets and associated NSEC or NSEC3 records from a referral response, leaving only unsigned NS records. A resolver that accepts such a modified referral would proceed to resolve the delegated name using unencrypted transport, defeating the purpose of New Delegation Types, such as those indicating encrypted transport parameters.
+An on-path attacker may remove Parent Type RRsets and associated NSEC or NSEC3 records from a referral response, leaving only unsigned NS records. A resolver that accepts such a modified referral would proceed to resolve the delegated name using unencrypted transport, defeating the purpose of Parent Types, such as those indicating encrypted transport parameters.
 
-The DNSKEY-ADT flag defined in (#ADT) provides a mitigation against this attack for validating resolvers. When the ADT flag is set in any DNSKEY of the delegating zone's DNSKEY RRset, a validating resolver MUST verify that the referral contains NSEC or NSEC3 records proving the presence or absence of New Delegation Types for the delegated name. A referral lacking this proof MUST be treated as tampered with and MUST be ignored.
+The DNSKEY-ADT flag defined in (#ADT) provides a mitigation against this attack for validating resolvers. When the ADT flag is set in any DNSKEY of the delegating zone's DNSKEY RRset, a validating resolver MUST verify that the referral contains NSEC or NSEC3 records proving the presence or absence of Parent Types for the delegated name. A referral lacking this proof MUST be treated as tampered with and MUST be ignored.
 
 This mitigation is effective only when all of the following conditions hold:
 
@@ -365,21 +365,21 @@ This mitigation is effective only when all of the following conditions hold:
 *  The resolver performs DNSSEC validation.
 *  The resolver enforces the ADT requirement as specified in (#ADTREQ).
 
-Operators of zones that publish New Delegation Types MUST set the ADT flag in their DNSKEY RRset to ensure that validating resolvers can detect this form of tampering. Zones that have not set the ADT flag provide no cryptographic protection against this attack.
+Operators of zones that publish Parent Types MUST set the ADT flag in their DNSKEY RRset to ensure that validating resolvers can detect this form of tampering. Zones that have not set the ADT flag provide no cryptographic protection against this attack.
 
 ###  Stripping of the DE Flag from Queries {#DESTRIP}
 
-The DE flag is carried in the EDNS(0) OPT record of query messages sent by resolvers. An on-path attacker may remove this flag from a query before it reaches the authoritative name server. A server that receives a query with the DE flag clear will respond without New Delegation Type RRsets, returning NS records only.
+The DE flag is carried in the EDNS(0) OPT record of query messages sent by resolvers. An on-path attacker may remove this flag from a query before it reaches the authoritative name server. A server that receives a query with the DE flag clear will respond without Parent Type RRsets, returning NS records only.
 
-However, when the ADT flag is set in the delegating zone's DNSKEY RRset, a Delegation-Extension-aware validating resolver expects that NSEC or NSEC3 proof of New Delegation Types accompany any referral from that zone. This obligation is established by the DNSKEY, not negotiated per-query via the DE flag. Consequently, a referral response lacking the required NSEC or NSEC3 records MUST be rejected by a validating resolver, whether or not the DE flag was stripped from the outgoing query. In this case, the ADT mechanism defeats the DE-flag-stripping attack.
+However, when the ADT flag is set in the delegating zone's DNSKEY RRset, a Delegation-Extension-aware validating resolver expects that NSEC or NSEC3 proof of Parent Types accompany any referral from that zone. This obligation is established by the DNSKEY, not negotiated per-query via the DE flag. Consequently, a referral response lacking the required NSEC or NSEC3 records MUST be rejected by a validating resolver, whether or not the DE flag was stripped from the outgoing query. In this case, the ADT mechanism defeats the DE-flag-stripping attack.
 
 This mitigation is subject to the same conditions as those listed in (#DSTRIP): the delegating zone must be signed, ADT must be set, and the resolver must validate. In the absence of these conditions, no cryptographic protection against DE-flag-stripping is available, and the considerations in (#PARTIAL) apply.
 
 ###  Interaction Between Flag-Stripping Attacks
 
-The two downgrade attacks described above may be attempted in combination. An attacker who strips the DE flag from a query causes the authoritative name server to respond with NS records only and no New Delegation Types. Without New Delegation Types in the response, the resolver cannot apply the NS-ignoring rule defined in (#REFS), and would ordinarily follow the NS records to resolve the delegated name, potentially over unencrypted transport.
+The two downgrade attacks described above may be attempted in combination. An attacker who strips the DE flag from a query causes the authoritative name server to respond with NS records only and no Parent Types. Without Parent Types in the response, the resolver cannot apply the NS-ignoring rule defined in (#REFS), and would ordinarily follow the NS records to resolve the delegated name, potentially over unencrypted transport.
 
-As described in (#DESTRIP), the ADT flag defeats this combined attack for validating resolvers in zones where ADT is set. The resolver's obligation to require NSEC or NSEC3 proof derives from the previously validated DNSKEY RRset, not from the contents of the referral itself. A referral containing only NS records, with no NSEC or NSEC3 proof, will be rejected regardless of whether New Delegation Types were present.
+As described in (#DESTRIP), the ADT flag defeats this combined attack for validating resolvers in zones where ADT is set. The resolver's obligation to require NSEC or NSEC3 proof derives from the previously validated DNSKEY RRset, not from the contents of the referral itself. A referral containing only NS records, with no NSEC or NSEC3 proof, will be rejected regardless of whether Parent Types were present.
 
 The residual risk in both (#DESTRIP) and this section therefore reduces to the same condition: zones in which ADT is not set, or in which DNSSEC is not deployed, provide no cryptographic protection against either attack. This is a deployment risk, addressed in (#PARTIAL).
 
@@ -407,9 +407,9 @@ Authoritative name servers SHOULD include an Extended DNS Error [@!RFC8914] code
 
 The mechanisms defined in this document are effective only when deployed end-to-end. During the transition period in which some resolvers, authoritative name servers, and zones have adopted this specification and others have not, a number of residual risks apply.
 
-The ADT flag provides protection against the downgrade attacks described in (#DOWNGRADE) only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish New Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available. 
+The ADT flag provides protection against the downgrade attacks described in (#DOWNGRADE) only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Parent Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available. 
 
-Zone operators that publish New Delegation Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on New Delegation Types for security properties such as encrypted transport MUST be DNSSEC-signed.
+Zone operators that publish Parent Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on Parent Types for security properties such as encrypted transport MUST be DNSSEC-signed.
 
 # IANA Considerations {#iana}
 
@@ -456,17 +456,17 @@ Allocation requests in the range 0xF000-0xF3EF require Expert Review or Standard
 
 ## Additional Expert Review Criteria {#alloc-crit}
 
-In addition to the general Expert Review criteria established by [@!RFC6895], the Designated Experts should evaluate allocation requests for New Delegation Types against the criteria in (#crit). The Designated Experts should also consider:
+In addition to the general Expert Review criteria established by [@!RFC6895], the Designated Experts should evaluate allocation requests for Parent Types against the criteria in (#crit). The Designated Experts should also consider:
 
-*  Whether the proposed New Delegation Type requires protocol modifications beyond those defined in this document, and if so, whether those modifications have been or are being specified in an appropriate Standards Track document.
+*  Whether the proposed Parent Type requires protocol modifications beyond those defined in this document, and if so, whether those modifications have been or are being specified in an appropriate Standards Track document.
 
-*  Whether the proposed New Delegation Type can be processed safely by Delegation-Extension-aware implementations that do not specifically implement the proposed type, in particular with respect to the requirements in (#REFS) and (#INCLUDEDT).
+*  Whether the proposed Parent Type can be processed safely by Delegation-Extension-aware implementations that do not specifically implement the proposed type, in particular with respect to the requirements in (#REFS) and (#INCLUDEDT).
 
-*  Whether the security properties of the proposed New Delegation Type are compatible with the DNSSEC signing requirements of (#DNSSECREQ), and whether any additional security considerations apply.
+*  Whether the security properties of the proposed Parent Type are compatible with the DNSSEC signing requirements of (#DNSSECREQ), and whether any additional security considerations apply.
 
 The Designated Experts may approve allocation requests accompanied by a stable, publicly available specification that need not be an RFC, provided that the specification is sufficiently detailed to allow independent interoperable implementation. 
 
-Allocation requests for New Delegation Types that introduce new protocol behaviors or that interact with the mechanisms defined in (#NSREQ), (#RESREQ), or (#DNSSECREQ) of this document must be accompanied by, or integrated into, a Standards Track document. 
+Allocation requests for Parent Types that introduce new protocol behaviors or that interact with the mechanisms defined in (#NSREQ), (#RESREQ), or (#DNSSECREQ) of this document must be accompanied by, or integrated into, a Standards Track document. 
 
 # Acknowledgments
 
