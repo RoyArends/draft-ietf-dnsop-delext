@@ -7,12 +7,12 @@ Internet-Draft                                                     ICANN
 Updates: 1034, 4035, 6672, 6840, 6895, 9824 (if              P. van Dijk
          approved)                                              PowerDNS
 Intended status: Standards Track                               P. Špaček
-Expires: 24 January 2027                                             ISC
-                                                            23 July 2026
+Expires: 25 January 2027                                             ISC
+                                                            24 July 2026
 
 
           DNS Protocol Modifications for Delegation Extensions
-                       draft-ietf-dnsop-delext-09
+                       draft-ietf-dnsop-delext-10
 
 Abstract
 
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2027.
+   This Internet-Draft will expire on 25 January 2027.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 1]
+Arends, et al.           Expires 25 January 2027                [Page 1]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 2]
+Arends, et al.           Expires 25 January 2027                [Page 2]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 3]
+Arends, et al.           Expires 25 January 2027                [Page 3]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -221,7 +221,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 4]
+Arends, et al.           Expires 25 January 2027                [Page 4]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -277,7 +277,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 5]
+Arends, et al.           Expires 25 January 2027                [Page 5]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -333,7 +333,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 6]
+Arends, et al.           Expires 25 January 2027                [Page 6]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -389,7 +389,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 7]
+Arends, et al.           Expires 25 January 2027                [Page 7]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -445,7 +445,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 8]
+Arends, et al.           Expires 25 January 2027                [Page 8]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -501,7 +501,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027                [Page 9]
+Arends, et al.           Expires 25 January 2027                [Page 9]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -557,7 +557,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 10]
+Arends, et al.           Expires 25 January 2027               [Page 10]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -613,7 +613,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 11]
+Arends, et al.           Expires 25 January 2027               [Page 11]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -669,7 +669,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 12]
+Arends, et al.           Expires 25 January 2027               [Page 12]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -725,7 +725,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 13]
+Arends, et al.           Expires 25 January 2027               [Page 13]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -781,7 +781,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 14]
+Arends, et al.           Expires 25 January 2027               [Page 14]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -837,7 +837,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 15]
+Arends, et al.           Expires 25 January 2027               [Page 15]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -893,7 +893,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 16]
+Arends, et al.           Expires 25 January 2027               [Page 16]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -949,7 +949,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 17]
+Arends, et al.           Expires 25 January 2027               [Page 17]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1005,7 +1005,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 18]
+Arends, et al.           Expires 25 January 2027               [Page 18]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1061,7 +1061,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 19]
+Arends, et al.           Expires 25 January 2027               [Page 19]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1117,7 +1117,7 @@ Internet-Draft                   DELEXT                        July 2026
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 20]
+Arends, et al.           Expires 25 January 2027               [Page 20]
 
 Internet-Draft                   DELEXT                        July 2026
 
@@ -1173,4 +1173,4 @@ Authors' Addresses
 
 
 
-Arends, et al.           Expires 24 January 2027               [Page 21]
+Arends, et al.           Expires 25 January 2027               [Page 21]

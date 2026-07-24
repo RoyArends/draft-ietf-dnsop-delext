@@ -1,7 +1,7 @@
 %%%
 title = "DNS Protocol Modifications for Delegation Extensions"
 abbrev = "DELEXT"
-docName = "draft-ietf-dnsop-delext-09"
+docName = "draft-ietf-dnsop-delext-10"
 category = "std"
 updates = [1034, 4035, 6672, 6840, 6895, 9824]
 
@@ -12,7 +12,7 @@ keyword = ["Internet-Draft"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-dnsop-delext-09"
+value = "draft-ietf-dnsop-delext-10"
 stream = "IETF"
 status = "standard"
 
