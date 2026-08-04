@@ -249,7 +249,7 @@ However, if the Delegation Type RRsets are known to exist but are unusable (for 
 
 2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.
 
-2.2.3. If SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.
+2.2.3. If a given SNAME is proven to not have any Delegation Type RRsets or an NS RRset, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. Note the existence of these RRsets stops this algorithm even if the SLIST is empty or servers referenced by SLIST are unusable for any reason.
 
 =====
 
