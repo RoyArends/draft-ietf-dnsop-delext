@@ -14,7 +14,7 @@
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-ietf-dnsop-delext-10" name="ietf.draft">
+<meta content="draft-ietf-dnsop-delext-11" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.31.0
     Python 3.9.6
@@ -1218,11 +1218,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">DELEXT</td>
-<td class="right">July 2026</td>
+<td class="right">September 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Arends, et al.</td>
-<td class="center">Expires 25 January 2027</td>
+<td class="center">Expires 21 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1232,18 +1232,18 @@ li > p:last-of-type:only-child {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">DNSOP</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-dnsop-delext-10</dd>
+<dd class="internet-draft">draft-ietf-dnsop-delext-11</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc4035" class="eref">4035</a>, <a href="https://www.rfc-editor.org/rfc/rfc6672" class="eref">6672</a>, <a href="https://www.rfc-editor.org/rfc/rfc6840" class="eref">6840</a>, <a href="https://www.rfc-editor.org/rfc/rfc6895" class="eref">6895</a>, <a href="https://www.rfc-editor.org/rfc/rfc9824" class="eref">9824</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-24" class="published">24 July 2026</time>
+<time datetime="2026-09-17" class="published">17 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-25">25 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-21">21 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1286,7 +1286,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1333,13 +1333,25 @@ li > p:last-of-type:only-child {
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-delegation-types" class="internal xref">Delegation Types</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-updates-to-allocation-polic" class="internal xref">Updates to Allocation Policy</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-criteria-for-delegation-typ" class="internal xref">Criteria for Delegation Type Allocation</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-ns-omitting-delegation-type" class="internal xref">NS-Omitting Delegation Types</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
-                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-private-use-range" class="internal xref">Private Use Range</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-ns-preserving-delegation-ty" class="internal xref">NS-Preserving Delegation Types</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-on-demand-delegation-types" class="internal xref">On-Demand Delegation Types</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-private-delegation-types" class="internal xref">Private Delegation Types</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-updates-to-allocation-polic" class="internal xref">Updates to Allocation Policy</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.1">
+                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="auto internal xref">3.5.1</a>.  <a href="#name-criteria-for-delegation-typ" class="internal xref">Criteria for Delegation Type Allocation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.2">
+                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-private-use-segment" class="internal xref">Private Use Segment</a></p>
 </li>
                 </ul>
 </li>
@@ -1475,7 +1487,7 @@ li > p:last-of-type:only-child {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Existing DNS protocol semantics permit only the Delegation Signer (DS) RR type to exist as authoritative data at a delegation point <span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>. New delegation mechanisms such as <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> require additional RR types with the same semantics. Rather than defining special protocol handling for each such RR type independently, this document defines a generic class of Delegation Types, reserves a range of RR type codes for that purpose, and specifies the protocol behavior common to all such types.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Existing DNS protocol semantics permit only the Delegation Signer (DS) RR type to exist as authoritative data at a delegation point <span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>. New delegation mechanisms such as <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> require additional RR types with the same semantics. Rather than defining special protocol handling for each such RR type independently, this document defines a generic class of Delegation Types, reserves a range of RR type codes for Delegation Types, divides that range into segments with distinct protocol semantics, and specifies the protocol behavior common to all such types.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Support for Delegation Types is negotiated using the EDNS(0) <span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span> Delegation Extensions (DE) flag, specified in <a href="#DE" class="auto internal xref">Section 5.1</a>. This ensures that implementations that do not support this specification continue to interoperate using existing DNS delegation semantics.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">To protect the negotiation mechanism against downgrade attacks, a DNSKEY flag is introduced in <a href="#ADT" class="auto internal xref">Section 6.1</a>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1500,7 +1512,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-relationship-with-the-exten">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-relationship-with-the-exten" class="section-name selfRef">Relationship with the Extensible Delegation for DNS</a>
         </h3>
-<p id="section-2.1-1"><span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> specifies a new type (DELEG) that is authoritative at a delegation point and specifies protocol modifications to support DELEG. The present document generalizes those protocol modifications so they apply to a range of Delegation Types.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1"><span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> specifies a new type (DELEG) that is authoritative at a delegation point, allocated from the Delegation Type range.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="relationship-with-ns-and-ds-records">
@@ -1521,41 +1533,89 @@ li > p:last-of-type:only-child {
       </h2>
 <p id="section-3-1"><span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span> lists three subcategories of RR type numbers: data TYPEs, QTYPEs, and Meta-TYPEs. This specification adds a fourth subcategory: Delegation Types.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Delegation Types are DNS CLASS independent.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3"><a href="#alloc-iana" class="auto internal xref">Section 9.3</a> requests IANA to allocate the ranges 0xF000-0xF1EF (61440-61935) and 0xF1F0-0xF1FF (61936-61951) for Delegation Types.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<div id="updates-to-allocation-policy">
+<p id="section-3-3"><a href="#alloc-iana" class="auto internal xref">Section 9.3</a> requests IANA to allocate the range 0xF000-0xF1FF (61440-61951) for Delegation Types. The Delegation Type range is divided into four segments. The segment in which a Delegation Type is allocated determines its handling in referral responses.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">The segmentation allows the intended referral behavior of a Delegation Type to be determined from its type code, avoiding the need to define or maintain separate per-type signaling for these behaviors.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-5">
+<pre>Decimal  Hex       Segment Description
+61440-   0xF000-   NS-Omitting Delegation Types
+61567    0xF07F
+
+61568-   0xF080-   NS-Preserving Delegation Types
+61695    0xF0FF
+
+61696-   0xF100-   On-Demand Delegation Types
+61935    0xF1EF
+
+61936-   0xF1F0-   Private Delegation Types
+61951    0xF1FF
+</pre><a href="#section-3-5" class="pilcrow">¶</a>
+</div>
+<div id="ns-omitting-delegation-types">
 <section id="section-3.1">
-        <h3 id="name-updates-to-allocation-polic">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-updates-to-allocation-polic" class="section-name selfRef">Updates to Allocation Policy</a>
+        <h3 id="name-ns-omitting-delegation-type">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-ns-omitting-delegation-type" class="section-name selfRef">NS-Omitting Delegation Types</a>
         </h3>
-<p id="section-3.1-1"><span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span> establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. <a href="#crit" class="auto internal xref">Section 3.1.1</a> updates that policy to account for the Delegation Types subcategory and <a href="#alloc-crit" class="auto internal xref">Section 9.4</a> specifies the criteria that apply to allocation requests within the range 0xF000-0xF1EF.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<div id="crit">
-<section id="section-3.1.1">
-          <h4 id="name-criteria-for-delegation-typ">
-<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-criteria-for-delegation-typ" class="section-name selfRef">Criteria for Delegation Type Allocation</a>
-          </h4>
-<p id="section-3.1.1-1">A Resource Record type MUST be allocated as a Delegation Type, rather than as a Data Type, if and only if all of the following conditions are met:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.1.1-2.1">
-              <p id="section-3.1.1-2.1.1">The RR type is intended to appear at a delegation point as authoritative data in the delegating zone, in a manner analogous to the DS record as defined in <span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>.<a href="#section-3.1.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-3.1.1-2.2">
-              <p id="section-3.1.1-2.2.1">The RR type carries information intended to be processed by a resolver while following a referral. This includes information used prior to sending queries to the authoritative name servers for the delegated zone, or after the referral has been followed, such as material used to authenticate a DNSKEY in the delegated zone.<a href="#section-3.1.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-3.1.1-2.3">
-              <p id="section-3.1.1-2.3.1">The RR type is not intended to appear as authoritative data within the delegated zone itself.<a href="#section-3.1.1-2.3.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-3.1.1-3">RR types that do not meet all of these criteria MUST NOT be allocated from the Delegation Types range.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-4">A record type may be useful in the context of delegation, but that does not by itself qualify it for allocation as a Delegation Type. Record types that convey information useful to resolvers but that are intended to appear within a zone rather than at its delegation point in the delegating zone are Data Types and MUST be allocated accordingly.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-5"><a href="#alloc-crit" class="auto internal xref">Section 9.4</a> specifies additional Expert Review criteria.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">The NS-Omitting Delegation Type segment contains types for delegation mechanisms that provide sufficient information for processing a delegation without the NS RRset. Separating these types allows referral responses to avoid carrying redundant delegation information, thereby reducing response size.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="private-use-range">
-<section id="section-3.1.2">
-          <h4 id="name-private-use-range">
-<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-private-use-range" class="section-name selfRef">Private Use Range</a>
+<div id="ns-preserving-delegation-types">
+<section id="section-3.2">
+        <h3 id="name-ns-preserving-delegation-ty">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-ns-preserving-delegation-ty" class="section-name selfRef">NS-Preserving Delegation Types</a>
+        </h3>
+<p id="section-3.2-1">The NS-Preserving Delegation Type segment contains types for delegation mechanisms that are used alongside the existing NS RRset. These types supplement, rather than replace, the delegation information provided by the NS RRset.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="on-demand-delegation-types">
+<section id="section-3.3">
+        <h3 id="name-on-demand-delegation-types">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-on-demand-delegation-types" class="section-name selfRef">On-Demand Delegation Types</a>
+        </h3>
+<p id="section-3.3-1">The On-Demand Delegation Type segment contains types that are not ordinarily needed in referral responses and can instead be queried for explicitly. This avoids increasing referral response sizes with information that is not required during normal delegation processing.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="private-delegation-types">
+<section id="section-3.4">
+        <h3 id="name-private-delegation-types">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-private-delegation-types" class="section-name selfRef">Private Delegation Types</a>
+        </h3>
+<p id="section-3.4-1">The Private Delegation Type segment contains types reserved for private or experimental use without requiring an IANA allocation. Private Delegation Types have the same referral behavior as NS-Preserving Delegation Types. This allows Private Delegation Types to be used in referral responses without replacing the delegation information provided by the NS RRset.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="updates-to-allocation-policy">
+<section id="section-3.5">
+        <h3 id="name-updates-to-allocation-polic">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-updates-to-allocation-polic" class="section-name selfRef">Updates to Allocation Policy</a>
+        </h3>
+<p id="section-3.5-1"><span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span> establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. <a href="#crit" class="auto internal xref">Section 3.5.1</a> defines the criteria for determining whether an RR type is eligible for allocation as a Delegation Type, and <a href="#alloc-crit" class="auto internal xref">Section 9.4</a> specifies the Expert Review criteria that apply to allocation requests within the range 0xF000-0xF1EF.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<div id="crit">
+<section id="section-3.5.1">
+          <h4 id="name-criteria-for-delegation-typ">
+<a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-criteria-for-delegation-typ" class="section-name selfRef">Criteria for Delegation Type Allocation</a>
           </h4>
-<p id="section-3.1.2-1">The range 0xF1F0-0xF1FF is reserved for Private Use in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-1">A Resource Record type is eligible for allocation as a Delegation Type, rather than as a Data Type, only if all of the following conditions are met:<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.5.1-2.1">
+              <p id="section-3.5.1-2.1.1">The RR type is intended to appear at a delegation point as authoritative data in the delegating zone, in a manner analogous to the DS record as defined in <span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>.<a href="#section-3.5.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.5.1-2.2">
+              <p id="section-3.5.1-2.2.1">The RR type carries information associated with the delegation that is intended to be processed by a resolver. This includes information used while following the delegation, as well as information that may be queried for separately when needed.<a href="#section-3.5.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.5.1-2.3">
+              <p id="section-3.5.1-2.3.1">The RR type is not intended to appear as authoritative data within the delegated zone itself.<a href="#section-3.5.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-3.5.1-3">RR types that do not meet all of these criteria MUST NOT be allocated from the Delegation Types range.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-4">A record type may be useful in the context of delegation, but that does not by itself qualify it for allocation as a Delegation Type. Record types that convey information useful to resolvers but are intended to appear within a zone rather than at its delegation point in the delegating zone are Data Types and MUST be allocated accordingly.<a href="#section-3.5.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-5"><a href="#alloc-crit" class="auto internal xref">Section 9.4</a> specifies additional Expert Review criteria.<a href="#section-3.5.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="private-use-segment">
+<section id="section-3.5.2">
+          <h4 id="name-private-use-segment">
+<a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-private-use-segment" class="section-name selfRef">Private Use Segment</a>
+          </h4>
+<p id="section-3.5.2-1">The segment 0xF1F0-0xF1FF is reserved for Private Use in accordance with <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1574,30 +1634,33 @@ li > p:last-of-type:only-child {
         <h3 id="name-including-delegation-types-">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-including-delegation-types-" class="section-name selfRef">Including Delegation Types in a Referral Response</a>
         </h3>
-<p id="section-4.1-1">When the DE flag is set to 1 and Delegation Type RRsets exist for the delegated name, the server MUST include the Delegation Type RRsets in the referral and MUST NOT include the NS RRset (regardless if the QTYPE=NS). If no Delegation Type RRsets exist for the delegated name, the server MUST include the NS RRset. For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns a negative response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> specified in <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> absent a local policy requiring otherwise.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">When the DE flag is set to 1, an authoritative server constructs a referral response according to the segment of each Delegation Type RRset present at the delegated name.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">NS-Omitting, NS-Preserving, and Private Delegation Type RRsets present at the delegated name MUST be included in the referral response. On-Demand Delegation Type RRsets MUST NOT be included unless explicitly queried for, as described in <a href="#EXPLIC" class="auto internal xref">Section 4.2</a>.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">If one or more NS-Omitting Delegation Type RRsets are present at the delegated name, the server MUST NOT include the NS RRset in the referral response, regardless of whether NS-Preserving or Private Delegation Type RRsets are also present and regardless of whether QTYPE=NS.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">If no NS-Omitting Delegation Type RRsets are present, the server MUST include the NS RRset in the referral response. The presence of an NS-Omitting Delegation Type takes precedence over the NS-preserving behavior of an NS-Preserving Delegation Type.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">For DNSSEC-signed zones, the response MUST include DNSSEC proof of the existence or non-existence of Delegation Type RRsets at the delegated name.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at a delegation point, there is no referral from the perspective of a non-Delegation-Extension-aware resolver and the server returns a negative response. The server SHOULD include the Delegation Extension Required INFO-CODE 34 ("New Delegation Only") Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> specified in <span>[<a href="#I-D.ietf-deleg" class="cite xref">I-D.ietf-deleg</a>]</span> absent a local policy requiring otherwise.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7">If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
 <div id="COED">
 <section id="section-4.1.1">
           <h4 id="name-compact-denial-of-existence">
 <a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-compact-denial-of-existence" class="section-name selfRef">Compact Denial of Existence</a>
           </h4>
 <p id="section-4.1.1-1">This document updates Compact Denial of Existence (CDOE) <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>. For CDOE enabled servers, the negative response required above is an exception to the CDOE method, i.e., it MUST be generated as a conventional Name Error proof (<span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span>, or <span>[<a href="#RFC5155" class="cite xref">RFC5155</a>]</span> for NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit
-Maps field conveys the Delegation Type(s) present at the delegation point.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit Maps field conveys the Delegation Type(s) present at the delegation point.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3">For an NSEC3 zone, the proof is the usual closest-encloser construction of <span>[<a href="#RFC5155" class="cite xref">RFC5155</a>]</span>: the NSEC3 record matching the delegation point (whose Type Bit Map conveys the Delegation Type(s) present there), the NSEC3 record covering the next closer name, and the NSEC3 record covering the source of synthesis (wildcard) at the closest encloser. Unlike the NSEC case, these are in general three distinct records, because NSEC3 hashing does not preserve the name hierarchy.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-4">Returning an NXNAME-based response matching the queried name would not convey the presence of Delegation Types at the delegation point and would prevent the downgrade detection described in <a href="#ADTREQ" class="auto internal xref">Section 6.2</a> and <a href="#DOSNON" class="auto internal xref">Section 8.4</a>.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="explicit-queries-for-delegation-types">
+<div id="EXPLIC">
 <section id="section-4.2">
         <h3 id="name-explicit-queries-for-delega">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-explicit-queries-for-delega" class="section-name selfRef">Explicit Queries for Delegation Types</a>
         </h3>
 <p id="section-4.2-1">When the DE flag is set to 1, a query for a Delegation Type MUST result in an authoritative answer if the queried Delegation Type exists, or a NODATA response (AA flag set, RCODE=0, empty answer section).<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in <span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span>, Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in <span>[<a href="#RFC2136" class="cite xref">RFC2136</a>]</span> Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="queries-for-type-any">
@@ -1605,8 +1668,7 @@ Maps field conveys the Delegation Type(s) present at the delegation point.<a hre
         <h3 id="name-queries-for-type-any">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-queries-for-type-any" class="section-name selfRef">Queries for type ANY</a>
         </h3>
-<p id="section-4.3-1">Queries for type ANY where the QNAME matches a delegation point with Delegation Types present MUST behave the same way
-as if a DS record was present at the delegation point.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">Queries for type ANY where the QNAME matches a delegation point with Delegation Types present MUST behave the same way as if a DS record was present at the delegation point.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="delegation-types-at-a-wildcard-domain-name">
@@ -1631,23 +1693,22 @@ as if a DS record was present at the delegation point.<a href="#section-4.3-1" c
         </h3>
 <p id="section-5.1-1">EDNS(0) <span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span> defines 16 bits as extended flags in the OPT record. These bits are encoded into the TTL field of the OPT record.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.1-2">
-<pre>           +0 (MSB)                            +1 (LSB)
-                                             1   1   1   1   1   1
-     0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
-   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-0: |         EXTENDED-RCODE        |            VERSION            |
-   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-2: | DO| CO| DE|                   Z                               |
-   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+<pre>            +0 (MSB)                            +1 (LSB)
+                                              1   1   1   1   1   1
+      0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+ 0: |         EXTENDED-RCODE        |            VERSION            |
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+ 2: | DO| CO| DE|                   Z                               |
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+Figure 1: OPT Record TTL Field with DE Flag
 </pre><a href="#section-5.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.1-3">Figure 1: OPT Record TTL Field with DE Flag.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1-4">The descriptions of the EXTENDED-RCODE, VERSION, DO, and Z are provided in Section 6.1.3 of <span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span>. The description of the CO flag is provided in <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.1-5"><a href="#DEFLAG" class="auto internal xref">Section 9.1</a> requests IANA to assign the Delegation Extensions (DE) flag to Bit 2.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.1-6">Delegation Types are an opt-in extension to the DNS protocol. Their use is negotiated using the EDNS(0) DE flag, allowing existing DNS implementations to interoperate without modification.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
-<p id="section-5.1-7">To indicate Delegation Types support, a resolver sets the Delegation Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS request message.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
-<p id="section-5.1-8">A Delegation-Extension-aware recursive resolver that receives a query with the DE flag set to 1 MUST set the DE flag to 1 in its response
-to indicate that Delegation Types are supported.<a href="#section-5.1-8" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">The descriptions of the EXTENDED-RCODE, VERSION, DO, and Z are provided in <span>[<a href="#RFC6891" class="cite xref">RFC6891</a>]</span> Section 6.1.3. The description of the CO flag is provided in <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span>.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4"><a href="#DEFLAG" class="auto internal xref">Section 9.1</a> requests IANA to assign the Delegation Extensions (DE) flag to Bit 2.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">Delegation Types are an opt-in extension to the DNS protocol. Their use is negotiated using the EDNS(0) DE flag, allowing existing DNS implementations to interoperate without modification.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1-6">To indicate Delegation Types support, a resolver sets the Delegation Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS request message.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1-7">A Delegation-Extension-aware recursive resolver that receives a query with the DE flag set to 1 MUST set the DE flag to 1 in its response to indicate that Delegation Types are supported.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="REFS">
@@ -1655,11 +1716,12 @@ to indicate that Delegation Types are supported.<a href="#section-5.1-8" class="
         <h3 id="name-referrals">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-referrals" class="section-name selfRef">Referrals</a>
         </h3>
-<p id="section-5.2-1">The presence of one or more Delegation Type RRsets in the Authority section identifies the response as a referral.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">Delegation Type RRsets, together with a DS RRset, provide all information required to process the delegation. Accordingly, NS records that appear in addition to Delegation Types MUST be ignored. These NS records MUST NOT be validated or cached.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">The purpose of this restriction is to avoid leakage of DNS messages over unencrypted transport (i.e., Do53) when servers, indicated by Delegation Types, fail to respond.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.2-4">When a signed Delegation Type RRset is the result of a wildcard domain name expansion, the delegation MUST NOT be used. Treat such delegation point as if all servers were unusable. The label counter in the RRSIG RDATA will be less than the number of labels observed in the owner name.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
-<p id="section-5.2-5">When the referral contains no Delegation Type RRsets, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The presence of one or more NS-Omitting, NS-Preserving, or Private Delegation Type RRsets in the Authority section identifies the response as a referral.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">When one or more NS-Omitting Delegation Type RRsets are present in a referral, the resolver MUST use the information provided by those Delegation Type RRsets to process the delegation. Any NS records present in the referral MUST be ignored and MUST NOT be validated or cached.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">When no NS-Omitting Delegation Type RRsets are present, the resolver MUST use the NS RRset to process the delegation. NS-Preserving and Private Delegation Type RRsets present in the referral supplement the delegation information provided by the NS RRset.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">The purpose of ignoring NS records in the presence of NS-Omitting Delegation Types is to avoid leakage of DNS messages over unencrypted transport (i.e., Do53) when servers, indicated by Delegation Types, fail to respond.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">When a signed Delegation Type RRset is the result of a wildcard domain name expansion, the delegation MUST NOT be used. Treat such delegation point as if all servers were unusable. The label counter in the RRSIG RDATA will be less than the number of labels observed in the owner name.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-6">When the referral contains no Delegation Type RRsets, the resolver MUST use NS records. Note that DNSSEC can prove the presence and absence of Delegation Types at a delegation.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="finding-best">
@@ -1667,43 +1729,44 @@ to indicate that Delegation Types are supported.<a href="#section-5.1-8" class="
         <h3 id="name-algorithm-for-finding-the-b">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-algorithm-for-finding-the-b" class="section-name selfRef">Algorithm for "Finding the Best Servers to Ask"</a>
         </h3>
-<p id="section-5.3-1">This document updates instructions for finding the best servers to ask, covered in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 and <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> Section 3.4.1 with the text "2. Find the best servers to ask.".
-These instructions were informally updated by <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 4.2 for the DS RR type.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">This document updates instructions for finding the best servers to ask, covered in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 and <span>[<a href="#RFC6672" class="cite xref">RFC6672</a>]</span> Section 3.4.1 with the text "2. Find the best servers to ask." These instructions were informally updated by <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 4.2 for the DS RR type.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">This document applies the behavior for DS RR types to Delegation Types.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">When Delegation Types exist, Delegation-Extension-aware resolvers ignore delegation point and Apex NS RRset for the delegated zone.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
-<p id="section-5.3-4">Each delegation level can have a mixture of Delegation Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
-<p id="section-5.3-5">The terms SNAME and SLIST used here are defined in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.2:<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Each delegation level can have a mixture of Delegation Types and NS RR types, and Delegation-Extension-aware resolvers MUST be able to follow chains of delegations which combine both types in arbitrary ways.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">The terms SNAME and SLIST used here are defined in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.2:<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3-6.1">
-            <p id="section-5.3-6.1.1">SNAME is the domain name we are searching for.<a href="#section-5.3-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.3-5.1">
+            <p id="section-5.3-5.1.1">SNAME is the domain name we are searching for.<a href="#section-5.3-5.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-6.2">
-            <p id="section-5.3-6.2.1">SLIST is a structure which describes the name servers and the zone which the resolver is currently trying to query.<a href="#section-5.3-6.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.3-5.2">
+            <p id="section-5.3-5.2.1">SLIST is a structure which describes the name servers and the zone which the resolver is currently trying to query.<a href="#section-5.3-5.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.3-7">This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.<a href="#section-5.3-7" class="pilcrow">¶</a></p>
-<p id="section-5.3-8">Neither <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> nor this document define how a resolver uses SLIST. They only define how to populate it.<a href="#section-5.3-8" class="pilcrow">¶</a></p>
-<p id="section-5.3-9">A Delegation-Extension-aware resolver's SLIST needs to be able to hold multiple types of information, delegations defined by NS RRset and delegations defined by Delegation Type RRsets.<a href="#section-5.3-9" class="pilcrow">¶</a></p>
-<p id="section-5.3-10">Delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.<a href="#section-5.3-10" class="pilcrow">¶</a></p>
-<p id="section-5.3-11">Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST.<a href="#section-5.3-11" class="pilcrow">¶</a></p>
-<p id="section-5.3-12">This is the same recommendation to bound the amount specified in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3.<a href="#section-5.3-12" class="pilcrow">¶</a></p>
-<p id="section-5.3-13">Step 2 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 is "2. Find the best servers to ask."<a href="#section-5.3-13" class="pilcrow">¶</a></p>
-<p id="section-5.3-14">For Delegation-Extension-aware resolvers, this description becomes:<a href="#section-5.3-14" class="pilcrow">¶</a></p>
-<p id="section-5.3-15">=====<a href="#section-5.3-15" class="pilcrow">¶</a></p>
-<p id="section-5.3-16">2. Find the best servers to ask:<a href="#section-5.3-16" class="pilcrow">¶</a></p>
-<p id="section-5.3-17">2.1. Determine deepest possible zone cut which can potentially hold the answer for a given (query name, type, class) combination as follows:<a href="#section-5.3-17" class="pilcrow">¶</a></p>
-<p id="section-5.3-18">2.1.1. Start with SNAME equal to QNAME.<a href="#section-5.3-18" class="pilcrow">¶</a></p>
-<p id="section-5.3-19">2.1.2. If QTYPE is a type that is authoritative at the delegation point (DS or the range defined in this document), remove the leftmost label from SNAME.<a href="#section-5.3-19" class="pilcrow">¶</a></p>
-<p id="section-5.3-20">For example, if the QNAME is "test.example." and the QTYPE is a Delegation Type or DS, set SNAME to "example.".<a href="#section-5.3-20" class="pilcrow">¶</a></p>
-<p id="section-5.3-21">2.2. Look for locally-available Delegation Types and NS RRsets, starting at current SNAME.<a href="#section-5.3-21" class="pilcrow">¶</a></p>
-<p id="section-5.3-22">2.2.1. For a given SNAME, check for the existence of Delegation Type RRsets.<a href="#section-5.3-22" class="pilcrow">¶</a></p>
-<p id="section-5.3-23">If they exist, the resolver MUST use their content to populate SLIST.<a href="#section-5.3-23" class="pilcrow">¶</a></p>
-<p id="section-5.3-24">However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.<a href="#section-5.3-24" class="pilcrow">¶</a></p>
-<p id="section-5.3-25">2.2.2. If a given SNAME is proven to not have Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST.<a href="#section-5.3-25" class="pilcrow">¶</a></p>
-<p id="section-5.3-26">2.2.3. If SLIST is not populated, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. If SLIST is populated, stop walking up the DNS tree.<a href="#section-5.3-26" class="pilcrow">¶</a></p>
-<p id="section-5.3-27">=====<a href="#section-5.3-27" class="pilcrow">¶</a></p>
-<p id="section-5.3-28">The rest of Step 2's description in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 is not affected by this document.<a href="#section-5.3-28" class="pilcrow">¶</a></p>
-<p id="section-5.3-29">Note that a query for QNAME="." and QTYPE=DS (or a Delegation Type) is non-sensical, as there is no zone that delegates to the root zone.<a href="#section-5.3-29" class="pilcrow">¶</a></p>
+<p id="section-5.3-6">This document defines SLIST to be a set. Each individual value MUST be represented only once in the final SLIST even if it was encountered multiple times during SLIST construction.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
+<p id="section-5.3-7">Neither <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> nor this document define how a resolver uses SLIST. They only define how to populate it.<a href="#section-5.3-7" class="pilcrow">¶</a></p>
+<p id="section-5.3-8">A Delegation-Extension-aware resolver's SLIST needs to be able to hold multiple types of information, delegations defined by NS RRset and delegations defined by Delegation Type RRsets.<a href="#section-5.3-8" class="pilcrow">¶</a></p>
+<p id="section-5.3-9">Delegations can create cyclic dependencies and/or lead to duplicate entries which point to the same server.<a href="#section-5.3-9" class="pilcrow">¶</a></p>
+<p id="section-5.3-10">Resolvers need to enforce suitable limits to prevent runaway processing even if someone has incorrectly configured some of the data used to create an SLIST.<a href="#section-5.3-10" class="pilcrow">¶</a></p>
+<p id="section-5.3-11">This is the same recommendation to bound the amount specified in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3.<a href="#section-5.3-11" class="pilcrow">¶</a></p>
+<p id="section-5.3-12">Step 2 of <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 is "2. Find the best servers to ask."<a href="#section-5.3-12" class="pilcrow">¶</a></p>
+<p id="section-5.3-13">For Delegation-Extension-aware resolvers, this description becomes:<a href="#section-5.3-13" class="pilcrow">¶</a></p>
+<p id="section-5.3-14">=====<a href="#section-5.3-14" class="pilcrow">¶</a></p>
+<ol start="2" type="1" class="compact type-1" id="section-5.3-15">
+<li id="section-5.3-15.1">Find the best servers to ask:<a href="#section-5.3-15.1" class="pilcrow">¶</a>
+</li>
+        </ol>
+<p id="section-5.3-16">2.1. Determine deepest possible zone cut which can potentially hold the answer for a given (query name, type, class) combination as follows:<a href="#section-5.3-16" class="pilcrow">¶</a></p>
+<p id="section-5.3-17">2.1.1. Start with SNAME equal to QNAME.<a href="#section-5.3-17" class="pilcrow">¶</a></p>
+<p id="section-5.3-18">2.1.2. If QTYPE is a type that is authoritative at the delegation point (DS or the range defined in this document), remove the leftmost label from SNAME.<a href="#section-5.3-18" class="pilcrow">¶</a></p>
+<p id="section-5.3-19">For example, if the QNAME is "test.example." and the QTYPE is a Delegation Type or DS, set SNAME to "example.".<a href="#section-5.3-19" class="pilcrow">¶</a></p>
+<p id="section-5.3-20">2.2. Look for locally available Delegation Types and NS RRsets, starting at current SNAME.<a href="#section-5.3-20" class="pilcrow">¶</a></p>
+<p id="section-5.3-21">2.2.1. For a given SNAME, check for the existence of NS-Omitting Delegation Type RRsets.<a href="#section-5.3-21" class="pilcrow">¶</a></p>
+<p id="section-5.3-22">If they exist, the resolver MUST use their content to populate SLIST.<a href="#section-5.3-22" class="pilcrow">¶</a></p>
+<p id="section-5.3-23">However, if the Delegation Type RRsets are known to exist but are unusable (for example, if it is found in DNSSEC BAD cache, or content of individual RRs is unusable for any reason), the resolver MUST NOT use an NS RRset; the resolver MUST treat this case as if SLIST is populated with unreachable servers.<a href="#section-5.3-23" class="pilcrow">¶</a></p>
+<p id="section-5.3-24">2.2.2. If a given SNAME is proven to not have NS-Omitting Delegation Type RRsets but does have an NS RRset, the resolver MUST copy the NS RRset into SLIST. The resolver MUST process any NS-Preserving or Private Delegation Type RRsets according to the specification defining those types.<a href="#section-5.3-24" class="pilcrow">¶</a></p>
+<p id="section-5.3-25">2.2.3. If a given SNAME is proven to not have any Delegation Type RRsets or an NS RRset, remove the leftmost label from SNAME and go back to step 2.2, using the newly shortened SNAME. Note the existence of these RRsets stops this algorithm even if the SLIST is empty or if servers referenced by SLIST are unusable for any reason.<a href="#section-5.3-25" class="pilcrow">¶</a></p>
+<p id="section-5.3-26">=====<a href="#section-5.3-26" class="pilcrow">¶</a></p>
+<p id="section-5.3-27">The rest of Step 2's description in <span>[<a href="#RFC1034" class="cite xref">RFC1034</a>]</span> Section 5.3.3 is not affected by this document.<a href="#section-5.3-27" class="pilcrow">¶</a></p>
+<p id="section-5.3-28">Note that a query for QNAME="." and QTYPE=DS (or a Delegation Type) is nonsensical, as there is no zone that delegates to the root zone.<a href="#section-5.3-28" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1722,17 +1785,17 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
         </h3>
 <p id="section-6.1-1">The DNSKEY Flags field consists of 16 bits shown in Figure 2.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.1-2">
-<pre>                                          1   1   1   1   1   1
-  0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|                           |ZON|REV|                   |ADT|SEP|
-+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+<pre>                                           1   1   1   1   1   1
+   0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
+ +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+ |                           |ZON|REV|                   |ADT|SEP|
+ +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+Figure 2: DNSKEY Flags Field
 </pre><a href="#section-6.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.1-3">Figure 2: DNSKEY Flags Field<a href="#section-6.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1-4">The descriptions of the ZONE (ZON) and Secure Entry Point (SEP) flags are provided in <span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>. The description of the REVOKE (REV) flag is provided in <span>[<a href="#RFC5011" class="cite xref">RFC5011</a>]</span>.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
-<p id="section-6.1-5"><a href="#ADTFLAG" class="auto internal xref">Section 9.2</a> requests IANA to assign the DNSKEY-ADT flag to bit 14.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
-<p id="section-6.1-6">When set to 1, it indicates to a validator that a referral MUST contain an NSEC or NSEC3 record to prove the presence or absence of types for the delegated name.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">The descriptions of the ZONE (ZON) and Secure Entry Point (SEP) flags are provided in <span>[<a href="#RFC4034" class="cite xref">RFC4034</a>]</span>. The description of the REVOKE (REV) flag is provided in <span>[<a href="#RFC5011" class="cite xref">RFC5011</a>]</span>.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4"><a href="#ADTFLAG" class="auto internal xref">Section 9.2</a> requests IANA to assign the DNSKEY-ADT flag to bit 14.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1-5">When set to 1, it indicates to a validator that a referral MUST contain an NSEC or NSEC3 record to prove the presence or absence of types for the delegated name.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ADTREQ">
@@ -1740,10 +1803,10 @@ These instructions were informally updated by <span>[<a href="#RFC4035" class="c
         <h3 id="name-validating-a-referral">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-validating-a-referral" class="section-name selfRef">Validating a Referral</a>
         </h3>
-<p id="section-6.2-1">On receiving a referral from a DNSSEC-signed delegating zone, a  validating resolver MUST determine the authenticated state of the ADT flag from a validated DNSKEY RRset for that zone.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2-2">When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.2-3">When the DNSKEY-ADT flag is clear, this consistency check does not
-apply. To be explicit, it means that a positive response with a DELEG RRset SHOULD NOT be treated as DNSSEC-bogus due to a clear ADT flag.  The resolver processes the referral according to the procedures defined in <a href="#RESREQ" class="auto internal xref">Section 5</a>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">On receiving a referral from a DNSSEC-signed delegating zone, a validating resolver MUST determine the authenticated state of the ADT flag from a validated DNSKEY RRset for that zone.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">When the DNSKEY-ADT flag is set to 1 in any DNSKEY record in the DNSKEY RRset of the delegating zone, the validator MUST check the NS-Omitting, NS-Preserving, and Private Delegation Type RRsets in the Authority section of the referral against the Type Bit Maps of the NSEC or NSEC3 record that matches the delegated name. If any are absent, the referral MUST be considered tampered with, and the response MUST be ignored.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">On-Demand Delegation Types indicated by the Type Bit Maps are not required to be present in a referral response.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">When the DNSKEY-ADT flag is clear, this consistency check does not apply. To be explicit, it means that a positive response with a DELEG RRset SHOULD NOT be treated as DNSSEC-bogus due to a clear ADT flag. The resolver processes the referral according to the procedures defined in <a href="#RESREQ" class="auto internal xref">Section 5</a>.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="clarifications-on-nonexistence-proofs">
@@ -1762,8 +1825,7 @@ apply. To be explicit, it means that a positive response with a DELEG RRset SHOU
             <p id="section-6.3-4.2.1">the Start of Authority (SOA) bit clear, and<a href="#section-6.3-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-4.3">
-            <p id="section-6.3-4.3.1">a signer field that is shorter than the owner name of the NSEC RR,
-or the original owner name for the NSEC3 RR.<a href="#section-6.3-4.3.1" class="pilcrow">¶</a></p>
+            <p id="section-6.3-4.3.1">a signer field that is shorter than the owner name of the NSEC RR, or the original owner name for the NSEC3 RR.<a href="#section-6.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-6.3-5">Ancestor delegation NSEC or NSEC3 RRs MUST NOT be used to assume nonexistence of any RRs below that zone cut, which include all RRs at that original owner name, other than types authoritative at the delegation point (DS and Delegation Types), and all RRs below that owner name regardless of type.<a href="#section-6.3-5" class="pilcrow">¶</a></p>
@@ -1777,8 +1839,7 @@ or the original owner name for the NSEC3 RR.<a href="#section-6.3-4.3.1" class="
 <p id="section-6.4-1">This document updates <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.4 to include securing delegation point RRsets. The first paragraph of that section is updated to read:<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2"><span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> Section 5.2 specifies that a validator, when proving a delegation is not secure, needs to check for the absence of the DS and SOA bits in the NSEC (or NSEC3) type bitmap; this was clarified in <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> Section 4.1.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">This document updates <span>[<a href="#RFC4035" class="cite xref">RFC4035</a>]</span> and <span>[<a href="#RFC6840" class="cite xref">RFC6840</a>]</span> to specify that the validator MUST check for the presence of the NS or Delegation Type bits in the matching NSEC (or NSEC3) RR (proving that there is, indeed, a delegation).<a href="#section-6.4-3" class="pilcrow">¶</a></p>
-<p id="section-6.4-4">Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3
-RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
+<p id="section-6.4-4">Alternatively, the validator must make sure that the delegation with an NS record is covered by an NSEC3 RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
 <p id="section-6.4-5">Opt-Out is not applicable to delegations with Delegation Type RRsets as Delegation Type RRsets are authoritative at the delegation point.<a href="#section-6.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1817,7 +1878,7 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
           <h4 id="name-stripping-of-delegation-typ">
 <a href="#section-8.2.1" class="section-number selfRef">8.2.1. </a><a href="#name-stripping-of-delegation-typ" class="section-name selfRef">Stripping of Delegation Types from Referrals</a>
           </h4>
-<p id="section-8.2.1-1">An on-path attacker may remove Delegation Type RRsets and associated NSEC or NSEC3 records from a referral response, leaving only unsigned NS records. A resolver that accepts such a modified referral would proceed to resolve the delegated name using unencrypted transport, defeating the purpose of Delegation Types, such as those indicating encrypted transport parameters.<a href="#section-8.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.2.1-1">An on-path attacker may remove NS-Omitting Delegation Type RRsets and associated NSEC or NSEC3 records from a referral response, leaving only unsigned NS records. A resolver that accepts such a modified referral would proceed to resolve the delegated name using the NS RRset, potentially using unencrypted transport and thereby defeating security properties provided by the NS-Omitting Delegation Types.<a href="#section-8.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-2">The DNSKEY-ADT flag defined in <a href="#ADT" class="auto internal xref">Section 6.1</a> provides a mitigation against this attack for validating resolvers. When the ADT flag is set in any DNSKEY of the delegating zone's DNSKEY RRset, a validating resolver MUST verify that the referral contains NSEC or NSEC3 records proving the presence or absence of Delegation Types for the delegated name. A referral lacking this proof MUST be treated as tampered with and MUST be ignored.<a href="#section-8.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-8.2.1-3">This mitigation is effective only when all of the following conditions hold:<a href="#section-8.2.1-3" class="pilcrow">¶</a></p>
 <ul class="compact">
@@ -1848,7 +1909,7 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
           <h4 id="name-interaction-between-flag-st">
 <a href="#section-8.2.3" class="section-number selfRef">8.2.3. </a><a href="#name-interaction-between-flag-st" class="section-name selfRef">Interaction Between Flag-Stripping Attacks</a>
           </h4>
-<p id="section-8.2.3-1">The two downgrade attacks described above may be attempted in combination. An attacker who strips the DE flag from a query causes the authoritative name server to respond with NS records only and no Delegation Types. Without Delegation Types in the response, the resolver cannot apply the NS-ignoring rule defined in <a href="#REFS" class="auto internal xref">Section 5.2</a>, and would ordinarily follow the NS records to resolve the delegated name, potentially over unencrypted transport.<a href="#section-8.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.2.3-1">The two downgrade attacks described above may be attempted in combination. An attacker who strips the DE flag from a query causes the authoritative name server to respond with NS records only and no Delegation Types. Without NS-Omitting Delegation Types in the response, the resolver cannot apply the NS-ignoring rule defined in <a href="#REFS" class="auto internal xref">Section 5.2</a>, and would ordinarily follow the NS records to resolve the delegated name, potentially over unencrypted transport.<a href="#section-8.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.2.3-2">As described in <a href="#DESTRIP" class="auto internal xref">Section 8.2.2</a>, the ADT flag defeats this combined attack for validating resolvers in zones where ADT is set. The resolver's obligation to require NSEC or NSEC3 proof derives from the previously validated DNSKEY RRset, not from the contents of the referral itself. A referral containing only NS records, with no NSEC or NSEC3 proof, will be rejected regardless of whether Delegation Types were present.<a href="#section-8.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-8.2.3-3">The residual risk in both <a href="#DESTRIP" class="auto internal xref">Section 8.2.2</a> and this section therefore reduces to the same condition: zones in which ADT is not set, or in which DNSSEC is not deployed, provide no cryptographic protection against either attack. This is a deployment risk, addressed in <a href="#PARTIAL" class="auto internal xref">Section 8.5</a>.<a href="#section-8.2.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -1860,7 +1921,7 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
         <h3 id="name-injection-of-delegation-typ">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-injection-of-delegation-typ" class="section-name selfRef">Injection of Delegation Types</a>
         </h3>
-<p id="section-8.3-1"><a href="#REFS" class="auto internal xref">Section 5.2</a> specifies that when Delegation Type RRsets are present in a referral response, accompanying NS records are ignored. An attacker capable of injecting or forging a referral response could exploit this rule by introducing fabricated Delegation Type RRsets into the response, causing the resolver to ignore legitimate NS records and use only the attacker-supplied Delegation Type RRsets, which may point to an attacker-controlled server.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1"><a href="#REFS" class="auto internal xref">Section 5.2</a> specifies that when NS-Omitting Delegation Type RRsets are present in a referral response, accompanying NS records are ignored. An attacker capable of injecting or forging a referral response could exploit this rule by introducing fabricated Delegation Type RRsets into the response, causing the resolver to ignore legitimate NS records and use only the attacker-supplied NS-Omitting Delegation Type RRsets, which may point to an attacker-controlled server.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.3-2">This attack is mitigated by DNSSEC. In a DNSSEC-signed zone, Delegation Type RRsets must be signed as specified in <a href="#DNSSECREQ" class="auto internal xref">Section 6</a>. A validating resolver will reject responses containing unsigned or incorrectly signed Delegation Type RRsets.<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <p id="section-8.3-3">In unsigned zones, no cryptographic protection against this attack is available.<a href="#section-8.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -1872,7 +1933,7 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-8.4-1"><a href="#INCLUDEDT" class="auto internal xref">Section 4.1</a> notes that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return a negative response. This behavior is intended to prevent a non-Delegation-Extension-aware resolver from exhausting other authoritative name servers for information it cannot act upon.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return a negative response for a name that legitimately exists.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
-<p id="section-8.4-3">However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any negative response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare negative response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject a negative response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering. Authoritative name servers for a delegating zone that employ Compact Denial of Existence [RFC9824] MUST NOT satisfy this proof with an NXNAME-based response matching the queried name, because such a response omits the Delegation Type bits at the delegation point on which this detection relies. They MUST instead return a conventional Name Error proof as described in <a href="#COED" class="auto internal xref">Section 4.1.1</a>.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any negative response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare negative response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject a negative response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering. Authoritative name servers for a delegating zone that employ Compact Denial of Existence <span>[<a href="#RFC9824" class="cite xref">RFC9824</a>]</span> MUST NOT satisfy this proof with an NXNAME-based response matching the queried name, because such a response omits the Delegation Type bits at the delegation point on which this detection relies. They MUST instead return a conventional Name Error proof as described in <a href="#COED" class="auto internal xref">Section 4.1.1</a>.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
 <p id="section-8.4-4">As with the attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a>, this mitigation depends on the delegating zone being DNSSEC-signed, ADT being set, and the resolver performing validation. In zones where these conditions do not hold, a DE-flag-stripping attack may result in a negative response that the resolver cannot distinguish from a legitimate one, causing a denial of service for the queried name. This residual risk is addressed in <a href="#PARTIAL" class="auto internal xref">Section 8.5</a>.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
 <p id="section-8.4-5">Authoritative name servers SHOULD include an Extended DNS Error <span>[<a href="#RFC8914" class="cite xref">RFC8914</a>]</span> code in negative responses returned when the DE flag is clear and no NS RRset exists, to assist in diagnosing misconfiguration or attack, absent a local policy requiring otherwise.<a href="#section-8.4-5" class="pilcrow">¶</a></p>
 </section>
@@ -1883,8 +1944,8 @@ RR with the Opt-Out flag set.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
 <a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-partial-deployment-and-tran" class="section-name selfRef">Partial Deployment and Transition Risks</a>
         </h3>
 <p id="section-8.5-1">The mechanisms defined in this document are effective only when deployed end-to-end. During the transition period in which some resolvers, authoritative name servers, and zones have adopted this specification and others have not, a number of residual risks apply.<a href="#section-8.5-1" class="pilcrow">¶</a></p>
-<p id="section-8.5-2">The ADT flag provides protection against the downgrade attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a> only when the delegating zone is DNSSEC- signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
-<p id="section-8.5-3">Zone operators that publish Delegation Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on Delegation Types for security properties such as encrypted transport MUST be DNSSEC-signed.<a href="#section-8.5-3" class="pilcrow">¶</a></p>
+<p id="section-8.5-2">The ADT flag provides protection against the downgrade attacks described in <a href="#DOWNGRADE" class="auto internal xref">Section 8.2</a> only when the delegating zone is DNSSEC-signed, the ADT flag is set in the zone's DNSKEY RRset, and the resolver performs validation. In zones that publish Delegation Types but have not set the ADT flag in the DNSKEY RRset, or that are not DNSSEC-signed, no cryptographic protection against referral-stripping or DE-flag-stripping attacks is available.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
+<p id="section-8.5-3">Zone operators that publish Delegation Types in signed zones are REQUIRED to set the ADT flag upon deployment. Zones relying on Delegation Types for security properties, such as encrypted transport, MUST be DNSSEC-signed.<a href="#section-8.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1927,15 +1988,21 @@ Bit 2    DE    Delegation Extensions        This-document
         </h3>
 <p id="section-9.3-1">IANA is requested to change reservations in the "Resource Record (RR) TYPEs" registry under the "Domain Name System (DNS) Parameters" registry group, available at <span><a href="https://www.iana.org/assignments/dns-parameters">https://www.iana.org/assignments/dns-parameters</a></span> with this document as the Reference.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-9.3-2">
-<pre>Decimal  Hex      Registration Procedures   Note
-61440-   0xF000-  Expert Review or          delegation TYPEs
-61935    0xF1EF   Standards Action
+<pre>Decimal  Hex       Registration Procedures  Note
+61440-   0xF000-   Expert Review or         NS-Omitting
+61567    0xF07F    Standards Action         Delegation TYPEs
 
-61936-   0xF1F0-  Private Use               private delegation TYPEs
-61951    0xF1FF
+61568-   0xF080-   Expert Review or         NS-Preserving
+61695    0xF0FF    Standards Action         Delegation TYPEs
+
+61696-   0xF100-   Expert Review or         On-Demand
+61935    0xF1EF    Standards Action         Delegation TYPEs
+
+61936-   0xF1F0-   Private Use              Private
+61951    0xF1FF                             Delegation TYPEs
 </pre><a href="#section-9.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-9.3-3">Allocation requests in the range 0xF000-0xF1EF require Expert Review or Standards Action. The Designated Experts for this range are drawn from the RFC6895 Experts Pool.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
+<p id="section-9.3-3">Allocation requests in the range 0xF000-0xF1EF require Expert Review or Standards Action. The allocation MUST be made from the segment corresponding to the referral behavior of the Delegation Type as defined in <a href="#alloc" class="auto internal xref">Section 3</a>. The Designated Experts for this range are drawn from the RFC6895 Experts Pool.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="alloc-crit">
@@ -1943,16 +2010,19 @@ Bit 2    DE    Delegation Extensions        This-document
         <h3 id="name-additional-expert-review-cr">
 <a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-additional-expert-review-cr" class="section-name selfRef">Additional Expert Review Criteria</a>
         </h3>
-<p id="section-9.4-1">In addition to the general Expert Review criteria established by <span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span>, the Designated Experts should evaluate allocation requests for Delegation Types against the criteria in <a href="#crit" class="auto internal xref">Section 3.1.1</a>. The Designated Experts should also consider:<a href="#section-9.4-1" class="pilcrow">¶</a></p>
+<p id="section-9.4-1">In addition to the general Expert Review criteria established by <span>[<a href="#RFC6895" class="cite xref">RFC6895</a>]</span>, the Designated Experts should evaluate allocation requests for Delegation Types against the criteria in <a href="#crit" class="auto internal xref">Section 3.5.1</a>. The Designated Experts should also consider:<a href="#section-9.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-9.4-2.1">
-            <p id="section-9.4-2.1.1">Whether the proposed Delegation Type requires protocol modifications beyond those defined in this document, and if so, whether those modifications have been or are being specified in an appropriate Standards Track document.<a href="#section-9.4-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-9.4-2.1.1">Whether the requested segment is appropriate for the referral behavior of the proposed Delegation Type. A type that provides sufficient information to process a delegation without the NS RRset should be allocated from the NS-Omitting segment. A type that supplements the NS RRset should be allocated from the NS-Preserving segment. A type that is not ordinarily required in referral responses should be allocated from the On-Demand segment.<a href="#section-9.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.4-2.2">
-            <p id="section-9.4-2.2.1">Whether the proposed Delegation Type can be processed safely by Delegation-Extension-aware implementations that do not specifically implement the proposed type, in particular with respect to the requirements in <a href="#REFS" class="auto internal xref">Section 5.2</a> and <a href="#INCLUDEDT" class="auto internal xref">Section 4.1</a>.<a href="#section-9.4-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-9.4-2.2.1">Whether the proposed Delegation Type requires protocol modifications beyond those defined in this document, and if so, whether those modifications have been or are being specified in an appropriate Standards Track document.<a href="#section-9.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.4-2.3">
-            <p id="section-9.4-2.3.1">Whether the security properties of the proposed Delegation Type are compatible with the DNSSEC signing requirements of <a href="#DNSSECREQ" class="auto internal xref">Section 6</a>, and whether any additional security considerations apply.<a href="#section-9.4-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-9.4-2.3.1">Whether the proposed Delegation Type can be processed safely by Delegation-Extension-aware implementations that do not specifically implement the proposed type, in particular with respect to the requirements in <a href="#REFS" class="auto internal xref">Section 5.2</a> and <a href="#INCLUDEDT" class="auto internal xref">Section 4.1</a>.<a href="#section-9.4-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-9.4-2.4">
+            <p id="section-9.4-2.4.1">Whether the security properties of the proposed Delegation Type are compatible with the DNSSEC signing requirements of <a href="#DNSSECREQ" class="auto internal xref">Section 6</a>, and whether any additional security considerations apply.<a href="#section-9.4-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-9.4-3">The Designated Experts may approve allocation requests accompanied by a stable, publicly available specification that need not be an RFC, provided that the specification is sufficiently detailed to allow independent interoperable implementation.<a href="#section-9.4-3" class="pilcrow">¶</a></p>
@@ -1966,19 +2036,9 @@ Bit 2    DE    Delegation Extensions        This-document
       <h2 id="name-acknowledgments">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-10-1">This document is heavily based on past work done by Tim April in
-   <span>[<a href="#I-D.tapril-ns2" class="cite xref">I-D.tapril-ns2</a>]</span> and thanks are extended to those who helped, including: John Levine, Erik Nygren, Jon Reed, Ben Kaduk,
-   Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon
-   Marx, and Brian Wellington.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2">Work on the Delegation Extensions protocol was started at IETF 118 Hackathon.  Hackathon
-   participants: Christian Elmerot, David Blacka, David Lawrence, Edward
-   Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion,
-   Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip
-   Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan
-   Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#section-10-2" class="pilcrow">¶</a></p>
-<p id="section-10-3">Other people joined the effort after the initial hackathon: Ben
-   Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
-   Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Peter Thomassen.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-1">This document is heavily based on past work done by Tim April in <span>[<a href="#I-D.tapril-ns2" class="cite xref">I-D.tapril-ns2</a>]</span> and thanks are extended to those who helped, including: John Levine, Erik Nygren, Jon Reed, Ben Kaduk, Mashooq Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx, and Brian Wellington.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">Work on the Delegation Extensions protocol was started at IETF 118 Hackathon. Hackathon participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.<a href="#section-10-2" class="pilcrow">¶</a></p>
+<p id="section-10-3">Other people joined the effort after the initial hackathon: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Peter Thomassen.<a href="#section-10-3" class="pilcrow">¶</a></p>
 <p id="section-10-4">The idea of allocating a range of delegation types was proposed by Petr Špaček <span>[<a href="#I-D.peetterr-dnsop-parent-side-auth-types" class="cite xref">I-D.peetterr-dnsop-parent-side-auth-types</a>]</span>. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.<a href="#section-10-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2068,7 +2128,7 @@ Bit 2    DE    Delegation Extensions        This-document
 <dl class="references">
 <dt id="I-D.ietf-deleg">[I-D.ietf-deleg]</dt>
         <dd>
-<span class="refAuthor">Špaček, P.</span>, <span class="refAuthor">Weber, R.</span>, and <span class="refAuthor">Lawrence</span>, <span class="refTitle">"Extensible Delegation for DNS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-deleg-10</span>, <time datetime="2026-07-04" class="refDate">4 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-deleg-10">https://datatracker.ietf.org/doc/html/draft-ietf-deleg-10</a>&gt;</span>. </dd>
+<span class="refAuthor">Špaček, P.</span>, <span class="refAuthor">Weber, R.</span>, and <span class="refAuthor">Lawrence</span>, <span class="refTitle">"Extensible Delegation for DNS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-deleg-11</span>, <time datetime="2026-07-23" class="refDate">23 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-deleg-11">https://datatracker.ietf.org/doc/html/draft-ietf-deleg-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.peetterr-dnsop-parent-side-auth-types">[I-D.peetterr-dnsop-parent-side-auth-types]</dt>
         <dd>
