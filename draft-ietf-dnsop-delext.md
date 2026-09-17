@@ -123,10 +123,10 @@ The NS-Preserving Delegation Type segment contains types for delegation mechanis
 The On-Demand Delegation Type segment contains types that are not ordinarily needed in referral responses and can instead be queried for explicitly. This avoids increasing referral response sizes with information that is not required during normal delegation processing.
 
 ## Private Delegation Types
-The Private Delegation Type segment contains types reserved for private or experimental use without requiring an IANA allocation. Private Delegation Types have the same referral behavior as NS-Preserving Delegation Types. This allows Private Delegation Types to be used in referral responses without replacing the delegation information provided by the NS RRset.
+The Private Delegation Type segment is reserved for Private Use as defined in [@!RFC8126]. Private Delegation Types have the same referral behavior as NS-Preserving Delegation Types. This allows Private Delegation Types to be used in referral responses without replacing the delegation information provided by the NS RRset.
 
 ## Updates to Allocation Policy
-[@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers and defines the Expert Review process governing that allocation. (#crit) defines the criteria for determining whether an RR type is eligible for allocation as a Delegation Type, and (#alloc-crit) specifies the Expert Review criteria that apply to allocation requests within the range 0xF000-0xF1EF.
+[@!RFC6895] establishes the allocation policy for DNS Resource Record type numbers. (@crit) defines the criteria for determining whether an RR type is eligible for allocation as a Delegation Type. (#alloc-crit) specifies additional Expert Review criteria for allocation requests within the range 0xF000-0xF1EF.
 
 ### Criteria for Delegation Type Allocation {#crit}
 A Resource Record type is eligible for allocation as a Delegation Type, rather than as a Data Type, only if all of the following conditions are met:
@@ -138,13 +138,6 @@ A Resource Record type is eligible for allocation as a Delegation Type, rather t
 * The RR type is not intended to appear as authoritative data within the delegated zone itself.
 
 RR types that do not meet all of these criteria MUST NOT be allocated from the Delegation Types range.
-
-A record type may be useful in the context of delegation, but that does not by itself qualify it for allocation as a Delegation Type. Record types that convey information useful to resolvers but are intended to appear within a zone rather than at its delegation point in the delegating zone are Data Types and MUST be allocated accordingly.
-
-(#alloc-crit) specifies additional Expert Review criteria.
-
-### Private Use Segment
-The segment 0xF1F0-0xF1FF is reserved for Private Use in accordance with [@!RFC8126].
 
 # Name Server Requirements {#NSREQ}
 Delegation-Extension-aware name servers MUST copy the value of the EDNS(0) DE flag from the request to the response.
@@ -205,8 +198,6 @@ Figure 1: OPT Record TTL Field with DE Flag
 The descriptions of the EXTENDED-RCODE, VERSION, DO, and Z are provided in [@!RFC6891] Section 6.1.3. The description of the CO flag is provided in [@!RFC9824].
 
 (#DEFLAG) requests IANA to assign the Delegation Extensions (DE) flag to Bit 2.
-
-Delegation Types are an opt-in extension to the DNS protocol. Their use is negotiated using the EDNS(0) DE flag, allowing existing DNS implementations to interoperate without modification.
 
 To indicate Delegation Types support, a resolver sets the Delegation Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS request message.
 
