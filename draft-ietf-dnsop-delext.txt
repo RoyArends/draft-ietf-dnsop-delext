@@ -7,12 +7,12 @@ Internet-Draft                                                     ICANN
 Updates: 1034, 4035, 6672, 6840, 6895, 9824 (if              P. van Dijk
          approved)                                              PowerDNS
 Intended status: Standards Track                               P. Špaček
-Expires: 21 March 2027                                               ISC
-                                                       17 September 2026
+Expires: 8 April 2027                                                ISC
+                                                          5 October 2026
 
 
           DNS Protocol Modifications for Delegation Extensions
-                       draft-ietf-dnsop-delext-11
+                       draft-ietf-dnsop-delext-12
 
 Abstract
 
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2027.
+   This Internet-Draft will expire on 8 April 2027.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 1]
+Arends, et al.            Expires 8 April 2027                  [Page 1]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    Please review these documents carefully, as they describe your rights
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 2]
+Arends, et al.            Expires 8 April 2027                  [Page 2]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
      9.3.  Changes to the DNS Parameters RR Types Registry . . . . .  18
@@ -165,9 +165,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 3]
+Arends, et al.            Expires 8 April 2027                  [Page 3]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
 2.1.  Relationship with the Extensible Delegation for DNS
@@ -221,9 +221,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 4]
+Arends, et al.            Expires 8 April 2027                  [Page 4]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
 3.1.  NS-Omitting Delegation Types
@@ -277,9 +277,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 5]
+Arends, et al.            Expires 8 April 2027                  [Page 5]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    *  The RR type carries information associated with the delegation
@@ -333,9 +333,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 6]
+Arends, et al.            Expires 8 April 2027                  [Page 6]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    Note that when the DE flag is clear (i.e., set to 0), and no NS RRset
@@ -389,9 +389,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 7]
+Arends, et al.            Expires 8 April 2027                  [Page 7]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    Note that when the DE flag is clear, presence of an NS RRset at the
@@ -445,9 +445,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 8]
+Arends, et al.            Expires 8 April 2027                  [Page 8]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    A Delegation-Extension-aware recursive resolver that receives a query
@@ -501,9 +501,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                 [Page 9]
+Arends, et al.            Expires 8 April 2027                  [Page 9]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    Each delegation level can have a mixture of Delegation Types and NS
@@ -557,9 +557,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 10]
+Arends, et al.            Expires 8 April 2027                 [Page 10]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    2.1.2.  If QTYPE is a type that is authoritative at the delegation
@@ -613,9 +613,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 11]
+Arends, et al.            Expires 8 April 2027                 [Page 11]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    See Section 8.2.1 for the specific Threat Model.  This secure signal
@@ -624,7 +624,8 @@ Internet-Draft                   DELEXT                   September 2026
 
 6.1.  The DNSKEY-ADT Flag
 
-   The DNSKEY Flags field consists of 16 bits shown in Figure 2.
+   The DNSKEY Flags field for Authoritative Delegation Types (ADT)
+   consists of 16 bits shown in Figure 2.
 
                                               1   1   1   1   1   1
       0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
@@ -668,10 +669,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-
-Arends, et al.            Expires 21 March 2027                [Page 12]
+Arends, et al.            Expires 8 April 2027                 [Page 12]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
 6.3.  Clarifications on Nonexistence Proofs
@@ -725,9 +725,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 13]
+Arends, et al.            Expires 8 April 2027                 [Page 13]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
 7.  Operational Considerations
@@ -781,9 +781,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 14]
+Arends, et al.            Expires 8 April 2027                 [Page 14]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    This mitigation is effective only when all of the following
@@ -837,9 +837,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 15]
+Arends, et al.            Expires 8 April 2027                 [Page 15]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    As described in Section 8.2.2, the ADT flag defeats this combined
@@ -893,9 +893,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 16]
+Arends, et al.            Expires 8 April 2027                 [Page 16]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    However, a resolver that sets the DE flag expects NSEC or NSEC3 proof
@@ -949,9 +949,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 17]
+Arends, et al.            Expires 8 April 2027                 [Page 17]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
 9.  IANA Considerations
@@ -1005,9 +1005,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 18]
+Arends, et al.            Expires 8 April 2027                 [Page 18]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
 9.4.  Additional Expert Review Criteria
@@ -1061,9 +1061,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 19]
+Arends, et al.            Expires 8 April 2027                 [Page 19]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    Work on the Delegation Extensions protocol was started at IETF 118
@@ -1076,7 +1076,7 @@ Internet-Draft                   DELEXT                   September 2026
    Other people joined the effort after the initial hackathon: Ben
    Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard
    Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt,
-   Peter Thomassen.
+   Peter Thomassen, Carsten Strotmann.
 
    The idea of allocating a range of delegation types was proposed by
    Petr Špaček [I-D.peetterr-dnsop-parent-side-auth-types].  His
@@ -1117,9 +1117,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 20]
+Arends, et al.            Expires 8 April 2027                 [Page 20]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    [RFC5011]  StJohns, M., "Automated Updates of DNS Security (DNSSEC)
@@ -1173,9 +1173,9 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 21]
+Arends, et al.            Expires 8 April 2027                 [Page 21]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    [RFC9824]  Huque, S., Elmerot, C., and O. Gudmundsson, "Compact
@@ -1229,9 +1229,9 @@ Authors' Addresses
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 22]
+Arends, et al.            Expires 8 April 2027                 [Page 22]
 
-Internet-Draft                   DELEXT                   September 2026
+Internet-Draft                   DELEXT                     October 2026
 
 
    Email: pspacek@isc.org
@@ -1285,4 +1285,4 @@ Internet-Draft                   DELEXT                   September 2026
 
 
 
-Arends, et al.            Expires 21 March 2027                [Page 23]
+Arends, et al.            Expires 8 April 2027                 [Page 23]

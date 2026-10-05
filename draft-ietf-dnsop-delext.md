@@ -1,7 +1,7 @@
 %%%
 title = "DNS Protocol Modifications for Delegation Extensions"
 abbrev = "DELEXT"
-docName = "draft-ietf-dnsop-delext-11"
+docName = "draft-ietf-dnsop-delext-12"
 category = "std"
 updates = [1034, 4035, 6672, 6840, 6895, 9824]
 
@@ -12,7 +12,7 @@ keyword = ["Internet-Draft"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "draft-ietf-dnsop-delext-11"
+value = "draft-ietf-dnsop-delext-12"
 stream = "IETF"
 status = "standard"
 
@@ -281,7 +281,7 @@ In a DNSSEC-signed zone, Delegation Type RRsets MUST be signed.
 To avoid a downgrade attack, where the Delegation Type RRsets, NSEC (or NSEC3) RRsets and their signatures can be replaced by unsigned NS records, a secure signal in the form of a DNSKEY flag is introduced. See (#DSTRIP) for the specific Threat Model. This secure signal indicates that NSEC or NSEC3 records MUST be present in a referral response.
 
 ## The DNSKEY-ADT Flag {#ADT}
-The DNSKEY Flags field consists of 16 bits shown in Figure 2.
+The DNSKEY Flags field for Authoritative Delegation Types (ADT) consists of 16 bits shown in Figure 2.
 
 ```
                                            1   1   1   1   1   1
@@ -455,7 +455,7 @@ This document is heavily based on past work done by Tim April in [@I-D.tapril-ns
 
 Work on the Delegation Extensions protocol was started at IETF 118 Hackathon. Hackathon participants: Christian Elmerot, David Blacka, David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan Včelák, Klaus Darilion, Libor Peltan, Manu Bretelle, Peter van Dijk, Petr Špaček, Philip Homburg, Ralf Weber, Roy Arends, Shane Kerr, Shumon Huque, Vandan Adhvaryu, Vladimír Čunát, Andreas Schulze.
 
-Other people joined the effort after the initial hackathon: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Peter Thomassen.
+Other people joined the effort after the initial hackathon: Ben Schwartz, Bob Halley, Paul Hoffman, Miek Gieben, Ray Hunter, Håvard Eidnes, Ted Hardie, Michael Richardson, Florian Obser, Evan Hunt, Peter Thomassen, Carsten Strotmann.
 
 The idea of allocating a range of delegation types was proposed by Petr Špaček [@I-D.peetterr-dnsop-parent-side-auth-types]. His contribution is rewarded by listing him as an author so he can take equal parts credit and blame.
 
