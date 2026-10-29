@@ -23,7 +23,7 @@ all: $(TXT) $(HTML) $(XML)
 	xml2rfc --html -o $@ $<
 
 %.xml: %.md
-	~/Desktop/IETF/auth-delegation-types/mmark  < $< > $@
+	mmark  < $< > $@
 
 clean:
 	rm -f draft-*.txt draft-*.html draft-*.xml metadata.min.js
