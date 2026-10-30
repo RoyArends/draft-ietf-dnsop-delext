@@ -179,11 +179,11 @@ Note that when the DE flag is clear (i.e., set to 0), and no NS RRset exists at 
 If future Delegation Types require extended error codes with new semantics, those Delegation Types must define their own codes.
 
 ### Compact Denial of Existence {#COED}
-This document updates Compact Denial of Existence (CDOE) [@!RFC9824]. For CDOE enabled servers, the negative response required above is an exception to the CDOE method, i.e., it MUST be generated as a conventional negative response proof ([@!RFC4035], or [@!RFC5155] for NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be returned regardless of whether the query sets the Compact Answers OK (CO) flag [@!RFC9824].
+This document updates Compact Denial of Existence (CDOE) [@!RFC9824]. For queries with DE=0 and a QNAME below a delegation point containing an NS-Omitting Delegation Type RRset but no NS RRset, authoritative servers implementing Compact Denial of Existence (CDOE) [@!RFC9824] MUST NOT use the CDOE method when the DE flag is clear. Instead, they MUST return a conventional negative response with the corresponding DNSSEC denial-of-existence proof as specified in [@RFC4035] or [@RFC5155], regardless of whether the Compact Answers OK (CO) flag is set.
 
-For an NSEC zone, a single NSEC record whose owner name matches the delegation point satisfies both aspects of the Name Error proof at once — it covers both the queried name and the wildcard at the closest encloser — while its Type Bit Maps field conveys the Delegation Type(s) present at the delegation point.
+For an NSEC zone, a single NSEC record whose owner name matches the delegation point and whose Next Domain Name is formed by prepending the label \043 to the delegation point satisfies both components of the Name Error proof. It covers both the queried name and the wildcard at the closest encloser, while its Type Bit Maps field indicates the types present at the delegation point. The label \043 sorts after the wildcard label (\042) in canonical ordering.
 
-For an NSEC3 zone, the proof is the usual closest-encloser construction of [@!RFC5155]: the NSEC3 record matching the delegation point (whose Type Bit Map conveys the Delegation Type(s) present there), the NSEC3 record covering the next closer name, and the NSEC3 record covering the source of synthesis (wildcard) at the closest encloser. Unlike the NSEC case, these are in general three distinct records, because NSEC3 hashing does not preserve the name hierarchy.
+For an NSEC3 zone, the proof follows the closest-encloser construction specified in [@RFC5155]: an NSEC3 record matching the delegation point, whose Type Bit Maps field indicates the types present at the delegation point; an NSEC3 record covering the next closer name; and an NSEC3 record covering the wildcard at the closest encloser. All three NSEC3 records use a Next Hashed Owner Name formed by incrementing the corresponding hash value by one. For the two covering NSEC3 records, the Hashed Owner Name is formed by decrementing the hash value being denied by one. These operations are performed on the unencoded binary hash values, before Base32hex encoding.
 
 Returning an NXNAME-based response matching the queried name would not convey the presence of Delegation Types at the delegation point and would prevent the downgrade detection described in (#ADTREQ) and (#DOSNON).
 
@@ -193,7 +193,7 @@ When the DE flag is set to 1 and the QNAME matches a delegation point, a query f
 Note that when the DE flag is clear, presence of an NS RRset at the delegation point occludes other types, as clarified in [@!RFC2136] Section 7.18, i.e., if an NS RRset exists at the delegation point, a query for a Delegation Type will result in a referral containing the NS RRset, regardless of whether the queried Delegation Type RRset exists at that delegation point.
 
 ## Queries for type ANY
-When the QNAME matches a delegation point, queries with QTYPE=ANY MUST apply the same handling to Delegation Type RRsets as is applied to other parent-side types (such as DS) .
+When the QNAME matches a delegation point, queries with QTYPE=ANY MUST apply the same handling to Delegation Type RRsets as is applied to other parent-side types (such as DS).
 
 ## Delegation Types at a Wildcard Domain Name
 Wildcard expansion defined in [@!RFC4592] does not create delegation points, as it was left undefined. Consequently, a wildcard owner name MUST NOT have Delegation Types.
@@ -201,7 +201,7 @@ Wildcard expansion defined in [@!RFC4592] does not create delegation points, as 
 # Resolver Requirements {#RESREQ}
 
 ## Setting the EDNS(0) DE Flag {#DEsetting}
-To indicate Delegation Types support, a resolver sets the Delegation Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS request message.
+A resolver that implements this specification and [@!I-D.ietf-deleg] sets the Delegation Extensions (DE) flag to 1 in the EDNS(0) Flags field when sending a DNS request message. A resolver MUST NOT set the DE flag to 1 unless it implements both specifications.
 
 A Delegation-Extension-aware recursive resolver that receives a query with the DE flag set to 1 MUST set the DE flag to 1 in its response to indicate that Delegation Types are supported.
 
@@ -389,10 +389,12 @@ This attack is mitigated by DNSSEC. In a DNSSEC-signed zone, Delegation Type RRs
 
 In unsigned zones, no cryptographic protection against this attack is available.
 
-## Denial-of-Service via a Negative Response for non-Delegation-Extension-aware Resolvers {#DOSNON}
+## Denial-of-Service via DE Flag Manipulation {#DOSNON}
 (#INCLUDEDT) notes that when the DE flag is clear and no NS RRset exists for a referral, the authoritative name server must return a negative response. This behavior is intended to prevent a non-Delegation-Extension-aware resolver from exhausting other authoritative name servers for information it cannot act upon.
 
-An attacker may attempt to exploit this behavior by stripping the DE flag from a query directed at a zone that publishes only Delegation Types and no NS RRsets, causing the server to return a negative response for a name that legitimately exists.
+An on-path attacker may set the DE flag in queries sent by a non-Delegation-Extension-aware resolver, causing an authoritative server to return Delegation Type RRsets instead of an NS RRset. At a delegation point containing both NS and NS-Omitting Delegation Type RRsets, the NSEC or NSEC3 record matching the delegation point indicates the presence of the NS RRset. As specified in [@!RFC6840] Section 4.1, a validating resolver cannot use such an ancestor delegation proof to establish nonexistence below the delegation point. Consequently, injecting the DE flag cannot cause a  non-Delegation-Extension-aware validating resolver to accept an authenticated denial of existence for names below the delegation.
+
+Conversely, an on-path attacker may strip the DE flag from a query sent by a Delegation-Extension-aware resolver to a zone that publishes only Delegation Types and no NS RRsets, causing the server to return a negative response for a name that legitimately exists.
 
 However, a resolver that sets the DE flag expects NSEC or NSEC3 proof in any negative response, demonstrating that the queried name does not exist or that no Delegation Types are present at or above it. A bare negative response lacking such proof is therefore detectable by a validating resolver. When the ADT flag is set in the delegating zone's DNSKEY RRset, the resolver MUST reject a negative response that does not include the required NSEC or NSEC3 records, as the absence of proof indicates tampering. Authoritative name servers for a delegating zone that employ Compact Denial of Existence [@!RFC9824] MUST NOT satisfy this proof with an NXNAME-based response matching the queried name, because such a response omits the Delegation Type bits at the delegation point on which this detection relies. They MUST instead return a conventional Name Error proof as described in (#COED).
 

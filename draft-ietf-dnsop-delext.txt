@@ -7,8 +7,8 @@ Internet-Draft                                                     ICANN
 Updates: 1034, 4035, 6672, 6840, 6895, 9824 (if              P. van Dijk
          approved)                                              PowerDNS
 Intended status: Standards Track                               P. Špaček
-Expires: 2 May 2027                                                  ISC
-                                                         29 October 2026
+Expires: 3 May 2027                                                  ISC
+                                                         30 October 2026
 
 
           DNS Protocol Modifications for Delegation Extensions
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 May 2027.
+   This Internet-Draft will expire on 3 May 2027.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 1]
+Arends, et al.             Expires 3 May 2027                   [Page 1]
 
 Internet-Draft                   DELEXT                     October 2026
 
@@ -82,7 +82,7 @@ Table of Contents
      4.1.  Including Delegation Types in a Referral Response . . . .   7
        4.1.1.  Compact Denial of Existence . . . . . . . . . . . . .   8
      4.2.  Explicit Queries for Delegation Types . . . . . . . . . .   8
-     4.3.  Queries for type ANY  . . . . . . . . . . . . . . . . . .   8
+     4.3.  Queries for type ANY  . . . . . . . . . . . . . . . . . .   9
      4.4.  Delegation Types at a Wildcard Domain Name  . . . . . . .   9
    5.  Resolver Requirements . . . . . . . . . . . . . . . . . . . .   9
      5.1.  Setting the EDNS(0) DE Flag . . . . . . . . . . . . . . .   9
@@ -91,37 +91,36 @@ Table of Contents
    6.  DNSSEC Requirements . . . . . . . . . . . . . . . . . . . . .  12
      6.1.  The DNSKEY-ADT Flag . . . . . . . . . . . . . . . . . . .  12
      6.2.  Validating a Referral . . . . . . . . . . . . . . . . . .  13
-     6.3.  Clarifications on Nonexistence Proofs . . . . . . . . . .  13
+     6.3.  Clarifications on Nonexistence Proofs . . . . . . . . . .  14
      6.4.  Insecure Delegation Proofs  . . . . . . . . . . . . . . .  14
-   7.  Operational Considerations  . . . . . . . . . . . . . . . . .  14
+   7.  Operational Considerations  . . . . . . . . . . . . . . . . .  15
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
      8.1.  Threat Model  . . . . . . . . . . . . . . . . . . . . . .  15
      8.2.  Downgrade Attacks . . . . . . . . . . . . . . . . . . . .  15
        8.2.1.  Stripping of Delegation Types from Referrals  . . . .  15
        8.2.2.  Stripping of the DE Flag from Queries . . . . . . . .  16
-       8.2.3.  Interaction Between Flag-Stripping Attacks  . . . . .  16
+       8.2.3.  Interaction Between Flag-Stripping Attacks  . . . . .  17
      8.3.  Injection of Delegation Types . . . . . . . . . . . . . .  17
-     8.4.  Denial-of-Service via a Negative Response for
-           non-Delegation-Extension-aware Resolvers  . . . . . . . .  17
-     8.5.  Partial Deployment and Transition Risks . . . . . . . . .  18
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  18
+     8.4.  Denial-of-Service via DE Flag Manipulation  . . . . . . .  18
+     8.5.  Partial Deployment and Transition Risks . . . . . . . . .  19
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  19
      9.1.  The EDNS(0) DE Flag . . . . . . . . . . . . . . . . . . .  19
+     9.2.  The DNSKEY-ADT Flag . . . . . . . . . . . . . . . . . . .  19
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 2]
+Arends, et al.             Expires 3 May 2027                   [Page 2]
 
 Internet-Draft                   DELEXT                     October 2026
 
 
-     9.2.  The DNSKEY-ADT Flag . . . . . . . . . . . . . . . . . . .  19
-     9.3.  Changes to the DNS Parameters RR Types Registry . . . . .  19
+     9.3.  Changes to the DNS Parameters RR Types Registry . . . . .  20
      9.4.  Additional Expert Review Criteria . . . . . . . . . . . .  20
-   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  20
+   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  21
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  21
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  21
      11.2.  Informative References . . . . . . . . . . . . . . . . .  23
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  23
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
 
 1.  Introduction
 
@@ -165,7 +164,8 @@ Internet-Draft                   DELEXT                     October 2026
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 3]
+
+Arends, et al.             Expires 3 May 2027                   [Page 3]
 
 Internet-Draft                   DELEXT                     October 2026
 
@@ -221,7 +221,7 @@ Internet-Draft                   DELEXT                     October 2026
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 4]
+Arends, et al.             Expires 3 May 2027                   [Page 4]
 
 Internet-Draft                   DELEXT                     October 2026
 
@@ -277,7 +277,7 @@ Internet-Draft                   DELEXT                     October 2026
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 5]
+Arends, et al.             Expires 3 May 2027                   [Page 5]
 
 Internet-Draft                   DELEXT                     October 2026
 
@@ -333,7 +333,7 @@ Internet-Draft                   DELEXT                     October 2026
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 6]
+Arends, et al.             Expires 3 May 2027                   [Page 6]
 
 Internet-Draft                   DELEXT                     October 2026
 
@@ -389,7 +389,7 @@ Internet-Draft                   DELEXT                     October 2026
 
 
 
-Arends, et al.             Expires 2 May 2027                   [Page 7]
+Arends, et al.             Expires 3 May 2027                   [Page 7]
 
 Internet-Draft                   DELEXT                     October 2026
 
@@ -397,26 +397,34 @@ Internet-Draft                   DELEXT                     October 2026
 4.1.1.  Compact Denial of Existence
 
    This document updates Compact Denial of Existence (CDOE) [RFC9824].
-   For CDOE enabled servers, the negative response required above is an
-   exception to the CDOE method, i.e., it MUST be generated as a
-   conventional negative response proof ([RFC4035], or [RFC5155] for
-   NSEC3) rather than as an NXNAME-based NODATA response, and it MUST be
-   returned regardless of whether the query sets the Compact Answers OK
-   (CO) flag [RFC9824].
+   For queries with DE=0 and a QNAME below a delegation point containing
+   an NS-Omitting Delegation Type RRset but no NS RRset, authoritative
+   servers implementing Compact Denial of Existence (CDOE) [RFC9824]
+   MUST NOT use the CDOE method when the DE flag is clear.  Instead,
+   they MUST return a conventional negative response with the
+   corresponding DNSSEC denial-of-existence proof as specified in
+   [RFC4035] or [RFC5155], regardless of whether the Compact Answers OK
+   (CO) flag is set.
 
    For an NSEC zone, a single NSEC record whose owner name matches the
-   delegation point satisfies both aspects of the Name Error proof at
-   once — it covers both the queried name and the wildcard at the
-   closest encloser — while its Type Bit Maps field conveys the
-   Delegation Type(s) present at the delegation point.
+   delegation point and whose Next Domain Name is formed by prepending
+   the label \043 to the delegation point satisfies both components of
+   the Name Error proof.  It covers both the queried name and the
+   wildcard at the closest encloser, while its Type Bit Maps field
+   indicates the types present at the delegation point.  The label \043
+   sorts after the wildcard label (\042) in canonical ordering.
 
-   For an NSEC3 zone, the proof is the usual closest-encloser
-   construction of [RFC5155]: the NSEC3 record matching the delegation
-   point (whose Type Bit Map conveys the Delegation Type(s) present
-   there), the NSEC3 record covering the next closer name, and the NSEC3
-   record covering the source of synthesis (wildcard) at the closest
-   encloser.  Unlike the NSEC case, these are in general three distinct
-   records, because NSEC3 hashing does not preserve the name hierarchy.
+   For an NSEC3 zone, the proof follows the closest-encloser
+   construction specified in [RFC5155]: an NSEC3 record matching the
+   delegation point, whose Type Bit Maps field indicates the types
+   present at the delegation point; an NSEC3 record covering the next
+   closer name; and an NSEC3 record covering the wildcard at the closest
+   encloser.  All three NSEC3 records use a Next Hashed Owner Name
+   formed by incrementing the corresponding hash value by one.  For the
+   two covering NSEC3 records, the Hashed Owner Name is formed by
+   decrementing the hash value being denied by one.  These operations
+   are performed on the unencoded binary hash values, before Base32hex
+   encoding.
 
    Returning an NXNAME-based response matching the queried name would
    not convey the presence of Delegation Types at the delegation point
@@ -430,6 +438,18 @@ Internet-Draft                   DELEXT                     October 2026
    answer if the queried Delegation Type exists, or a NODATA response
    (AA flag set, RCODE=0, empty answer section).
 
+
+
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                   [Page 8]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    Note that when the DE flag is clear, presence of an NS RRset at the
    delegation point occludes other types, as clarified in [RFC2136]
    Section 7.18, i.e., if an NS RRset exists at the delegation point, a
@@ -441,14 +461,7 @@ Internet-Draft                   DELEXT                     October 2026
 
    When the QNAME matches a delegation point, queries with QTYPE=ANY
    MUST apply the same handling to Delegation Type RRsets as is applied
-   to other parent-side types (such as DS) .
-
-
-
-Arends, et al.             Expires 2 May 2027                   [Page 8]
-
-Internet-Draft                   DELEXT                     October 2026
-
+   to other parent-side types (such as DS).
 
 4.4.  Delegation Types at a Wildcard Domain Name
 
@@ -460,9 +473,10 @@ Internet-Draft                   DELEXT                     October 2026
 
 5.1.  Setting the EDNS(0) DE Flag
 
-   To indicate Delegation Types support, a resolver sets the Delegation
-   Extensions flag to 1 in the EDNS(0) Flags field when sending a DNS
-   request message.
+   A resolver that implements this specification and [I-D.ietf-deleg]
+   sets the Delegation Extensions (DE) flag to 1 in the EDNS(0) Flags
+   field when sending a DNS request message.  A resolver MUST NOT set
+   the DE flag to 1 unless it implements both specifications.
 
    A Delegation-Extension-aware recursive resolver that receives a query
    with the DE flag set to 1 MUST set the DE flag to 1 in its response
@@ -480,6 +494,18 @@ Internet-Draft                   DELEXT                     October 2026
    present in the referral MUST be ignored and MUST NOT be validated or
    cached.
 
+
+
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                   [Page 9]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    When no NS-Omitting Delegation Type RRsets are present, the resolver
    MUST use the NS RRset to process the delegation.  NS-Preserving and
    Private Delegation Type RRsets present in the referral supplement the
@@ -496,15 +522,6 @@ Internet-Draft                   DELEXT                     October 2026
    delegation point as if all servers were unusable.  The label counter
    in the RRSIG RDATA will be less than the number of labels observed in
    the owner name.
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                   [Page 9]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    When the referral contains no Delegation Type RRsets, the resolver
    MUST use NS records.  Note that DNSSEC can prove the presence and
@@ -537,6 +554,14 @@ Internet-Draft                   DELEXT                     October 2026
    be represented only once in the final SLIST even if it was
    encountered multiple times during SLIST construction.
 
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 10]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    Neither [RFC1034] nor this document define how a resolver uses SLIST.
    They only define how to populate it.
 
@@ -553,14 +578,6 @@ Internet-Draft                   DELEXT                     October 2026
 
    This is the same recommendation to bound the amount of work specified
    in [RFC1034] Section 5.3.3.
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 10]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    Step 2 of [RFC1034] Section 5.3.3 is "2.  Find the best servers to
    ask."
@@ -592,6 +609,15 @@ Internet-Draft                   DELEXT                     October 2026
 
    If they exist, the resolver MUST use their content to populate SLIST.
 
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 11]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    However, if the Delegation Type RRsets are known to exist but are
    unusable (for example, if it is found in DNSSEC BAD cache, or content
    of individual RRs is unusable for any reason), the resolver MUST NOT
@@ -605,18 +631,6 @@ Internet-Draft                   DELEXT                     October 2026
    2.2.3.  The resolver MUST process any NS-Preserving or Private
    Delegation Type RRsets according to the specification defining those
    types.
-
-
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 11]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    2.2.4.  If a given SNAME is proven to not have any Delegation Type
    RRsets or an NS RRset, remove the leftmost label from SNAME and go
@@ -647,6 +661,19 @@ Internet-Draft                   DELEXT                     October 2026
 
    The DNSKEY Flags field consists of 16 bits shown in Figure 2.
 
+
+
+
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 12]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
                                               1   1   1   1   1   1
       0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5
     +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -663,16 +690,6 @@ Internet-Draft                   DELEXT                     October 2026
    When the ADT flag is set to 1, it indicates to a validator that a
    referral MUST contain an NSEC or NSEC3 record to prove the presence
    or absence of types for the delegated name.
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 12]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
 6.2.  Validating a Referral
 
@@ -705,6 +722,14 @@ Internet-Draft                   DELEXT                     October 2026
    On-Demand Delegation Types indicated by the Type Bit Maps are not
    required to be present in a referral response.
 
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 13]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    When the ADT flag is clear, this consistency check does not apply.
    To be explicit, it means that a positive response with a DELEG RRset
    SHOULD NOT be treated as DNSSEC-bogus due to a clear ADT flag.  The
@@ -721,14 +746,6 @@ Internet-Draft                   DELEXT                     October 2026
    The text in that section is updated as follows:
 
    An "ancestor delegation" NSEC RR (or NSEC3 RR) is one with:
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 13]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    *  the NS and/or Delegation Type bits set,
 
@@ -759,6 +776,16 @@ Internet-Draft                   DELEXT                     October 2026
    bits in the matching NSEC (or NSEC3) RR (proving that there is,
    indeed, a delegation).
 
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 14]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    Alternatively, the validator must make sure that the delegation with
    only an NS record is covered by an NSEC3 RR with the Opt-Out flag
    set.
@@ -775,16 +802,6 @@ Internet-Draft                   DELEXT                     October 2026
    aware forwarders.  Otherwise DNSSEC-secure zones might fail to
    validate and DNSSEC-insecure zones might observe inconsistent
    answers.
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 14]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
 8.  Security Considerations
 
@@ -815,6 +832,16 @@ Internet-Draft                   DELEXT                     October 2026
    RRset, potentially using unencrypted transport and thereby defeating
    security properties provided by the NS-Omitting Delegation Types.
 
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 15]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    The ADT flag defined in Section 6.1 provides a mitigation against
    this attack for validating resolvers.  When the ADT flag is set in
    any DNSKEY of the delegating zone's DNSKEY RRset, a validating
@@ -831,16 +858,6 @@ Internet-Draft                   DELEXT                     October 2026
    *  The resolver performs DNSSEC validation.
    *  The resolver enforces the ADT requirement as specified in
       Section 6.2.
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 15]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    Operators of zones that publish Delegation Types MUST set the ADT
    flag in their DNSKEY RRset to ensure that validating resolvers can
@@ -871,6 +888,16 @@ Internet-Draft                   DELEXT                     October 2026
    no cryptographic protection against DE-flag-stripping is available,
    and the considerations in Section 8.5 apply.
 
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 16]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
 8.2.3.  Interaction Between Flag-Stripping Attacks
 
    The two downgrade attacks described above may be attempted in
@@ -888,15 +915,6 @@ Internet-Draft                   DELEXT                     October 2026
    referral itself.  A referral containing only NS records, with no NSEC
    or NSEC3 proof, will be rejected regardless of whether Delegation
    Types were present.
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 16]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    The residual risk in both Section 8.2.2 and this section therefore
    reduces to the same condition: zones in which ADT is not set, or in
@@ -923,8 +941,20 @@ Internet-Draft                   DELEXT                     October 2026
    In unsigned zones, no cryptographic protection against this attack is
    available.
 
-8.4.  Denial-of-Service via a Negative Response for non-Delegation-
-      Extension-aware Resolvers
+
+
+
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 17]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
+8.4.  Denial-of-Service via DE Flag Manipulation
 
    Section 4.1 notes that when the DE flag is clear and no NS RRset
    exists for a referral, the authoritative name server must return a
@@ -932,10 +962,22 @@ Internet-Draft                   DELEXT                     October 2026
    Delegation-Extension-aware resolver from exhausting other
    authoritative name servers for information it cannot act upon.
 
-   An attacker may attempt to exploit this behavior by stripping the DE
-   flag from a query directed at a zone that publishes only Delegation
-   Types and no NS RRsets, causing the server to return a negative
-   response for a name that legitimately exists.
+   An on-path attacker may set the DE flag in queries sent by a non-
+   Delegation-Extension-aware resolver, causing an authoritative server
+   to return Delegation Type RRsets instead of an NS RRset.  At a
+   delegation point containing both NS and NS-Omitting Delegation Type
+   RRsets, the NSEC or NSEC3 record matching the delegation point
+   indicates the presence of the NS RRset.  As specified in [RFC6840]
+   Section 4.1, a validating resolver cannot use such an ancestor
+   delegation proof to establish nonexistence below the delegation
+   point.  Consequently, injecting the DE flag cannot cause a non-
+   Delegation-Extension-aware validating resolver to accept an
+   authenticated denial of existence for names below the delegation.
+
+   Conversely, an on-path attacker may strip the DE flag from a query
+   sent by a Delegation-Extension-aware resolver to a zone that
+   publishes only Delegation Types and no NS RRsets, causing the server
+   to return a negative response for a name that legitimately exists.
 
    However, a resolver that sets the DE flag expects NSEC or NSEC3 proof
    in any negative response, demonstrating that the queried name does
@@ -946,14 +988,6 @@ Internet-Draft                   DELEXT                     October 2026
    that does not include the required NSEC or NSEC3 records, as the
    absence of proof indicates tampering.  Authoritative name servers for
    a delegating zone that employ Compact Denial of Existence [RFC9824]
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 17]
-
-Internet-Draft                   DELEXT                     October 2026
-
-
    MUST NOT satisfy this proof with an NXNAME-based response matching
    the queried name, because such a response omits the Delegation Type
    bits at the delegation point on which this detection relies.  They
@@ -967,6 +1001,14 @@ Internet-Draft                   DELEXT                     October 2026
    response that the resolver cannot distinguish from a legitimate one,
    causing a denial of service for the queried name.  This residual risk
    is addressed in Section 8.5.
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 18]
+
+Internet-Draft                   DELEXT                     October 2026
+
 
    Authoritative name servers SHOULD include an Extended DNS Error
    [RFC8914] code in negative responses returned when the DE flag is
@@ -996,20 +1038,6 @@ Internet-Draft                   DELEXT                     October 2026
 
 9.  IANA Considerations
 
-
-
-
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 18]
-
-Internet-Draft                   DELEXT                     October 2026
-
-
 9.1.  The EDNS(0) DE Flag
 
    IANA is requested to assign Bit 2 in the "EDNS Header Flags (16
@@ -1030,6 +1058,13 @@ Internet-Draft                   DELEXT                     October 2026
 
    Number   Description                        Reference
      14     Authoritative Delegation Types     This-document
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 19]
+
+Internet-Draft                   DELEXT                     October 2026
+
 
 9.3.  Changes to the DNS Parameters RR Types Registry
 
@@ -1057,15 +1092,6 @@ Internet-Draft                   DELEXT                     October 2026
    defined in Section 3.  The Designated Experts for this range are
    drawn from the RFC6895 Experts Pool.
 
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 19]
-
-Internet-Draft                   DELEXT                     October 2026
-
-
 9.4.  Additional Expert Review Criteria
 
    In addition to the general Expert Review criteria established by
@@ -1085,6 +1111,16 @@ Internet-Draft                   DELEXT                     October 2026
       modifications beyond those defined in this document, and if so,
       whether those modifications have been or are being specified in an
       appropriate Standards Track document.
+
+
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 20]
+
+Internet-Draft                   DELEXT                     October 2026
+
 
    *  Whether the proposed Delegation Type can be processed safely by
       Delegation-Extension-aware implementations that do not
@@ -1113,15 +1149,6 @@ Internet-Draft                   DELEXT                     October 2026
    Muhaimen, Jason Moreau, Jerrod Wiesman, Billy Tiemann, Gordon Marx,
    and Brian Wellington.
 
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 20]
-
-Internet-Draft                   DELEXT                     October 2026
-
-
    Work on the Delegation Extensions protocol was started at IETF 118
    Hackathon.  Hackathon participants: Christian Elmerot, David Blacka,
    David Lawrence, Edward Lewis, Erik Nygren, George Michaelson, Jan
@@ -1142,6 +1169,14 @@ Internet-Draft                   DELEXT                     October 2026
 11.  References
 
 11.1.  Normative References
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 21]
+
+Internet-Draft                   DELEXT                     October 2026
+
 
    [I-D.ietf-deleg]
               Špaček, P., Weber, R., and D. C Lawrence, "Extensible
@@ -1169,15 +1204,6 @@ Internet-Draft                   DELEXT                     October 2026
               RFC 4034, DOI 10.17487/RFC4034, March 2005,
               <https://www.rfc-editor.org/info/rfc4034>.
 
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 21]
-
-Internet-Draft                   DELEXT                     October 2026
-
-
    [RFC4035]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Protocol Modifications for the DNS Security
               Extensions", RFC 4035, DOI 10.17487/RFC4035, March 2005,
@@ -1199,6 +1225,14 @@ Internet-Draft                   DELEXT                     October 2026
    [RFC6672]  Rose, S. and W. Wijngaards, "DNAME Redirection in the
               DNS", RFC 6672, DOI 10.17487/RFC6672, June 2012,
               <https://www.rfc-editor.org/info/rfc6672>.
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 22]
+
+Internet-Draft                   DELEXT                     October 2026
+
 
    [RFC6840]  Weiler, S., Ed. and D. Blacka, Ed., "Clarifications and
               Implementation Notes for DNS Security (DNSSEC)", RFC 6840,
@@ -1222,17 +1256,6 @@ Internet-Draft                   DELEXT                     October 2026
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 22]
-
-Internet-Draft                   DELEXT                     October 2026
-
 
    [RFC8914]  Kumari, W., Hunt, E., Arends, R., Hardaker, W., and D.
               Lawrence, "Extended DNS Errors", RFC 8914,
@@ -1258,6 +1281,15 @@ Internet-Draft                   DELEXT                     October 2026
               <https://datatracker.ietf.org/doc/html/draft-peetterr-
               dnsop-parent-side-auth-types-01>.
 
+
+
+
+
+Arends, et al.             Expires 3 May 2027                  [Page 23]
+
+Internet-Draft                   DELEXT                     October 2026
+
+
    [I-D.tapril-ns2]
               April, T., "Parameterized Nameserver Delegation with NS2
               and NS2T", Work in Progress, Internet-Draft, draft-tapril-
@@ -1278,16 +1310,6 @@ Authors' Addresses
    Den Haag
    Netherlands
    Email: peter.van.dijk@powerdns.com
-
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 23]
-
-Internet-Draft                   DELEXT                     October 2026
 
 
    Petr Špaček
@@ -1319,26 +1341,4 @@ Internet-Draft                   DELEXT                     October 2026
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Arends, et al.             Expires 2 May 2027                  [Page 24]
+Arends, et al.             Expires 3 May 2027                  [Page 24]
